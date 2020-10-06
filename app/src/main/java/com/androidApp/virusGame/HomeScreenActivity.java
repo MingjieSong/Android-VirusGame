@@ -18,7 +18,7 @@ public class HomeScreenActivity extends SingleFragmentActivity {
 /* FIXME: Override activity lifecycle methods for checkpoint3, but if we choose to use fragment for future
     development(which the professor recommends us to do), we don't need most of the code below.
  */
-
+    //Jenni
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
