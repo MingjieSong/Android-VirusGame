@@ -30,12 +30,29 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
     }
 
 
-   //FIXME: add more @Override methods if we choose to use fragment
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart()") ;
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume()") ;
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause()") ;
+    }
 
-
-
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop()") ;
+    }
 
     //FIXME: add switch statement based on the layout
     @Override
