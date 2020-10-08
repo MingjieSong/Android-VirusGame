@@ -3,5 +3,6 @@
     <string name="TextView">TextView</string>
     <string name="Login">Login</string>
     <string name="CreateAccount">Create Account</string>
+    <string name="MaskCheck">Before we go outside, we\'d like to remind you to wear a mask. Are you wearing your mask?</string>
 
 </resources>

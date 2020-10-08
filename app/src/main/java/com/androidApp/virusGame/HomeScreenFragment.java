@@ -1,6 +1,7 @@
 package com.androidApp.virusGame;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +15,7 @@ import androidx.fragment.app.Fragment;
 
 public class HomeScreenFragment extends Fragment implements View.OnClickListener {
 
-    private static final String TAG = "Debugging message";
+    private static final String TAG = "DebuggingMessage";
 
 
     @Override
@@ -71,13 +72,21 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.login_button:
-                CharSequence txt="Login Pushed";
-                Toast.makeText(getActivity(),txt,Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getActivity(),MaskCheck.class);
+                startActivity(intent);
+                //just called here so we can trigger onDestroy
+                getActivity().finish();
                 break;
             case R.id.create_account:
                 CharSequence pushed ="Create Account Pushed";
                 Toast.makeText(getActivity(),pushed,Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy()") ;
     }
 }
