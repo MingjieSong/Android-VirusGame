@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">VirusGame</string>
     <string name="TextView">TextView</string>
-    <string name="Button">Button</string>
+    <string name="Login">Login</string>
+    <string name="CreateAccount">Create Account</string>
+
 </resources>

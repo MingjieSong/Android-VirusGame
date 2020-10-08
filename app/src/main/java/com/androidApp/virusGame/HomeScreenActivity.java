@@ -16,7 +16,7 @@ public class HomeScreenActivity extends SingleFragmentActivity {
     protected HomeScreenFragment createFragment(){return new HomeScreenFragment() ;}
 
 
-    //Jenni
+
 
 
     @Override

@@ -1,10 +1,13 @@
 package com.androidApp.virusGame;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -25,8 +28,17 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         Log.d(TAG, "onCreateView()") ;
+
+
       // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_homescreen, container, false);
+        View v=inflater.inflate(R.layout.fragment_homescreen, container, false);
+        Button loginButton=v.findViewById(R.id.login_button);
+        loginButton.setOnClickListener(this);
+        Button accountButton=v.findViewById(R.id.create_account);
+        accountButton.setOnClickListener(this);
+
+        return v;
+
     }
 
 
@@ -57,6 +69,15 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
     //FIXME: add switch statement based on the layout
     @Override
     public void onClick(View view) {
-
+        switch(view.getId()){
+            case R.id.login_button:
+                CharSequence txt="Login Pushed";
+                Toast.makeText(getActivity(),txt,Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.create_account:
+                CharSequence pushed ="Create Account Pushed";
+                Toast.makeText(getActivity(),pushed,Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }
