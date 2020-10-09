@@ -67,12 +67,18 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
         Log.d(TAG, "onStop()") ;
     }
 
-    //FIXME: add switch statement based on the layout
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy()") ;
+    }
+
+
     @Override
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.login_button:
-                Intent intent=new Intent(getActivity(),MaskCheck.class);
+                Intent intent=new Intent( getActivity(), MaskCheck.class);
                 startActivity(intent);
                 //just called here so we can trigger onDestroy
                 getActivity().finish();
@@ -84,9 +90,5 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy()") ;
-    }
+
 }
