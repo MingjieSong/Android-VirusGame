@@ -1,6 +1,5 @@
-package com.androidApp.virusGame;
+package com.androidApp.virusGame.UI;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +10,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import com.androidApp.virusGame.R;
 
 
 public class HomeScreenFragment extends Fragment implements View.OnClickListener {
@@ -76,16 +77,18 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
+        Intent intent ;
         switch(view.getId()){
             case R.id.login_button:
-                Intent intent=new Intent( getActivity(), MaskCheck.class);
+                intent=new Intent( getActivity(), MaskCheck.class);
                 startActivity(intent);
                 //just called here so we can trigger onDestroy
                 getActivity().finish();
                 break;
             case R.id.create_account:
-                CharSequence pushed ="Create Account Pushed";
-                Toast.makeText(getActivity(),pushed,Toast.LENGTH_SHORT).show();
+
+                intent =new Intent( getActivity(), PlayerAccountActivity.class);
+                startActivity(intent);
                 break;
         }
     }

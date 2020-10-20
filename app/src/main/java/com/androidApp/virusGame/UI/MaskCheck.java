@@ -1,8 +1,10 @@
-package com.androidApp.virusGame;
+package com.androidApp.virusGame.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.androidApp.virusGame.R;
 
 public class MaskCheck extends AppCompatActivity {
 
