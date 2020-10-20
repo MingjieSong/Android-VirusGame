@@ -56,7 +56,7 @@ public class PlayerSingleton {
 
 
     //Delete all players info from the database.
-    public void deleteAllAccounts() {
+    public void deleteAllPlayers() {
         mDatabase.beginTransaction();
         try {
             mDatabase.delete(PlayerDbSchema.PlayerTable.NAME, null, null);

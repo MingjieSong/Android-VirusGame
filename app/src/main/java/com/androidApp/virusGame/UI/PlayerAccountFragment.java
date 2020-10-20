@@ -16,15 +16,11 @@ import com.androidApp.virusGame.Model.PlayerSingleton;
 import com.androidApp.virusGame.R;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
+
 
 
 public class PlayerAccountFragment extends Fragment implements View.OnClickListener  {
@@ -33,7 +29,6 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     private EditText mEtUsername;
     private EditText mEtPassword;
     private EditText mEtConfirm;
-    private PlayerSingleton singleton ;
 
 
 
@@ -77,9 +72,14 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 mEtConfirm.setText("");
                 break;
             case R.id.exit_button:
-                Log.d("Debugging message", "reach here ") ;
+                /*Only for debugging purpose
                 showStoredPlayers() ;
+                deleteAllPlayers() ;
+
+                 */
                 //FIXME pop up current activity and return to the homescreen
+
+
         }
     }
 
@@ -90,7 +90,7 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
         String confirm = mEtConfirm.getText().toString();
         if (activity != null) {
             if (password.equals(confirm) && !username.equals("") && !password.equals("")) {
-                singleton = PlayerSingleton.get(activity.getApplicationContext());
+                PlayerSingleton singleton = PlayerSingleton.get(activity.getApplicationContext());
                 Player player= new Player(username, password);
                 singleton.addPlayer(player);
                 Toast.makeText(activity.getApplicationContext(), "New player info inserted", Toast.LENGTH_SHORT).show();
@@ -101,15 +101,31 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     }
 
 
-    //only used to check if db setup is working
+    /*Only for debugging purpose
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void showStoredPlayers(){
 
-
+        FragmentActivity activity = getActivity();
+        if(activity != null){
+            PlayerSingleton singleton = PlayerSingleton.get(activity.getApplicationContext());
             List<Player> players =  singleton.getPlayers();
             for(int i=0 ;i<players.size(); i++){
                 Log.d("Stored players info", "player#"+ i+" "+players.get(i).getName());
             }
-
+        }
     }
+
+    private void deleteAllPlayers(){
+
+        FragmentActivity activity = getActivity();
+        if(activity != null){
+            PlayerSingleton singleton = PlayerSingleton.get(activity.getApplicationContext());
+            singleton.deleteAllPlayers();
+
+        }
+    }
+    */
+
+
+
 }
