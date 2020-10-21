@@ -80,7 +80,7 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
         Intent intent ;
         switch(view.getId()){
             case R.id.login_button:
-                intent=new Intent( getActivity(), MaskCheck.class);
+                intent=new Intent( getActivity(), MaskCheckActivity.class);
                 startActivity(intent);
                 //just called here so we can trigger onDestroy
                 getActivity().finish();

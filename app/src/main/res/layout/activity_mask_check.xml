@@ -6,12 +6,10 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="296dp"
-        android:layout_height="86dp"
-        android:text="@string/MaskCheck"
-        tools:layout_editor_absoluteX="57dp"
-        tools:layout_editor_absoluteY="164dp" />
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.androidApp.virusGame.UI.MaskCheckFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
