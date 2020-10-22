@@ -124,7 +124,7 @@ public class PlayerSingleton {
             }else if(cursor!=null){
                 cursor.moveToFirst();
                 //check password
-                if(cursor.getString(1).equals(password)){
+                if(cursor.getString(2).equals(password)){
                     //login successful
                     return 0;
                 }else{

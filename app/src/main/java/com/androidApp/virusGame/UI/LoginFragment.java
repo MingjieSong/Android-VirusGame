@@ -1,6 +1,7 @@
 package com.androidApp.virusGame.UI;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -57,10 +58,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.done_button:
-                checkAccount(mEtUsername.getText().toString(),mEtPassword.getText().toString());
-                //TODO: move to proper screen
+                if(checkAccount(mEtUsername.getText().toString(),mEtPassword.getText().toString())==0){
+                    intent =new Intent( getActivity(), MaskCheckActivity.class);
+                    startActivity(intent);
+                }
+
                 break;
             case R.id.clear_button:
                 mEtUsername.setText("");
@@ -77,7 +82,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
         }
     }
-    public void checkAccount(String username, String password){
+    public int checkAccount(String username, String password){
         //TODO: clear text edits and ask for new password, etc.
         FragmentActivity activity=getActivity();
         PlayerSingleton singleton = PlayerSingleton.get(activity.getApplicationContext());
@@ -86,19 +91,19 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         if(check==0){
             //login successful
             Toast.makeText(activity.getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-
+            return 0;
         }else if(check==1){
             //player not found with that username
             Toast.makeText(activity.getApplicationContext(), "Player not found with that username", Toast.LENGTH_SHORT).show();
-
+            return 1;
         }else if(check==2){
             //incorrect password
             Toast.makeText(activity.getApplicationContext(), "Incorrect password", Toast.LENGTH_SHORT).show();
-
+            return 2;
         }else{
             //other error
             Toast.makeText(activity.getApplicationContext(), "Other error", Toast.LENGTH_SHORT).show();
-
+            return -1;
         }
     }
 }
