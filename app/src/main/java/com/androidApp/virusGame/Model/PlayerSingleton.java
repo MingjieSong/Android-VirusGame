@@ -106,14 +106,45 @@ public class PlayerSingleton {
                 null, // HAVING
                 null // ORDER BY
         );
-
         return new CursorWrapper(cursor);
+
+    }
+
+    public int checkLoginCredentials(String username, String password){
+        Cursor cursor;
+        mDatabase.beginTransaction();
+        String[]where=new String[]{username};
+        try {
+
+            cursor=mDatabase.rawQuery("SELECT * from players WHERE name=?",where);
+            cursor.moveToFirst();
+            if(cursor== null ||cursor.getCount()<=0){
+                //PLAYER not found
+                return 1;
+            }else if(cursor!=null){
+                cursor.moveToFirst();
+                //check password
+                if(cursor.getString(1).equals(password)){
+                    //login successful
+                    return 0;
+                }else{
+                    return 2;
+                    //incorrect password
+                }
+            }
+            mDatabase.setTransactionSuccessful();
+        } finally {
+            mDatabase.endTransaction();
+        }
+
+        return -1;
     }
 
     /*FIXME
     Retrieve single player's info
     Update single player's info (username / password)
     Delete single player's info from the db
+    Make sure there are no duplicate usernames
     */
 
 

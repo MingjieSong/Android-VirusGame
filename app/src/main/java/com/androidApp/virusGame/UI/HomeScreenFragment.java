@@ -79,11 +79,10 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         Intent intent ;
         switch(view.getId()){
+
             case R.id.login_button:
-                intent=new Intent( getActivity(), MaskCheckActivity.class);
+                intent =new Intent( getActivity(), LoginActivity.class);
                 startActivity(intent);
-                //just called here so we can trigger onDestroy
-                getActivity().finish();
                 break;
             case R.id.create_account:
 
@@ -91,6 +90,12 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
                 startActivity(intent);
                 break;
         }
+        /* this needs to be called after a successful login
+        intent=new Intent( getActivity(), MaskCheckActivity.class);
+        startActivity(intent);
+        //just called here so we can trigger onDestroy
+        getActivity().finish();
+        break;*/
     }
 
 
