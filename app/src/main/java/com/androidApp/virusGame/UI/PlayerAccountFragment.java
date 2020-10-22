@@ -101,7 +101,7 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     }
 
 
-    /*Only for debugging purpose
+/*Only for debugging purpose
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void showStoredPlayers(){
 
