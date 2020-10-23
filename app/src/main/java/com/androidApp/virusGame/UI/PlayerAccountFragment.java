@@ -74,10 +74,12 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 mEtConfirm.setText("");
                 break;
             case R.id.exit_button:
-                Activity activity = getActivity();
+                showStoredVirus();
+
+                /*Activity activity = getActivity();
                 if (activity != null) {
                     activity.finish() ;
-                }
+                }*/
                 /*Only for debugging purpose
                 deleteAllPlayers() ;
                 showStoredPlayers() ;
@@ -109,15 +111,12 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
 //Only for debugging purpose
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void showStoredPlayers(){
-
-        FragmentActivity activity = getActivity();
-        if(activity != null){
             PlayerSingleton singleton = PlayerSingleton.get();
             List<Player> players =  singleton.getPlayers();
             for(int i=0 ;i<players.size(); i++){
                 Log.d("Stored players info", "player#"+ i+" "+players.get(i).getName());
             }
-        }
+
     }
 
     private void deleteAllPlayers(){
@@ -133,7 +132,8 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void showStoredVirus(){
         VirusSingleton singleton = VirusSingleton.get();
-        List<Virus> virus = singleton.getVirus();
+        singleton.addVirus();
+        List<Virus> virus = singleton.getVirus(); 
         for(int i=0 ;i<virus.size(); i++){
             Log.d("Stored virus info", "virus#"+ i+" "+virus.get(i).getName());
         }

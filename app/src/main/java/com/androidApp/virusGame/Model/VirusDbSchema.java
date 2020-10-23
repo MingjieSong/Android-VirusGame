@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 //virus schema
-public class VirusDbSchema {
+class VirusDbSchema {
     static final class VirusTable{
         static final String NAME = "virus";
 

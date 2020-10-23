@@ -41,12 +41,12 @@ public class VirusSingleton  {
 
         List<ContentValues> contentValuesList = setUpVirus() ;
         for(int i= 0 ; i<contentValuesList.size() ; i++) {
-            mDatabase .beginTransaction();
+            mDatabase.beginTransaction();
             try {
-                mDatabase .insert(VirusDbSchema.VirusTable.NAME, null, contentValuesList.get(i));
-                mDatabase .setTransactionSuccessful();
+                mDatabase.insert(VirusDbSchema.VirusTable.NAME, null, contentValuesList.get(i));
+                mDatabase.setTransactionSuccessful();
             } finally {
-                mDatabase .endTransaction();
+                mDatabase.endTransaction();
             }
         }
 
@@ -87,7 +87,6 @@ public class VirusSingleton  {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public List<Virus> getVirus() {
         List<Virus> virusList = new ArrayList<>();
-
         try ( CursorWrapper cursor = queryVirus()) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
