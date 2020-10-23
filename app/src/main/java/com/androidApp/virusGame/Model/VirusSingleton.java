@@ -56,9 +56,9 @@ public class VirusSingleton  {
     private List<ContentValues> setUpVirus(){
         List<ContentValues>  contentValuesList = new ArrayList();
         List<Virus> virusList = new  ArrayList();
-        virusList.add(new Virus("flu virus", 1)) ;
-        virusList.add(new Virus("COVID 19", 3)) ;
-        virusList.add(new Virus("HIV", 10)) ;
+        virusList.add(new Virus("flu virus", "1")) ;
+        virusList.add(new Virus("COVID 19", "3")) ;
+        virusList.add(new Virus("HIV", "10")) ;
 
         for(int i =0 ;i<virusList.size() ; i++) {
             ContentValues contentValues = new ContentValues();
@@ -95,7 +95,7 @@ public class VirusSingleton  {
             while (!cursor.isAfterLast()) {
 
                 String name = cursor.getString(cursor.getColumnIndex(VirusDbSchema.VirusTable.Cols.NAME));
-                int hitpt = cursor.getInt(cursor.getColumnIndex(VirusDbSchema.VirusTable.Cols.HITPOINT));
+                String hitpt = cursor.getString(cursor.getColumnIndex(VirusDbSchema.VirusTable.Cols.HITPOINT));
                 //String location = cursor.getString(cursor.getColumnIndex(VirusDbSchema.VirusTable.Cols.LOCATION));
                 Virus virus = new Virus(name, hitpt);
                 virusList.add(virus);
@@ -131,7 +131,7 @@ public class VirusSingleton  {
 
 
     //update single virus's hitpoint
-    public void updateSingleVirusHitpoint(String name, int hitpoint) {
+    public void updateSingleVirusHitpoint(String name, String hitpoint) {
         Virus virus = new Virus(name,hitpoint);
         ContentValues newContent = getContentValues(virus) ;
         String whereArgs[] = {name};

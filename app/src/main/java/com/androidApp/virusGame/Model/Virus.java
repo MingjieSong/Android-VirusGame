@@ -11,11 +11,11 @@ import java.util.Vector;
 
 public class Virus {
     private String NAME;
-    private int HITPOINT;
+    private String HITPOINT;
     private String LOCATION;
 
 
-    public Virus(String name, int hitpt /*, String location*/) {
+    public Virus(String name, String hitpt /*, String location*/) {
         NAME = name;
         HITPOINT = hitpt;
         //LOCATION = location;
@@ -25,7 +25,7 @@ public class Virus {
         return NAME;
     }
 
-    public int getHitpt() {
+    public String getHitpt() {
         return HITPOINT;
     }
 
@@ -35,7 +35,7 @@ public class Virus {
         this.NAME = NAME;
     }
 
-    public void setHITPOINT(int HITPOINT) {
+    public void setHITPOINT(String HITPOINT) {
         this.HITPOINT = HITPOINT;
     }
 
