@@ -10,6 +10,8 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.androidApp.virusGame.UI.HomeScreenActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,18 +24,17 @@ public class PlayerSingleton {
     private static final String INSERT_STMT = "INSERT INTO " + PlayerDbSchema.PlayerTable.NAME + " (name, password) VALUES (?, ?)" ;
 
     //construct the only one PlayerSingleton object here
-    public static PlayerSingleton get(Context context) {
+    public static PlayerSingleton get() {
         if (sPlayer == null) {
-            sPlayer = new PlayerSingleton(context);
+            sPlayer = new PlayerSingleton();
         }
         return sPlayer;
     }
 
     //private constructor
-    private PlayerSingleton(Context context) {
-        //use dbHelper to create the  Player table
-        PlayerDbHelper dbHelper = new PlayerDbHelper(context.getApplicationContext());
-        mDatabase = dbHelper.getWritableDatabase();
+    private PlayerSingleton() {
+        //get db
+        mDatabase =  HomeScreenActivity.dbHelper.getWritableDatabase();
     }
 
 

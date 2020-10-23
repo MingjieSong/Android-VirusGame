@@ -9,12 +9,12 @@ import android.util.Log;
 //virus schema
 public class VirusDbSchema {
     static final class VirusTable{
-        static final String NAME = "virus_table";
+        static final String NAME = "virus";
 
         static final class Cols {
             static final String NAME = "name";
             static final String HITPOINT = "hitpoint";
-            //static final String IMAGE = "image";
+
         }
     }
 }

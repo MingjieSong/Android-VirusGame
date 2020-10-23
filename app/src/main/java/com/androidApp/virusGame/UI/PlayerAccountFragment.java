@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.androidApp.virusGame.Model.Player;
 import com.androidApp.virusGame.Model.PlayerSingleton;
+import com.androidApp.virusGame.Model.Virus;
+import com.androidApp.virusGame.Model.VirusSingleton;
 import com.androidApp.virusGame.R;
 
 import androidx.annotation.NonNull;
@@ -72,12 +74,15 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 mEtConfirm.setText("");
                 break;
             case R.id.exit_button:
+                Activity activity = getActivity();
+                if (activity != null) {
+                    activity.finish() ;
+                }
                 /*Only for debugging purpose
-                showStoredPlayers() ;
                 deleteAllPlayers() ;
+                showStoredPlayers() ;
+                showStoredVirus(); */
 
-                 */
-                //FIXME pop up current activity and return to the homescreen
 
 
         }
@@ -90,7 +95,7 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
         String confirm = mEtConfirm.getText().toString();
         if (activity != null) {
             if (password.equals(confirm) && !username.equals("") && !password.equals("")) {
-                PlayerSingleton singleton = PlayerSingleton.get(activity.getApplicationContext());
+                PlayerSingleton singleton = PlayerSingleton.get();
                 Player player= new Player(username, password);
                 singleton.addPlayer(player);
                 Toast.makeText(activity.getApplicationContext(), "New player info inserted", Toast.LENGTH_SHORT).show();
@@ -101,13 +106,13 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     }
 
 
-/*Only for debugging purpose
+//Only for debugging purpose
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void showStoredPlayers(){
 
         FragmentActivity activity = getActivity();
         if(activity != null){
-            PlayerSingleton singleton = PlayerSingleton.get(activity.getApplicationContext());
+            PlayerSingleton singleton = PlayerSingleton.get();
             List<Player> players =  singleton.getPlayers();
             for(int i=0 ;i<players.size(); i++){
                 Log.d("Stored players info", "player#"+ i+" "+players.get(i).getName());
@@ -116,16 +121,24 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     }
 
     private void deleteAllPlayers(){
-
         FragmentActivity activity = getActivity();
         if(activity != null){
-            PlayerSingleton singleton = PlayerSingleton.get(activity.getApplicationContext());
+            PlayerSingleton singleton = PlayerSingleton.get();
             singleton.deleteAllPlayers();
 
         }
     }
-    */
 
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void showStoredVirus(){
+        VirusSingleton singleton = VirusSingleton.get();
+        List<Virus> virus = singleton.getVirus();
+        for(int i=0 ;i<virus.size(); i++){
+            Log.d("Stored virus info", "virus#"+ i+" "+virus.get(i).getName());
+        }
+
+    }
 
 
 }
