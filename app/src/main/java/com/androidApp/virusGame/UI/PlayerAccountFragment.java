@@ -79,9 +79,6 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                     activity.finish() ;
                 }
 
-
-
-              
                 /*
                 VirusSingleton singleton = VirusSingleton.get();
                 singleton.getSingleVirus("HIV");
@@ -159,7 +156,7 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     private void showStoredVirus(){
         VirusSingleton singleton = VirusSingleton.get();
         singleton.addVirus();
-        List<Virus> virus = singleton.getVirus(); 
+        List<Virus> virus = singleton.getVirus();
         for(int i=0 ;i<virus.size(); i++){
             Log.d("Stored virus info", "virus#"+ i+" "+virus.get(i).getName()
                     +" Hitpoint: "+virus.get(i).getHitpt());

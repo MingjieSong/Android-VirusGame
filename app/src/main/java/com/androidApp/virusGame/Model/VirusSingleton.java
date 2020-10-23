@@ -71,6 +71,7 @@ public class VirusSingleton  {
         return contentValuesList ;
     }
 
+
     private CursorWrapper queryVirus(){
 
         Cursor cursor = mDatabase.query(
@@ -133,9 +134,8 @@ public class VirusSingleton  {
     public void updateSingleVirusHitpoint(String name, int hitpoint) {
         Virus virus = new Virus(name,hitpoint);
         ContentValues newContent = getContentValues(virus) ;
-        String whereClause = "NAME=?";
-        String whereArgs[] = {virus.getName()};
-        mDatabase.update(VirusDbSchema.VirusTable.NAME, newContent, whereClause, whereArgs);
+        String whereArgs[] = {name};
+        mDatabase.update(VirusDbSchema.VirusTable.NAME, newContent, "NAME=?", whereArgs);
 
     }
 
