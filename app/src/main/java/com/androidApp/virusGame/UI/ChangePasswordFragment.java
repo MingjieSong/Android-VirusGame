@@ -38,7 +38,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_login, container, false);
+        View v = inflater.inflate(R.layout.fragment_change_password, container, false);
 
         Activity activity = getActivity();
 
@@ -78,7 +78,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
 
     public void checkAccount(String username, String oldPassword, String newPassword, String confirm) {
         FragmentActivity activity = getActivity();
-        PlayerSingleton singleton = PlayerSingleton.get(activity.getApplicationContext());
+        PlayerSingleton singleton = PlayerSingleton.get();
         int check = singleton.checkLoginCredentials(username, oldPassword);
         if (check == 0) {
             //username and password are good, move on to change password

@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             Button btnExit = v.findViewById(R.id.exit_button);
             btnExit.setOnClickListener(this);
 
+            Button btnChange = v.findViewById(R.id.change_password_button);
+            btnChange.setOnClickListener(this);
+
         }
 
         return v;
@@ -78,8 +82,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 if (activity != null) {
                     activity.finish() ;
                 }
-
-
+                break;
+            case R.id.change_password_button:
+                intent =new Intent( getActivity(), ChangePasswordActivity.class);
+                startActivity(intent);
+                break;
         }
     }
     public int checkAccount(String username, String password){
