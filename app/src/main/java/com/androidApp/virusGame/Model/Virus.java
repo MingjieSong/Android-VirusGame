@@ -48,8 +48,8 @@ public class Virus {
         if (o == null || getClass() != o.getClass()) return false;
         Virus virus = (Virus) o;
         return Objects.equals(NAME, virus.NAME) &&
-                Objects.equals(HITPOINT, virus.HITPOINT)
-                && Objects.equals(LOCATION, virus.LOCATION);
+                Objects.equals(HITPOINT, virus.HITPOINT);
+                //&& Objects.equals(LOCATION, virus.LOCATION);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

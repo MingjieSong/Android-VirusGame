@@ -81,7 +81,7 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
 
 
 
-
+              
                 /*
                 VirusSingleton singleton = VirusSingleton.get();
                 singleton.getSingleVirus("HIV");
