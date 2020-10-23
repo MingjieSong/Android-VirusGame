@@ -18,7 +18,7 @@ import java.io.File;
 
 public class HomeScreenActivity extends SingleFragmentActivity {
     public static DbHelper dbHelper ;
-    /*File pinkVirusFile = new File("/app/src/main/pinkvirus-playstore.png");
+    /* File pinkVirusFile = new File("/app/src/main/pinkvirus-playstore.png");
     private String pink_virus_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath() +
     File.separator + "pinkvirus-playstore.png"; */
 
