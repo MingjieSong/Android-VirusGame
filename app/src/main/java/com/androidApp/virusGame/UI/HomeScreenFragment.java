@@ -95,7 +95,7 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
         intent=new Intent( getActivity(), MaskCheckActivity.class);
         startActivity(intent); */
         //just called here so we can trigger onDestroy
-        getActivity().finish();
+        //getActivity().finish();
 
     }
 

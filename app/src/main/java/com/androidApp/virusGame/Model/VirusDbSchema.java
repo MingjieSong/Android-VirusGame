@@ -14,6 +14,7 @@ class VirusDbSchema {
         static final class Cols {
             static final String NAME = "name";
             static final String HITPOINT = "hitpoint";
+            //static final String LOCATION = "location";
 
         }
     }

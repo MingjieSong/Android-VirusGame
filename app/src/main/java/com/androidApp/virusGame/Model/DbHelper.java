@@ -27,7 +27,8 @@ public class DbHelper extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL("CREATE TABLE " + VirusDbSchema.VirusTable.NAME + "(" +
                     "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     VirusDbSchema.VirusTable.Cols.NAME + " TEXT, " +
-                    VirusDbSchema.VirusTable.Cols.HITPOINT + " TEXT" +
+                    VirusDbSchema.VirusTable.Cols.HITPOINT + " INTEGER " +
+                    //VirusDbSchema.VirusTable.Cols.LOCATION + " TEXT " +
                     //VirusDbSchema.VirusTable.Cols.IMAGE + "BLOB" +
                     ")");
         }

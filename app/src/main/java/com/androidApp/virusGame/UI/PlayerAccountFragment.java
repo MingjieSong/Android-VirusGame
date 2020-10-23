@@ -79,16 +79,23 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                     activity.finish() ;
                 }
 
-                /*Only for debugging purpose
-                deleteAllPlayers() ;
-                showStoredPlayers() ;
+
+
+
+                /*
+                VirusSingleton singleton = VirusSingleton.get();
+                singleton.getSingleVirus("HIV");
+                singleton.updateSingleVirusHitpoint("HIV",4);
                 showStoredVirus();
+                deleteAllVirus();
+
+                showStoredPlayers() ;
+                deleteAllPlayers() ;
                 PlayerSingleton singleton = PlayerSingleton.get();
                 singleton.getSinglePlayer("mingjie") ;
                 singleton.updateSinglePlayerPassword("654321", "mingjie");
-                singleton.deleteSinglePlayerByName("mingjie");
+                singleton.deleteSinglePlayerByName("mingjie");*/
 
-                */
 
 
 
@@ -140,14 +147,23 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
         }
     }
 
+    private void deleteAllVirus(){
+        FragmentActivity activity = getActivity();
+        if(activity != null){
+            VirusSingleton singleton = VirusSingleton.get();
+            singleton.deleteAllVirus();
 
+        }
+    }
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void showStoredVirus(){
         VirusSingleton singleton = VirusSingleton.get();
         singleton.addVirus();
         List<Virus> virus = singleton.getVirus(); 
         for(int i=0 ;i<virus.size(); i++){
-            Log.d("Stored virus info", "virus#"+ i+" "+virus.get(i).getName());
+            Log.d("Stored virus info", "virus#"+ i+" "+virus.get(i).getName()
+                    +" Hitpoint: "+virus.get(i).getHitpt());
+                    //+ " Location: "+virus.get(i).getLocation());
         }
 
     }
