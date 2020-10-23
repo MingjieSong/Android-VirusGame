@@ -16,6 +16,7 @@
     <string name="confirm_new_password">confirm</string>
     <string name="old_password">old password</string>
     <string name="new_password">new password</string>
+    <string name="delete_account">delete account</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <!-- TODO: Remove or change this placeholder text -->

@@ -57,6 +57,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             Button btnChange = v.findViewById(R.id.change_password_button);
             btnChange.setOnClickListener(this);
 
+            Button btnDelete = v.findViewById(R.id.delete_account_button);
+            btnDelete.setOnClickListener(this);
+
         }
 
         return v;
@@ -85,6 +88,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.change_password_button:
                 intent =new Intent( getActivity(), ChangePasswordActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.delete_account_button:
+                intent =new Intent( getActivity(), DeleteAccountActivity.class);
                 startActivity(intent);
                 break;
         }
