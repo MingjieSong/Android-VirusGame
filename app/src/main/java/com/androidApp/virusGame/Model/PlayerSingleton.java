@@ -1,12 +1,12 @@
 package com.androidApp.virusGame.Model;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -39,20 +39,25 @@ public class PlayerSingleton {
 
 
     //Add new player info into the db
-    public void addPlayer(Player player) {
-        ContentValues contentValues = getContentValues(player);
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public boolean addPlayer(Player player) {
+        if(!checkUsernameDuplicate(player.getName())) {
+            ContentValues contentValues = getContentValues(player);
 
-        mDatabase.beginTransaction();
-        try {
-            SQLiteStatement statement = mDatabase.compileStatement(INSERT_STMT);
-            statement.bindString(1, contentValues.getAsString(PlayerDbSchema.PlayerTable.Cols.NAME));
-            statement.bindString(2, contentValues.getAsString(PlayerDbSchema.PlayerTable.Cols.PASSWORD));
-            statement.executeInsert();
-            mDatabase.setTransactionSuccessful();
-        } finally {
-            mDatabase.endTransaction();
+            mDatabase.beginTransaction();
+            try {
+                SQLiteStatement statement = mDatabase.compileStatement(INSERT_STMT);
+                statement.bindString(1, contentValues.getAsString(PlayerDbSchema.PlayerTable.Cols.NAME));
+                statement.bindString(2, contentValues.getAsString(PlayerDbSchema.PlayerTable.Cols.PASSWORD));
+                statement.executeInsert();
+                mDatabase.setTransactionSuccessful();
+            } finally {
+                mDatabase.endTransaction();
 
+            }
+            return true ;
         }
+        return false ;
     }
 
 
@@ -89,6 +94,41 @@ public class PlayerSingleton {
         return playerList;
     }
 
+    //retrieve single player's info by its username
+    public void getSinglePlayer(String username) {
+        String[]where=new String[]{username};
+        Cursor cursor=mDatabase.rawQuery("SELECT * from players WHERE name=?",where);
+        if(cursor== null ||cursor.getCount()<=0){
+            Log.d("error", "player not found");
+
+        }else if(cursor!=null) {
+            cursor.moveToFirst() ;
+            String password = cursor.getString(cursor.getColumnIndex(PlayerDbSchema.PlayerTable.Cols.PASSWORD));
+            Log.d("Found the player's info", "The player "+ username + "'s password is "+ password);
+            //FIXME: show the retrieved player's info on the screen
+
+        }
+
+    }
+
+    //update single player's password
+    public void updateSinglePlayerPassword( String updatePassword, String name ) {
+        Player player = new Player(name, updatePassword) ;
+        ContentValues newContent = getContentValues(player) ;
+        String whereClause = "NAME=?";
+        String whereArgs[] = {player.getName()};
+        mDatabase.update(PlayerDbSchema.PlayerTable.NAME, newContent, whereClause, whereArgs);
+
+    }
+
+    //delete single player's info from db
+    public void deleteSinglePlayerByName( String name ) {
+        String whereClause = "NAME=?";
+        String whereArgs[] = {name};
+        mDatabase.delete(PlayerDbSchema.PlayerTable.NAME , whereClause, whereArgs) ;
+    }
+
+
     private static ContentValues getContentValues(Player player) {
         ContentValues values = new ContentValues();
         values.put(PlayerDbSchema.PlayerTable.Cols.NAME, player.getName());
@@ -108,7 +148,21 @@ public class PlayerSingleton {
                 null // ORDER BY
         );
         return new CursorWrapper(cursor);
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private boolean checkUsernameDuplicate(String userName) {
+        try ( CursorWrapper cursor = queryPlayer()) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                String name = cursor.getString(cursor.getColumnIndex(PlayerDbSchema.PlayerTable.Cols.NAME));
+                if(userName.equals(name)){
+                    return true ;
+                }
+                cursor.moveToNext();
+            }
+        }
+        return false ;
     }
 
     public int checkLoginCredentials(String username, String password){
@@ -141,12 +195,8 @@ public class PlayerSingleton {
         return -1;
     }
 
-    /*FIXME
-    Retrieve single player's info
-    Update single player's info (username / password)
-    Delete single player's info from the db
-    Make sure there are no duplicate usernames
-    */
+
+
 
 
 }
