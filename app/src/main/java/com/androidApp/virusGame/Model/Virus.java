@@ -1,43 +1,60 @@
 package com.androidApp.virusGame.Model;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteStatement;
+import android.os.Build;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
+import androidx.annotation.RequiresApi;
 
-import com.androidApp.virusGame.Model.VirusDbHelper;
+import java.util.Objects;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
+public class Virus {
+    private String NAME;
+    private String HITPOINT;
 
-public class Virus extends AppCompatActivity {
-    VirusDbHelper virusDb;
-    //private String pink_virus_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath() +
-    //File.separator + "pinkvirus-playstore.png";
-    File pinkVirusFile = new File("/app/src/main/pinkvirus-playstore.png");
-    @Override
-    public void onCreate(Bundle savedInstanceState){
 
-        super.onCreate(savedInstanceState);
-        virusDb = new VirusDbHelper(this);
-        virusDb.insertVirus("pinkVirus",4,convertToByteArray(pinkVirusFile));
-        String check = VirusDbSchema.VirusTable.Cols.NAME, name;
-
+    public Virus(String name, String hitpt) {
+        NAME = name;
+        HITPOINT = hitpt;
     }
 
-    //convert bitmap image into byte array
-    // Convert that image to byte array & store that byte [] to DB.
-    // While retrieving that image get byte [] convert that byte [] to bitmap by which you will get original image.
-    public byte[] convertToByteArray(File virusFile) {
-        Bitmap imageBitmap = BitmapFactory.decodeFile(virusFile.getAbsolutePath());
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
+    public String getName() {
+        return NAME;
+    }
 
-        return byteArray;
+    public String getHitpt() {
+        return HITPOINT;
+    }
+
+    public void setNAME(String NAME) {
+        this.NAME = NAME;
+    }
+
+    public void setHITPOINT(String HITPOINT) {
+        this.HITPOINT = HITPOINT;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Virus virus = (Virus) o;
+        return Objects.equals(NAME, virus.NAME) &&
+                Objects.equals(HITPOINT, virus.HITPOINT);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public int hashCode() {
+        return Objects.hash(NAME, HITPOINT);
+    }
+
+    @Override
+    public String toString() {
+        return "Virus{" +
+                "NAME='" + NAME + '\'' +
+                ", HITPOINT='" + HITPOINT + '\'' +
+                '}';
     }
 }

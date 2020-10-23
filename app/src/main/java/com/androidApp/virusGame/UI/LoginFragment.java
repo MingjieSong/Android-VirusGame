@@ -50,8 +50,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             btnAdd.setOnClickListener(this);
             Button btnClear = v.findViewById(R.id.clear_button);
             btnClear.setOnClickListener(this);
-            Button btnChange = v.findViewById(R.id.change_password_button);
-            btnClear.setOnClickListener(this);
+            Button btnExit = v.findViewById(R.id.exit_button);
+            btnExit.setOnClickListener(this);
 
         }
 
@@ -73,17 +73,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 mEtUsername.setText("");
                 mEtPassword.setText("");
                 break;
-            case R.id.change_password_button:
-                //TODO: it's not moving to this activity
-                intent =new Intent( getActivity(), ChangePasswordActivity.class);
-                startActivity(intent);
             case R.id.exit_button:
-                //TODO: go back to another activity
-                /*Only for debugging purpose
-                showStoredPlayers() ;
-                deleteAllPlayers() ;
-
-                 */
+                Activity activity = getActivity();
+                if (activity != null) {
+                    activity.finish() ;
+                }
 
 
         }
@@ -91,8 +85,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     public int checkAccount(String username, String password){
         //TODO: clear text edits and ask for new password, etc.
         FragmentActivity activity=getActivity();
-        PlayerSingleton singleton = PlayerSingleton.get(activity.getApplicationContext());
-        Player player= new Player(username, password);
+        PlayerSingleton singleton = PlayerSingleton.get();
         int check=singleton.checkLoginCredentials(username,password);
         if(check==0){
             //login successful

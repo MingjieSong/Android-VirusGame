@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.androidApp.virusGame.Model.Player;
 import com.androidApp.virusGame.Model.PlayerSingleton;
+import com.androidApp.virusGame.Model.Virus;
+import com.androidApp.virusGame.Model.VirusSingleton;
 import com.androidApp.virusGame.R;
 
 import androidx.annotation.NonNull;
@@ -72,17 +74,28 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 mEtConfirm.setText("");
                 break;
             case R.id.exit_button:
-                /*Only for debugging purpose
-                showStoredPlayers() ;
-                deleteAllPlayers() ;
+                Activity activity = getActivity();
+                if (activity != null) {
+                    activity.finish() ;
+                }
 
-                 */
-                //FIXME pop up current activity and return to the homescreen
+                /*Only for debugging purpose
+                deleteAllPlayers() ;
+                showStoredPlayers() ;
+                showStoredVirus();
+                PlayerSingleton singleton = PlayerSingleton.get();
+                singleton.getSinglePlayer("mingjie") ;
+                singleton.updateSinglePlayerPassword("654321", "mingjie");
+                singleton.deleteSinglePlayerByName("mingjie");
+
+                */
+
 
 
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void createAccount() {
         FragmentActivity activity = getActivity();
         String username = mEtUsername.getText().toString();
@@ -90,10 +103,13 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
         String confirm = mEtConfirm.getText().toString();
         if (activity != null) {
             if (password.equals(confirm) && !username.equals("") && !password.equals("")) {
-                PlayerSingleton singleton = PlayerSingleton.get(activity.getApplicationContext());
+                PlayerSingleton singleton = PlayerSingleton.get();
                 Player player= new Player(username, password);
-                singleton.addPlayer(player);
-                Toast.makeText(activity.getApplicationContext(), "New player info inserted", Toast.LENGTH_SHORT).show();
+                if(singleton.addPlayer(player)){
+                    Toast.makeText(activity.getApplicationContext(), "New player info inserted", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(activity.getApplicationContext(), "Duplicate username", Toast.LENGTH_SHORT).show();
+                }
             } else if ((username.equals("")) || (password.equals("")) || (confirm.equals(""))) {
                 Toast.makeText(activity.getApplicationContext(), "Missing entry", Toast.LENGTH_SHORT).show();
             }
@@ -101,31 +117,40 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     }
 
 
-    /*Only for debugging purpose
+    //Only for debugging purpose
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void showStoredPlayers(){
-
-        FragmentActivity activity = getActivity();
-        if(activity != null){
-            PlayerSingleton singleton = PlayerSingleton.get(activity.getApplicationContext());
+            PlayerSingleton singleton = PlayerSingleton.get();
             List<Player> players =  singleton.getPlayers();
             for(int i=0 ;i<players.size(); i++){
-                Log.d("Stored players info", "player#"+ i+" "+players.get(i).getName());
+                Log.d("Stored players info", "player#"+ i+" "+players.get(i).getName() + " and the password is "+ players.get(i).getPassword());
             }
-        }
+            if(players.size()<=0){
+                Log.d("Stored players info", "no player stored!") ;
+            }
+
     }
 
     private void deleteAllPlayers(){
-
         FragmentActivity activity = getActivity();
         if(activity != null){
-            PlayerSingleton singleton = PlayerSingleton.get(activity.getApplicationContext());
+            PlayerSingleton singleton = PlayerSingleton.get();
             singleton.deleteAllPlayers();
 
         }
     }
-    */
 
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void showStoredVirus(){
+        VirusSingleton singleton = VirusSingleton.get();
+        singleton.addVirus();
+        List<Virus> virus = singleton.getVirus(); 
+        for(int i=0 ;i<virus.size(); i++){
+            Log.d("Stored virus info", "virus#"+ i+" "+virus.get(i).getName());
+        }
+
+    }
 
 
 }

@@ -88,6 +88,7 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
 
                 intent =new Intent( getActivity(), PlayerAccountActivity.class);
                 startActivity(intent);
+
                 break;
         }
         /* this needs to be called after a successful login

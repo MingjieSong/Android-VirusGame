@@ -30,6 +30,13 @@ public class MaskCheckFragment extends Fragment {
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_mask_check, container, false);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         Log.d(TAG, "onStart()") ;
@@ -58,10 +65,5 @@ public class MaskCheckFragment extends Fragment {
         super.onDestroy();
         Log.d(TAG, "onDestroy()") ;
     }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mask_check, container, false);
-    }
+
 }
