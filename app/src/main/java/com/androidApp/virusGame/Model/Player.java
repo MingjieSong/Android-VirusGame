@@ -10,7 +10,6 @@ public class Player {
     private String mName;
     private String mPassword;
 
-
     public Player(String name, String password) {
         mName = name;
         mPassword = password;

@@ -139,6 +139,21 @@ public class PlayerSingleton {
 
         return -1;
     }
+    public int changePassword(String username,String newPassword){
+        Cursor cursor;
+        mDatabase.beginTransaction();
+        String[]where=new String[]{newPassword,username};
+        try {
+
+            cursor=mDatabase.rawQuery("UPDATE players SET password=? WHERE name=?",where);
+            cursor.moveToFirst();
+            mDatabase.setTransactionSuccessful();
+            return 0;
+        } finally {
+            mDatabase.endTransaction();
+        }
+
+    }
 
     /*FIXME
     Retrieve single player's info

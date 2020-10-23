@@ -92,10 +92,10 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
         }
         /* this needs to be called after a successful login
         intent=new Intent( getActivity(), MaskCheckActivity.class);
-        startActivity(intent);
+        startActivity(intent); */
         //just called here so we can trigger onDestroy
         getActivity().finish();
-        break;*/
+
     }
 
 

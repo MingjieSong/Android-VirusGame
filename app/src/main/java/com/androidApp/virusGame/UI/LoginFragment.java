@@ -50,6 +50,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             btnAdd.setOnClickListener(this);
             Button btnClear = v.findViewById(R.id.clear_button);
             btnClear.setOnClickListener(this);
+            Button btnChange = v.findViewById(R.id.change_password_button);
+            btnClear.setOnClickListener(this);
 
         }
 
@@ -71,6 +73,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 mEtUsername.setText("");
                 mEtPassword.setText("");
                 break;
+            case R.id.change_password_button:
+                //TODO: it's not moving to this activity
+                intent =new Intent( getActivity(), ChangePasswordActivity.class);
+                startActivity(intent);
             case R.id.exit_button:
                 //TODO: go back to another activity
                 /*Only for debugging purpose
