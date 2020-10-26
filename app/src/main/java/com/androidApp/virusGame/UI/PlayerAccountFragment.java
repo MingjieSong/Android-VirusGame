@@ -74,11 +74,6 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 mEtConfirm.setText("");
                 break;
             case R.id.exit_button:
-                VirusSingleton singleton = VirusSingleton.get();
-
-                singleton.getSingleVirus("HIV");
-                singleton.updateSingleVirusHitpoint("HIV","4");
-                showStoredVirus();
 
                  Activity activity = getActivity();
                 if (activity != null) {
