@@ -111,15 +111,22 @@ public class PlayerSingleton {
 
     }
 
-    //update single player's password
-    public void updateSinglePlayerPassword( String updatePassword, String name ) {
-        Player player = new Player(name, updatePassword) ;
-        ContentValues newContent = getContentValues(player) ;
-        String whereClause = "NAME=?";
-        String whereArgs[] = {player.getName()};
-        mDatabase.update(PlayerDbSchema.PlayerTable.NAME, newContent, whereClause, whereArgs);
+    public int changePassword(String username,String newPassword){
+        Cursor cursor;
+        mDatabase.beginTransaction();
+        String[]where=new String[]{newPassword,username};
+        try {
+
+            cursor=mDatabase.rawQuery("UPDATE players SET password=? WHERE name=?",where);
+            cursor.moveToFirst();
+            mDatabase.setTransactionSuccessful();
+            return 0;
+        } finally {
+            mDatabase.endTransaction();
+        }
 
     }
+
 
 
     //delete single player's info from db
@@ -194,21 +201,6 @@ public class PlayerSingleton {
         }
 
         return -1;
-    }
-    public int changePassword(String username,String newPassword){
-        Cursor cursor;
-        mDatabase.beginTransaction();
-        String[]where=new String[]{newPassword,username};
-        try {
-
-            cursor=mDatabase.rawQuery("UPDATE players SET password=? WHERE name=?",where);
-            cursor.moveToFirst();
-            mDatabase.setTransactionSuccessful();
-            return 0;
-        } finally {
-            mDatabase.endTransaction();
-        }
-
     }
 
 

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 
 import com.androidApp.virusGame.Model.DbHelper;
+import com.androidApp.virusGame.Model.VirusSingleton;
 
 
 import java.io.ByteArrayOutputStream;
@@ -33,6 +34,9 @@ public class HomeScreenActivity extends SingleFragmentActivity {
 
         super.onCreate(savedInstanceState);
         dbHelper = new DbHelper( getApplicationContext());
+        VirusSingleton singleton = VirusSingleton.get();
+        //Add viruses into the db
+        singleton.addVirus();
 
 
 

@@ -39,7 +39,7 @@ public class VirusSingleton  {
 
 
     public void addVirus(){
-
+//FIXME: prevent adding duplicate virus
         List<ContentValues> contentValuesList = setUpVirus() ;
         for(int i= 0 ; i<contentValuesList.size() ; i++) {
             mDatabase.beginTransaction();
@@ -124,7 +124,7 @@ public class VirusSingleton  {
     private static ContentValues getContentValues(Virus virus) {
         ContentValues values = new ContentValues();
         values.put(VirusDbSchema.VirusTable.Cols.NAME, virus.getName());
-        values.put(VirusDbSchema.VirusTable.Cols.NAME, virus.getHitpt());
+        values.put(VirusDbSchema.VirusTable.Cols.HITPOINT, virus.getHitpt());
 
         return values;
     }

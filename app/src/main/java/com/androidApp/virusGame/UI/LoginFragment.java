@@ -92,8 +92,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.delete_account_button:
-                //intent =new Intent( getActivity(), DeleteAccountActivity.class);
-                //startActivity(intent);
+                intent =new Intent( getActivity(), DeleteAccountActivity.class);
+                startActivity(intent);
                 break;
         }
     }

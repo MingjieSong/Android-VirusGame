@@ -74,6 +74,12 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 mEtConfirm.setText("");
                 break;
             case R.id.exit_button:
+                VirusSingleton singleton = VirusSingleton.get();
+
+                singleton.getSingleVirus("HIV");
+                singleton.updateSingleVirusHitpoint("HIV","4");
+                showStoredVirus();
+
                  Activity activity = getActivity();
                 if (activity != null) {
                     activity.finish() ;
@@ -155,7 +161,6 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void showStoredVirus(){
         VirusSingleton singleton = VirusSingleton.get();
-        singleton.addVirus();
         List<Virus> virus = singleton.getVirus();
         for(int i=0 ;i<virus.size(); i++){
             Log.d("Stored virus info", "virus#"+ i+" "+virus.get(i).getName()
