@@ -15,6 +15,7 @@ import com.androidApp.virusGame.UI.HomeScreenActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class VirusSingleton  {
     private static VirusSingleton sVirus;
@@ -63,11 +64,13 @@ public class VirusSingleton  {
             ContentValues contentValues = new ContentValues();
             contentValues.put(VirusDbSchema.VirusTable.Cols.NAME, virusList.get(i).getName());
             contentValues.put(VirusDbSchema.VirusTable.Cols.HITPOINT, virusList.get(i).getHitpt());
+            //contentValues.put(VirusDbSchema.VirusTable.Cols.LOCATION, virusList.get(i).getLocation());
             contentValuesList.add(contentValues)  ;
         }
 
         return contentValuesList ;
     }
+
 
     private CursorWrapper queryVirus(){
 
@@ -93,6 +96,7 @@ public class VirusSingleton  {
 
                 String name = cursor.getString(cursor.getColumnIndex(VirusDbSchema.VirusTable.Cols.NAME));
                 String hitpt = cursor.getString(cursor.getColumnIndex(VirusDbSchema.VirusTable.Cols.HITPOINT));
+                //String location = cursor.getString(cursor.getColumnIndex(VirusDbSchema.VirusTable.Cols.LOCATION));
                 Virus virus = new Virus(name, hitpt);
                 virusList.add(virus);
                 cursor.moveToNext();
@@ -101,6 +105,51 @@ public class VirusSingleton  {
 
         return virusList;
     }
+
+    //retrieve single virus's info by its name
+    public void getSingleVirus(String name) {
+        String[]where=new String[]{name};
+        Cursor cursor=mDatabase.rawQuery("SELECT * from virus WHERE name=?",where);
+        if(cursor== null ||cursor.getCount()<=0){
+            Log.d("error", "virus not found");
+
+        }else if(cursor!=null) {
+            cursor.moveToFirst() ;
+            int htpt = cursor.getInt(cursor.getColumnIndex(VirusDbSchema.VirusTable.Cols.HITPOINT));
+            Log.d("Found the virus's info", "The virus "+ name + "'s hitpoint is "+ htpt);
+
+        }
+
+    }
+    private static ContentValues getContentValues(Virus virus) {
+        ContentValues values = new ContentValues();
+        values.put(VirusDbSchema.VirusTable.Cols.NAME, virus.getName());
+        values.put(VirusDbSchema.VirusTable.Cols.NAME, virus.getHitpt());
+
+        return values;
+    }
+
+
+    //update single virus's hitpoint
+    public void updateSingleVirusHitpoint(String name, String hitpoint) {
+        Virus virus = new Virus(name,hitpoint);
+        ContentValues newContent = getContentValues(virus) ;
+        String whereArgs[] = {name};
+        mDatabase.update(VirusDbSchema.VirusTable.NAME, newContent, "NAME=?", whereArgs);
+
+    }
+
+    public void deleteAllVirus() {
+        mDatabase.beginTransaction();
+        try {
+            mDatabase.delete(VirusDbSchema.VirusTable.NAME, null, null);
+            mDatabase.setTransactionSuccessful();
+        } finally {
+            mDatabase.endTransaction();
+        }
+    }
+
+
 
 }
 

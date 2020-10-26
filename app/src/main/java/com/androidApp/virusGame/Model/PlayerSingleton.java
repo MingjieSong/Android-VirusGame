@@ -121,6 +121,7 @@ public class PlayerSingleton {
 
     }
 
+
     //delete single player's info from db
     public void deleteSinglePlayerByName( String name ) {
         String whereClause = "NAME=?";

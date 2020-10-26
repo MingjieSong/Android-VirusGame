@@ -9,6 +9,13 @@ import android.util.Log;
 public class DbHelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "VirusGame.db";
         private static final int DATABASE_VERSION = 1;
+        private static final String PLAYER_TABLE = PlayerDbSchema.PlayerTable.NAME;
+        private static final String PLAYER_NAME = PlayerDbSchema.PlayerTable.Cols.NAME;
+        private static final String PLAYER_PSD = PlayerDbSchema.PlayerTable.Cols.PASSWORD;
+
+    private static final String VIRUS_TABLE = VirusDbSchema.VirusTable.NAME;
+    private static final String VIRUS_NAME = VirusDbSchema.VirusTable.Cols.NAME ;
+    private static final String VIRUS_HP = VirusDbSchema.VirusTable.Cols.HITPOINT;
 
 
         public DbHelper(Context context) {
@@ -18,16 +25,19 @@ public class DbHelper extends SQLiteOpenHelper {
 
         @Override
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
-            sqLiteDatabase.execSQL("CREATE TABLE " + PlayerDbSchema.PlayerTable.NAME + "(" +
+            sqLiteDatabase.execSQL("CREATE TABLE " + PLAYER_TABLE + "(" +
                     "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    PlayerDbSchema.PlayerTable.Cols.NAME + " TEXT, " +
-                    PlayerDbSchema.PlayerTable.Cols.PASSWORD + " TEXT" +
-                    ")");
+                    PLAYER_NAME + " TEXT, " +
+                    PLAYER_PSD + " TEXT, " +
+                    VIRUS_NAME + " TEXT, " + "FOREIGN KEY ("+VIRUS_NAME+") REFERENCES "+VIRUS_TABLE+"("+VIRUS_NAME+"))");
 
-            sqLiteDatabase.execSQL("CREATE TABLE " + VirusDbSchema.VirusTable.NAME + "(" +
+
+            sqLiteDatabase.execSQL("CREATE TABLE " + VIRUS_TABLE+ "(" +
                     "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    VirusDbSchema.VirusTable.Cols.NAME + " TEXT, " +
-                    VirusDbSchema.VirusTable.Cols.HITPOINT + " TEXT" +
+                    VIRUS_NAME + " TEXT, " +
+                    VIRUS_HP + " INTEGER " +
+
+                    //VirusDbSchema.VirusTable.Cols.LOCATION + " TEXT " +
                     //VirusDbSchema.VirusTable.Cols.IMAGE + "BLOB" +
                     ")");
         }

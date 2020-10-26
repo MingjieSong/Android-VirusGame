@@ -7,15 +7,18 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import java.util.Objects;
+import java.util.Vector;
 
 public class Virus {
     private String NAME;
     private String HITPOINT;
+    private String LOCATION;
 
 
-    public Virus(String name, String hitpt) {
+    public Virus(String name, String hitpt /*, String location*/) {
         NAME = name;
         HITPOINT = hitpt;
+        //LOCATION = location;
     }
 
     public String getName() {
@@ -26,6 +29,8 @@ public class Virus {
         return HITPOINT;
     }
 
+    public String getLocation() {return LOCATION; }
+
     public void setNAME(String NAME) {
         this.NAME = NAME;
     }
@@ -33,6 +38,8 @@ public class Virus {
     public void setHITPOINT(String HITPOINT) {
         this.HITPOINT = HITPOINT;
     }
+
+    public void setLOCATION(String LOCATION) {this.LOCATION = LOCATION; }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -42,12 +49,13 @@ public class Virus {
         Virus virus = (Virus) o;
         return Objects.equals(NAME, virus.NAME) &&
                 Objects.equals(HITPOINT, virus.HITPOINT);
+                //&& Objects.equals(LOCATION, virus.LOCATION);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public int hashCode() {
-        return Objects.hash(NAME, HITPOINT);
+        return Objects.hash(NAME, HITPOINT,LOCATION);
     }
 
     @Override
@@ -55,6 +63,7 @@ public class Virus {
         return "Virus{" +
                 "NAME='" + NAME + '\'' +
                 ", HITPOINT='" + HITPOINT + '\'' +
+                //", LOCATION='" + LOCATION + '\'' +
                 '}';
     }
 }
