@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorWrapper;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
@@ -37,17 +38,24 @@ public class VirusSingleton  {
         mDatabase =  HomeScreenActivity.dbHelper.getWritableDatabase();
     }
 
+    //return number of rows in table
+    public long getRowCount(String table){
+        mDatabase = HomeScreenActivity.dbHelper.getReadableDatabase();
+        long count = DatabaseUtils.queryNumEntries(mDatabase, table);
+        return count;
+    }
 
     public void addVirus(){
-//FIXME: prevent adding duplicate virus
-        List<ContentValues> contentValuesList = setUpVirus() ;
-        for(int i= 0 ; i<contentValuesList.size() ; i++) {
-            mDatabase.beginTransaction();
-            try {
-                mDatabase.insert(VirusDbSchema.VirusTable.NAME, null, contentValuesList.get(i));
-                mDatabase.setTransactionSuccessful();
-            } finally {
-                mDatabase.endTransaction();
+        if (getRowCount(VirusDbSchema.VirusTable.NAME)!=3) {
+            List<ContentValues> contentValuesList = setUpVirus();
+            for (int i = 0; i < contentValuesList.size(); i++) {
+                mDatabase.beginTransaction();
+                try {
+                    mDatabase.insert(VirusDbSchema.VirusTable.NAME, null, contentValuesList.get(i));
+                    mDatabase.setTransactionSuccessful();
+                } finally {
+                    mDatabase.endTransaction();
+                }
             }
         }
 

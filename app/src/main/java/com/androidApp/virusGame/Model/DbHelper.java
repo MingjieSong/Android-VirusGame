@@ -28,14 +28,14 @@ public class DbHelper extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL("CREATE TABLE " + PLAYER_TABLE + "(" +
                     "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     PLAYER_NAME + " TEXT, " +
-                    PLAYER_PSD + " TEXT, " +
-                    VIRUS_NAME + " TEXT, " + "FOREIGN KEY ("+VIRUS_NAME+") REFERENCES "+VIRUS_TABLE+"("+VIRUS_NAME+"))");
+                    PLAYER_PSD + " TEXT, "
+                   + VIRUS_NAME + " TEXT, " + "FOREIGN KEY ("+VIRUS_NAME+") REFERENCES "+VIRUS_TABLE+"("+VIRUS_NAME+"))");
 
 
             sqLiteDatabase.execSQL("CREATE TABLE " + VIRUS_TABLE+ "(" +
                     "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     VIRUS_NAME + " TEXT, " +
-                    VIRUS_HP + " INTEGER " +
+                    VIRUS_HP + " TEXT " +
 
                     //VirusDbSchema.VirusTable.Cols.LOCATION + " TEXT " +
                     //VirusDbSchema.VirusTable.Cols.IMAGE + "BLOB" +
