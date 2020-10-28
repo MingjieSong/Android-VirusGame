@@ -18,7 +18,7 @@ class DbSchema {
         static final class Cols {
             static final String NAME = "name";
             static final String HITPOINT = "hitpoint";
-            //static final String LOCATION = "location";
+            static final String LOCATION = "location";
 
         }
     }

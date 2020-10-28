@@ -74,17 +74,15 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 mEtConfirm.setText("");
                 break;
             case R.id.exit_button:
-
-                /*Activity activity = getActivity();
+                Activity activity = getActivity();
                 if (activity != null) {
                     activity.finish() ;
-                }*/
-             
+                }
 
                 /*
                 VirusSingleton singleton = VirusSingleton.get();
                 singleton.getSingleVirus("HIV");
-                singleton.updateSingleVirusHitpoint("HIV","4");
+                singleton.updateSingleVirus("HIV","4","5,5");
                 showStoredVirus();
                 deleteAllVirus();
 
@@ -160,8 +158,8 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
         List<Virus> virus = singleton.getVirus();
         for(int i=0 ;i<virus.size(); i++){
             Log.d("Stored virus info", "virus#"+ i+" "+virus.get(i).getName()
-                    +" Hitpoint: "+virus.get(i).getHitpt());
-                    //+ " Location: "+virus.get(i).getLocation());
+                    +" Hitpoint: "+virus.get(i).getHitpt()
+                    + " Location: ("+virus.get(i).getLocation()+")");
         }
 
     }

@@ -15,10 +15,10 @@ public class Virus {
     private String LOCATION;
 
 
-    public Virus(String name, String hitpt /*, String location*/) {
+    public Virus(String name, String hitpt, String location) {
         NAME = name;
         HITPOINT = hitpt;
-        //LOCATION = location;
+        LOCATION = location;
     }
 
     public String getName() {
@@ -48,8 +48,8 @@ public class Virus {
         if (o == null || getClass() != o.getClass()) return false;
         Virus virus = (Virus) o;
         return Objects.equals(NAME, virus.NAME) &&
-                Objects.equals(HITPOINT, virus.HITPOINT);
-                //&& Objects.equals(LOCATION, virus.LOCATION);
+                Objects.equals(HITPOINT, virus.HITPOINT) &&
+                Objects.equals(LOCATION, virus.LOCATION);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -63,7 +63,7 @@ public class Virus {
         return "Virus{" +
                 "NAME='" + NAME + '\'' +
                 ", HITPOINT='" + HITPOINT + '\'' +
-                //", LOCATION='" + LOCATION + '\'' +
+                ", LOCATION='" + LOCATION + '\'' +
                 '}';
     }
 }

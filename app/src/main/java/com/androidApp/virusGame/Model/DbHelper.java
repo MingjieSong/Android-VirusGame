@@ -16,7 +16,7 @@ public class DbHelper extends SQLiteOpenHelper {
         private static final String VIRUS_TABLE = DbSchema.VirusTable.NAME;
         private static final String VIRUS_NAME = DbSchema.VirusTable.Cols.NAME ;
         private static final String VIRUS_HP = DbSchema.VirusTable.Cols.HITPOINT;
-        //private static final String VIRUS_LOCATION = VirusDbSchema.VirusTable.Cols.LOCATION;
+        private static final String VIRUS_LOCATION = DbSchema.VirusTable.Cols.LOCATION;
 
 
         public DbHelper(Context context) {
@@ -37,9 +37,8 @@ public class DbHelper extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL("CREATE TABLE " + VIRUS_TABLE+ "(" +
                     "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     VIRUS_NAME + " TEXT, " +
-                    VIRUS_HP + " TEXT " +
-
-                    //VirusDbSchema.VirusTable.Cols.LOCATION + " TEXT " +
+                    VIRUS_HP + " TEXT, " +
+                    VIRUS_LOCATION + " TEXT " +
                     //VirusDbSchema.VirusTable.Cols.IMAGE + "BLOB" +
                     ")");
         }

@@ -64,15 +64,15 @@ public class VirusSingleton  {
     private List<ContentValues> setUpVirus(){
         List<ContentValues>  contentValuesList = new ArrayList();
         List<Virus> virusList = new  ArrayList();
-        virusList.add(new Virus("flu virus", "1")) ;
-        virusList.add(new Virus("COVID 19", "3")) ;
-        virusList.add(new Virus("HIV", "10")) ;
+        virusList.add(new Virus("flu virus", "1","2,3")) ;
+        virusList.add(new Virus("COVID 19", "3","4,4")) ;
+        virusList.add(new Virus("HIV", "10","5,2")) ;
 
         for(int i =0 ;i<virusList.size() ; i++) {
             ContentValues contentValues = new ContentValues();
             contentValues.put(DbSchema.VirusTable.Cols.NAME, virusList.get(i).getName());
             contentValues.put(DbSchema.VirusTable.Cols.HITPOINT, virusList.get(i).getHitpt());
-            //contentValues.put(VirusDbSchema.VirusTable.Cols.LOCATION, virusList.get(i).getLocation());
+            contentValues.put(DbSchema.VirusTable.Cols.LOCATION, virusList.get(i).getLocation());
             contentValuesList.add(contentValues)  ;
         }
 
@@ -104,8 +104,8 @@ public class VirusSingleton  {
 
                 String name = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.NAME));
                 String hitpt = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.HITPOINT));
-                //String location = cursor.getString(cursor.getColumnIndex(VirusDbSchema.VirusTable.Cols.LOCATION));
-                Virus virus = new Virus(name, hitpt);
+                String location = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.LOCATION));
+                Virus virus = new Virus(name, hitpt,location);
                 virusList.add(virus);
                 cursor.moveToNext();
             }
@@ -124,7 +124,8 @@ public class VirusSingleton  {
         }else if(cursor!=null) {
             cursor.moveToFirst() ;
             int htpt = cursor.getInt(cursor.getColumnIndex(DbSchema.VirusTable.Cols.HITPOINT));
-            Log.d("Found the virus's info", "The virus "+ name + "'s hitpoint is "+ htpt);
+            String loc = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.LOCATION));
+            Log.d("Found the virus's info", "The virus "+ name + "'s hitpoint is "+ htpt + " Location: ("+loc+")");
 
         }
 
@@ -133,14 +134,14 @@ public class VirusSingleton  {
         ContentValues values = new ContentValues();
         values.put(DbSchema.VirusTable.Cols.NAME, virus.getName());
         values.put(DbSchema.VirusTable.Cols.HITPOINT, virus.getHitpt());
-
+        values.put(DbSchema.VirusTable.Cols.LOCATION, virus.getLocation());
         return values;
     }
 
 
-    //update single virus's hitpoint
-    public void updateSingleVirusHitpoint(String name, String hitpoint) {
-        Virus virus = new Virus(name,hitpoint);
+    //update single virus's info
+    public void updateSingleVirus(String name, String hitpoint, String location) {
+        Virus virus = new Virus(name,hitpoint,location);
         ContentValues newContent = getContentValues(virus) ;
         String whereArgs[] = {name};
         mDatabase.update(DbSchema.VirusTable.NAME, newContent, "NAME=?", whereArgs);
