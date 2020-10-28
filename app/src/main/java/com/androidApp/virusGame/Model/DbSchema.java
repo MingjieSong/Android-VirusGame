@@ -1,13 +1,17 @@
 package com.androidApp.virusGame.Model;
 
-import android.content.Context;
-import android.content.res.AssetManager;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
-//virus schema
-class VirusDbSchema {
+class DbSchema {
+    //player schema
+    static final class PlayerTable {
+        static final String NAME = "players";
+
+        static final class Cols {
+            static final String NAME = "name";
+            static final String PASSWORD = "password";
+        }
+    }
+    //virus schema
     static final class VirusTable{
         static final String NAME = "virus";
 
@@ -18,4 +22,5 @@ class VirusDbSchema {
 
         }
     }
+
 }

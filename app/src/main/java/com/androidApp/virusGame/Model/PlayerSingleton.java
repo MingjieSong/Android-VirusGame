@@ -21,7 +21,7 @@ public class PlayerSingleton {
 
     private SQLiteDatabase mDatabase;
 
-    private static final String INSERT_STMT = "INSERT INTO " + PlayerDbSchema.PlayerTable.NAME + " (name, password) VALUES (?, ?)" ;
+    private static final String INSERT_STMT = "INSERT INTO " + DbSchema.PlayerTable.NAME + " (name, password) VALUES (?, ?)" ;
 
     //construct the only one PlayerSingleton object here
     public static PlayerSingleton get() {
@@ -47,8 +47,8 @@ public class PlayerSingleton {
             mDatabase.beginTransaction();
             try {
                 SQLiteStatement statement = mDatabase.compileStatement(INSERT_STMT);
-                statement.bindString(1, contentValues.getAsString(PlayerDbSchema.PlayerTable.Cols.NAME));
-                statement.bindString(2, contentValues.getAsString(PlayerDbSchema.PlayerTable.Cols.PASSWORD));
+                statement.bindString(1, contentValues.getAsString(DbSchema.PlayerTable.Cols.NAME));
+                statement.bindString(2, contentValues.getAsString(DbSchema.PlayerTable.Cols.PASSWORD));
                 statement.executeInsert();
                 mDatabase.setTransactionSuccessful();
             } finally {
@@ -60,12 +60,13 @@ public class PlayerSingleton {
         return false ;
     }
 
+//FIXME: Add update virus method to player's stored vuris
 
     //Delete all players info from the database.
     public void deleteAllPlayers() {
         mDatabase.beginTransaction();
         try {
-            mDatabase.delete(PlayerDbSchema.PlayerTable.NAME, null, null);
+            mDatabase.delete(DbSchema.PlayerTable.NAME, null, null);
             mDatabase.setTransactionSuccessful();
         } finally {
             mDatabase.endTransaction();
@@ -83,8 +84,8 @@ public class PlayerSingleton {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
 
-                String name = cursor.getString(cursor.getColumnIndex(PlayerDbSchema.PlayerTable.Cols.NAME));
-                String password = cursor.getString(cursor.getColumnIndex(PlayerDbSchema.PlayerTable.Cols.PASSWORD));
+                String name = cursor.getString(cursor.getColumnIndex(DbSchema.PlayerTable.Cols.NAME));
+                String password = cursor.getString(cursor.getColumnIndex(DbSchema.PlayerTable.Cols.PASSWORD));
                 Player player = new Player(name, password);
                 playerList.add(player);
                 cursor.moveToNext();
@@ -103,7 +104,7 @@ public class PlayerSingleton {
 
         }else if(cursor!=null) {
             cursor.moveToFirst() ;
-            String password = cursor.getString(cursor.getColumnIndex(PlayerDbSchema.PlayerTable.Cols.PASSWORD));
+            String password = cursor.getString(cursor.getColumnIndex(DbSchema.PlayerTable.Cols.PASSWORD));
             Log.d("Found the player's info", "The player "+ username + "'s password is "+ password);
             //FIXME: show the retrieved player's info on the screen
 
@@ -133,21 +134,21 @@ public class PlayerSingleton {
     public void deleteSinglePlayerByName( String name ) {
         String whereClause = "NAME=?";
         String whereArgs[] = {name};
-        mDatabase.delete(PlayerDbSchema.PlayerTable.NAME , whereClause, whereArgs) ;
+        mDatabase.delete(DbSchema.PlayerTable.NAME , whereClause, whereArgs) ;
     }
 
 
     private static ContentValues getContentValues(Player player) {
         ContentValues values = new ContentValues();
-        values.put(PlayerDbSchema.PlayerTable.Cols.NAME, player.getName());
-        values.put(PlayerDbSchema.PlayerTable.Cols.PASSWORD, player.getPassword());
+        values.put(DbSchema.PlayerTable.Cols.NAME, player.getName());
+        values.put(DbSchema.PlayerTable.Cols.PASSWORD, player.getPassword());
 
         return values;
     }
 
     private CursorWrapper queryPlayer() {
         Cursor cursor = mDatabase.query(
-                PlayerDbSchema.PlayerTable.NAME,
+                DbSchema.PlayerTable.NAME,
                 null, // columns; null selects all columns
                 null,
                 null,
@@ -163,7 +164,7 @@ public class PlayerSingleton {
         try ( CursorWrapper cursor = queryPlayer()) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                String name = cursor.getString(cursor.getColumnIndex(PlayerDbSchema.PlayerTable.Cols.NAME));
+                String name = cursor.getString(cursor.getColumnIndex(DbSchema.PlayerTable.Cols.NAME));
                 if(userName.equals(name)){
                     return true ;
                 }

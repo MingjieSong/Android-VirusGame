@@ -79,7 +79,7 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 if (activity != null) {
                     activity.finish() ;
                 }*/
-
+             
 
                 /*
                 VirusSingleton singleton = VirusSingleton.get();

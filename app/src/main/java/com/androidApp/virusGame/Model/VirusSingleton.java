@@ -38,20 +38,20 @@ public class VirusSingleton  {
         mDatabase =  HomeScreenActivity.dbHelper.getWritableDatabase();
     }
 
-    //return number of rows in table
-    public long getRowCount(String table){
+    //return number of table
+    public long getRowCount(String tablename){
         mDatabase = HomeScreenActivity.dbHelper.getReadableDatabase();
-        long count = DatabaseUtils.queryNumEntries(mDatabase, table);
+        long count = DatabaseUtils.queryNumEntries(mDatabase, tablename);
         return count;
     }
 
     public void addVirus(){
-        if (getRowCount(VirusDbSchema.VirusTable.NAME)!=3) {
+        if (getRowCount(DbSchema.VirusTable.NAME)!=3) {
             List<ContentValues> contentValuesList = setUpVirus();
             for (int i = 0; i < contentValuesList.size(); i++) {
                 mDatabase.beginTransaction();
                 try {
-                    mDatabase.insert(VirusDbSchema.VirusTable.NAME, null, contentValuesList.get(i));
+                    mDatabase.insert(DbSchema.VirusTable.NAME, null, contentValuesList.get(i));
                     mDatabase.setTransactionSuccessful();
                 } finally {
                     mDatabase.endTransaction();
@@ -70,8 +70,8 @@ public class VirusSingleton  {
 
         for(int i =0 ;i<virusList.size() ; i++) {
             ContentValues contentValues = new ContentValues();
-            contentValues.put(VirusDbSchema.VirusTable.Cols.NAME, virusList.get(i).getName());
-            contentValues.put(VirusDbSchema.VirusTable.Cols.HITPOINT, virusList.get(i).getHitpt());
+            contentValues.put(DbSchema.VirusTable.Cols.NAME, virusList.get(i).getName());
+            contentValues.put(DbSchema.VirusTable.Cols.HITPOINT, virusList.get(i).getHitpt());
             //contentValues.put(VirusDbSchema.VirusTable.Cols.LOCATION, virusList.get(i).getLocation());
             contentValuesList.add(contentValues)  ;
         }
@@ -83,7 +83,7 @@ public class VirusSingleton  {
     private CursorWrapper queryVirus(){
 
         Cursor cursor = mDatabase.query(
-                VirusDbSchema.VirusTable.NAME,
+                DbSchema.VirusTable.NAME,
                 null, // columns; null selects all columns
                 null,
                 null,
@@ -102,8 +102,8 @@ public class VirusSingleton  {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
 
-                String name = cursor.getString(cursor.getColumnIndex(VirusDbSchema.VirusTable.Cols.NAME));
-                String hitpt = cursor.getString(cursor.getColumnIndex(VirusDbSchema.VirusTable.Cols.HITPOINT));
+                String name = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.NAME));
+                String hitpt = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.HITPOINT));
                 //String location = cursor.getString(cursor.getColumnIndex(VirusDbSchema.VirusTable.Cols.LOCATION));
                 Virus virus = new Virus(name, hitpt);
                 virusList.add(virus);
@@ -123,7 +123,7 @@ public class VirusSingleton  {
 
         }else if(cursor!=null) {
             cursor.moveToFirst() ;
-            int htpt = cursor.getInt(cursor.getColumnIndex(VirusDbSchema.VirusTable.Cols.HITPOINT));
+            int htpt = cursor.getInt(cursor.getColumnIndex(DbSchema.VirusTable.Cols.HITPOINT));
             Log.d("Found the virus's info", "The virus "+ name + "'s hitpoint is "+ htpt);
 
         }
@@ -131,8 +131,8 @@ public class VirusSingleton  {
     }
     private static ContentValues getContentValues(Virus virus) {
         ContentValues values = new ContentValues();
-        values.put(VirusDbSchema.VirusTable.Cols.NAME, virus.getName());
-        values.put(VirusDbSchema.VirusTable.Cols.HITPOINT, virus.getHitpt());
+        values.put(DbSchema.VirusTable.Cols.NAME, virus.getName());
+        values.put(DbSchema.VirusTable.Cols.HITPOINT, virus.getHitpt());
 
         return values;
     }
@@ -143,14 +143,14 @@ public class VirusSingleton  {
         Virus virus = new Virus(name,hitpoint);
         ContentValues newContent = getContentValues(virus) ;
         String whereArgs[] = {name};
-        mDatabase.update(VirusDbSchema.VirusTable.NAME, newContent, "NAME=?", whereArgs);
+        mDatabase.update(DbSchema.VirusTable.NAME, newContent, "NAME=?", whereArgs);
 
     }
 
     public void deleteAllVirus() {
         mDatabase.beginTransaction();
         try {
-            mDatabase.delete(VirusDbSchema.VirusTable.NAME, null, null);
+            mDatabase.delete(DbSchema.VirusTable.NAME, null, null);
             mDatabase.setTransactionSuccessful();
         } finally {
             mDatabase.endTransaction();

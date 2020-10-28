@@ -23,6 +23,7 @@ public class Player {
         return mPassword;
     }
 
+
     public void setName(String mName) {
         this.mName = mName;
     }
@@ -30,6 +31,7 @@ public class Player {
     public void setPassword(String mPassword) {
         this.mPassword = mPassword;
     }
+
 
     //override equal, hashcode and toString
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -54,6 +56,7 @@ public class Player {
         return "Player{" +
                 "mName='" + mName + '\'' +
                 ", mPassword='" + mPassword + '\'' +
-                '}';
+
+        '}';
     }
 }
