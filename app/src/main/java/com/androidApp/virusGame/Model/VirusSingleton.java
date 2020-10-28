@@ -24,7 +24,7 @@ public class VirusSingleton  {
     private SQLiteDatabase mDatabase;
 
 
-    //construct the only one PlayerSingleton object here
+    //construct the only one VirusSingleton object here
     public static VirusSingleton get() {
         if (sVirus == null) {
             sVirus = new VirusSingleton();

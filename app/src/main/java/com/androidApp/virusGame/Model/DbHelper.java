@@ -18,6 +18,10 @@ public class DbHelper extends SQLiteOpenHelper {
         private static final String VIRUS_HP = DbSchema.VirusTable.Cols.HITPOINT;
         private static final String VIRUS_LOCATION = DbSchema.VirusTable.Cols.LOCATION;
 
+        private static final String CAUGHTVIRUS_TABLE = DbSchema.CaughtVirus.NAME;
+        private static final String PLAYER_ID = DbSchema.CaughtVirus.Cols.PLAYER_ID;
+        private static final String VIRUS_ID = DbSchema.CaughtVirus.Cols.VIRUS_ID;
+
 
         public DbHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -30,9 +34,6 @@ public class DbHelper extends SQLiteOpenHelper {
                     "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     PLAYER_NAME + " TEXT, " +
                     PLAYER_PSD + " TEXT " +")");
-                    //VIRUS_NAME + " TEXT, " + "FOREIGN KEY ("+VIRUS_NAME+") REFERENCES "+VIRUS_TABLE+"("+VIRUS_NAME+"))");
-
-//relational table
 
             sqLiteDatabase.execSQL("CREATE TABLE " + VIRUS_TABLE+ "(" +
                     "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -41,6 +42,12 @@ public class DbHelper extends SQLiteOpenHelper {
                     VIRUS_LOCATION + " TEXT " +
                     //VirusDbSchema.VirusTable.Cols.IMAGE + "BLOB" +
                     ")");
+
+            sqLiteDatabase.execSQL("CREATE TABLE "+CAUGHTVIRUS_TABLE+" ("+
+                    PLAYER_ID + " INTEGER PRIMARY KEY," +
+                    VIRUS_ID + " INTEGER, FOREIGN KEY (" + PLAYER_ID + ") REFERENCES " + PLAYER_TABLE + "(" + "_id" + ") ON DELETE CASCADE,"+
+                    "FOREIGN KEY (" + VIRUS_ID + ") REFERENCES " + VIRUS_TABLE + "(" + "_id" + ") ON DELETE CASCADE);");
+
         }
 
         @Override

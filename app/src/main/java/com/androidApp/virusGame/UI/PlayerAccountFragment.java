@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,10 +75,13 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 mEtConfirm.setText("");
                 break;
             case R.id.exit_button:
+
                 Activity activity = getActivity();
                 if (activity != null) {
                     activity.finish() ;
                 }
+
+
 
                 /*
                 VirusSingleton singleton = VirusSingleton.get();
@@ -85,6 +89,12 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 singleton.updateSingleVirus("HIV","4","5,5");
                 showStoredVirus();
                 deleteAllVirus();
+
+                PlayerSingleton singleton = PlayerSingleton.get();
+                singleton.getSinglePlayer("tina") ;
+                singleton.addVirusToPlayer("tina","HIV");
+                List<Pair<Integer,Integer>> PV = singleton.getPlayerAndVirus();
+                showPlayerAndVirus(PV);
 
                 showStoredPlayers() ;
                 deleteAllPlayers() ;
@@ -163,6 +173,13 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
         }
 
     }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void showPlayerAndVirus(List<Pair<Integer,Integer>> list){
+        for(int i=0 ;i<list.size(); i++){
+            Log.d("PlayerCaughtVirus info","Player "+list.get(i).first + " Virus " + list.get(i).second);
 
+        }
+
+    }
 
 }

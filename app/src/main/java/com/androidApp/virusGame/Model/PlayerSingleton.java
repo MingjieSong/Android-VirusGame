@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Build;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.RequiresApi;
 
@@ -204,6 +205,39 @@ public class PlayerSingleton {
         return -1;
     }
 
+    //below are methods for relational db between player and virus
+    public void addVirusToPlayer(String player, String virus) {
+        ContentValues values = new ContentValues();
+
+        values.put(DbSchema.CaughtVirus.Cols.PLAYER_ID, "(SELECT " + "_id" + " FROM " + DbSchema.PlayerTable.NAME + " WHERE " + DbSchema.PlayerTable.Cols.NAME + "=" + player + ")");
+        values.put(DbSchema.CaughtVirus.Cols.VIRUS_ID, "(SELECT " + "_id" + " FROM " + DbSchema.VirusTable.NAME + " WHERE " + DbSchema.VirusTable.Cols.NAME + "=" + virus + ")");
+
+        mDatabase.insert(DbSchema.CaughtVirus.NAME, null, values);
+
+        mDatabase.beginTransaction();
+        try {
+            mDatabase.insert(DbSchema.CaughtVirus.NAME, null, values);
+            mDatabase.setTransactionSuccessful();
+        } finally {
+            mDatabase.endTransaction();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public List<Pair<Integer,Integer>> getPlayerAndVirus() {
+        List<Pair<Integer,Integer>> player_virus_List = new ArrayList<>();
+        try (CursorWrapper cursor = queryPlayer()) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+
+                int player_id = cursor.getInt(cursor.getColumnIndex(DbSchema.CaughtVirus.Cols.PLAYER_ID));
+                int virus_id = cursor.getInt(cursor.getColumnIndex(DbSchema.CaughtVirus.Cols.VIRUS_ID));
+                player_virus_List.add(new Pair<Integer, Integer>(player_id,virus_id));
+                cursor.moveToNext();
+            }
+        }
+        return player_virus_List;
+    }
 
 
 

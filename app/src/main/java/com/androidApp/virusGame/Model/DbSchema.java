@@ -23,4 +23,14 @@ class DbSchema {
         }
     }
 
+    //relation schema
+    static final class CaughtVirus{
+        static final String NAME = "caught_virus";
+
+        static final class Cols{
+            static final String PLAYER_ID = "player";
+            static final String VIRUS_ID = "virus";
+        }
+    }
+
 }
