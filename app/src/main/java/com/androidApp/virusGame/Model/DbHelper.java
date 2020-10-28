@@ -44,8 +44,10 @@ public class DbHelper extends SQLiteOpenHelper {
                     ")");
 
             sqLiteDatabase.execSQL("CREATE TABLE "+CAUGHTVIRUS_TABLE+" ("+
-                    PLAYER_ID + " INTEGER PRIMARY KEY," +
-                    VIRUS_ID + " INTEGER, FOREIGN KEY (" + PLAYER_ID + ") REFERENCES " + PLAYER_TABLE + "(" + "_id" + ") ON DELETE CASCADE,"+
+                    "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    PLAYER_ID + " INTEGER," +
+                    VIRUS_ID + " INTEGER, " +
+                    "FOREIGN KEY (" + PLAYER_ID + ") REFERENCES " + PLAYER_TABLE + "(" + "_id" + ") ON DELETE CASCADE,"+
                     "FOREIGN KEY (" + VIRUS_ID + ") REFERENCES " + VIRUS_TABLE + "(" + "_id" + ") ON DELETE CASCADE);");
 
         }
@@ -53,8 +55,9 @@ public class DbHelper extends SQLiteOpenHelper {
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
             Log.d("Upgrading message","Upgrading database; dropping and recreating tables.");
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DbSchema.PlayerTable.NAME);
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DbSchema.VirusTable.NAME);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PLAYER_TABLE);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + VIRUS_TABLE);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + CAUGHTVIRUS_TABLE);
             onCreate(sqLiteDatabase);
         }
 

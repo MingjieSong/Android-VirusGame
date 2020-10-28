@@ -205,14 +205,13 @@ public class PlayerSingleton {
         return -1;
     }
 
+
     //below are methods for relational db between player and virus
     public void addVirusToPlayer(String player, String virus) {
         ContentValues values = new ContentValues();
 
         values.put(DbSchema.CaughtVirus.Cols.PLAYER_ID, "(SELECT " + "_id" + " FROM " + DbSchema.PlayerTable.NAME + " WHERE " + DbSchema.PlayerTable.Cols.NAME + "=" + player + ")");
         values.put(DbSchema.CaughtVirus.Cols.VIRUS_ID, "(SELECT " + "_id" + " FROM " + DbSchema.VirusTable.NAME + " WHERE " + DbSchema.VirusTable.Cols.NAME + "=" + virus + ")");
-
-        mDatabase.insert(DbSchema.CaughtVirus.NAME, null, values);
 
         mDatabase.beginTransaction();
         try {
@@ -223,10 +222,23 @@ public class PlayerSingleton {
         }
     }
 
+    private CursorWrapper queryPlayerVirus() {
+        Cursor cursor = mDatabase.query(
+                DbSchema.CaughtVirus.NAME,
+                null, // columns; null selects all columns
+                null,
+                null,
+                null, // GROUP BY
+                null, // HAVING
+                null // ORDER BY
+        );
+        return new CursorWrapper(cursor);
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public List<Pair<Integer,Integer>> getPlayerAndVirus() {
         List<Pair<Integer,Integer>> player_virus_List = new ArrayList<>();
-        try (CursorWrapper cursor = queryPlayer()) {
+        try (CursorWrapper cursor = queryPlayerVirus()) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
 

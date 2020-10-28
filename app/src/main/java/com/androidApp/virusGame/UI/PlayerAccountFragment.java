@@ -90,6 +90,7 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 showStoredVirus();
                 deleteAllVirus();
 
+
                 PlayerSingleton singleton = PlayerSingleton.get();
                 singleton.getSinglePlayer("tina") ;
                 singleton.addVirusToPlayer("tina","HIV");
