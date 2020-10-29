@@ -19,10 +19,6 @@ import java.io.File;
 
 public class HomeScreenActivity extends SingleFragmentActivity {
     public static DbHelper dbHelper ;
-    /* File pinkVirusFile = new File("/app/src/main/pinkvirus-playstore.png");
-    private String pink_virus_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath() +
-    File.separator + "pinkvirus-playstore.png"; */
-
 
     @Override
     protected HomeScreenFragment createFragment(){return new HomeScreenFragment() ;}
@@ -33,8 +29,8 @@ public class HomeScreenActivity extends SingleFragmentActivity {
     public void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
-        dbHelper = new DbHelper( getApplicationContext());
-        VirusSingleton singleton = VirusSingleton.get();
+        dbHelper = new DbHelper(getApplicationContext());
+        VirusSingleton singleton = VirusSingleton.get(getApplicationContext());
         //Add viruses into the db
         singleton.addVirus();
 
@@ -53,23 +49,6 @@ public class HomeScreenActivity extends SingleFragmentActivity {
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         //Get access to more stored data
     }
-
-
-
-
-    //convert bitmap image into byte array
-    // Convert that image to byte array & store that byte [] to DB.
-    // While retrieving that image get byte [] convert that byte [] to bitmap by which you will get original image.
-    public byte[] convertToByteArray(File virusFile) {
-        Bitmap imageBitmap = BitmapFactory.decodeFile(virusFile.getAbsolutePath());
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-
-        return byteArray;
-    }
-
-
 
 
 }

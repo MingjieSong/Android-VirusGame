@@ -77,21 +77,21 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.exit_button:
 
-               /* Activity activity = getActivity();
+               Activity activity = getActivity();
                 if (activity != null) {
                     activity.finish() ;
-                } */
-                Intent intent =new Intent( getActivity(), MapActivity.class);
-                startActivity(intent);
+                }
 
 
                 /*
+                Intent intent =new Intent( getActivity(), MapActivity.class);
+                startActivity(intent);
+
                 VirusSingleton singleton = VirusSingleton.get();
                 singleton.getSingleVirus("HIV");
                 singleton.updateSingleVirus("HIV","4","5,5");
                 showStoredVirus();
                 deleteAllVirus();
-
 
                 PlayerSingleton singleton = PlayerSingleton.get();
                 p_singleton.getSinglePlayer("mingjie") ;
@@ -162,19 +162,21 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     private void deleteAllVirus(){
         FragmentActivity activity = getActivity();
         if(activity != null){
-            VirusSingleton singleton = VirusSingleton.get();
+            VirusSingleton singleton = VirusSingleton.get(this.getContext());
             singleton.deleteAllVirus();
 
         }
     }
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void showStoredVirus(){
-        VirusSingleton singleton = VirusSingleton.get();
+        VirusSingleton singleton = VirusSingleton.get(this.getContext());
         List<Virus> virus = singleton.getVirus();
         for(int i=0 ;i<virus.size(); i++){
             Log.d("Stored virus info", "virus#"+ i+" "+virus.get(i).getName()
                     +" Hitpoint: "+virus.get(i).getHitpt()
-                    + " Location: ("+virus.get(i).getLocation()+")");
+                    + " Location: ("+virus.get(i).getLocation() + ")"
+                    + " Image byte array: "+virus.get(i).getImage()
+                    + ")");
         }
 
     }

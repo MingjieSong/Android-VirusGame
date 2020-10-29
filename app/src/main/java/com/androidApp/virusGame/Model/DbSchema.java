@@ -21,6 +21,7 @@ class DbSchema {
             static final String NAME = "name";
             static final String HITPOINT = "hitpoint";
             static final String LOCATION = "location";
+            static final String IMAGE = "image";
 
         }
     }

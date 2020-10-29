@@ -9,6 +9,7 @@ import android.util.Log;
 public class DbHelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "VirusGame.db";
         private static final int DATABASE_VERSION = 1;
+
         private static final String PLAYER_TABLE = DbSchema.PlayerTable.NAME;
         private static final String PLAYER_NAME = DbSchema.PlayerTable.Cols.NAME;
         private static final String PLAYER_PSD = DbSchema.PlayerTable.Cols.PASSWORD;
@@ -17,6 +18,7 @@ public class DbHelper extends SQLiteOpenHelper {
         private static final String VIRUS_NAME = DbSchema.VirusTable.Cols.NAME ;
         private static final String VIRUS_HP = DbSchema.VirusTable.Cols.HITPOINT;
         private static final String VIRUS_LOCATION = DbSchema.VirusTable.Cols.LOCATION;
+        private static final String VIRUS_IMAGE = DbSchema.VirusTable.Cols.IMAGE;
 
         private static final String CAUGHTVIRUS_TABLE = DbSchema.CaughtVirus.NAME;
         private static final String PLAYER_ID = DbSchema.CaughtVirus.Cols.PLAYER_ID;
@@ -39,9 +41,8 @@ public class DbHelper extends SQLiteOpenHelper {
                     DbSchema.VirusTable.Cols.ID+ " INTEGER PRIMARY KEY, "+
                     VIRUS_NAME + " TEXT, " +
                     VIRUS_HP + " TEXT, " +
-                    VIRUS_LOCATION + " TEXT " +
-                    //VirusDbSchema.VirusTable.Cols.IMAGE + "BLOB" +
-                    ")");
+                    VIRUS_LOCATION + " TEXT, " +
+                    VIRUS_IMAGE + " BLOB "+ ")");
 
             sqLiteDatabase.execSQL("CREATE TABLE "+CAUGHTVIRUS_TABLE+" ("+
                     DbSchema.CaughtVirus.Cols.ID+ " INTEGER PRIMARY KEY, "+
