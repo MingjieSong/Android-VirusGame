@@ -22,7 +22,7 @@ public class VirusSingleton  {
     private static VirusSingleton sVirus;
 
     private SQLiteDatabase mDatabase;
-
+    private int virusCount = 3 ;
 
     //construct the only one VirusSingleton object here
     public static VirusSingleton get() {
@@ -46,7 +46,7 @@ public class VirusSingleton  {
     }
 
     public void addVirus(){
-        if (getRowCount(DbSchema.VirusTable.NAME)!=3) {
+        if (getRowCount(DbSchema.VirusTable.NAME)!=virusCount) {
             List<ContentValues> contentValuesList = setUpVirus();
             for (int i = 0; i < contentValuesList.size(); i++) {
                 mDatabase.beginTransaction();
