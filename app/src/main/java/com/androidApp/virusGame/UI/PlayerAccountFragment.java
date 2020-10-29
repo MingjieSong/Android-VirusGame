@@ -1,6 +1,7 @@
 package com.androidApp.virusGame.UI;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -76,10 +77,12 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.exit_button:
 
-                Activity activity = getActivity();
+               /* Activity activity = getActivity();
                 if (activity != null) {
                     activity.finish() ;
-                }
+                } */
+                Intent intent =new Intent( getActivity(), MapActivity.class);
+                startActivity(intent);
 
 
                 /*
