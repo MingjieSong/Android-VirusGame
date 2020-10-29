@@ -76,23 +76,12 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.exit_button:
 
-                /*Activity activity = getActivity();
+                Activity activity = getActivity();
                 if (activity != null) {
                     activity.finish() ;
-                } */
+                }
 
-                VirusSingleton v_singleton = VirusSingleton.get();
-                v_singleton.getSingleVirus("HIV");
-                v_singleton.updateSingleVirus("HIV","4","5,5");
-                showStoredVirus();
 
-                PlayerSingleton p_singleton = PlayerSingleton.get();
-                p_singleton.getSinglePlayer("mingjie") ;
-                p_singleton.addVirusToPlayer("mingjie","HIV");
-                p_singleton.addVirusToPlayer("mingjie","flu virus");
-                p_singleton.addVirusToPlayer("mingjie","COVID 19");
-                List<Pair<Integer,Integer>> PV = p_singleton.getPlayerAndVirus();
-                showPlayerAndVirus(PV);
                 /*
                 VirusSingleton singleton = VirusSingleton.get();
                 singleton.getSingleVirus("HIV");
@@ -102,9 +91,11 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
 
 
                 PlayerSingleton singleton = PlayerSingleton.get();
-                singleton.getSinglePlayer("tina") ;
-                singleton.addVirusToPlayer("tina","HIV");
-                List<Pair<Integer,Integer>> PV = singleton.getPlayerAndVirus();
+                p_singleton.getSinglePlayer("mingjie") ;
+                p_singleton.addVirusToPlayer("mingjie","HIV");
+                p_singleton.addVirusToPlayer("mingjie","flu virus");
+                p_singleton.addVirusToPlayer("mingjie","COVID 19");
+                List<Pair<String, String>> PV = singleton.getPlayerAndVirus();
                 showPlayerAndVirus(PV);
 
                 showStoredPlayers() ;
@@ -185,7 +176,7 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
 
     }
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void showPlayerAndVirus(List<Pair<Integer,Integer>> list){
+    private void showPlayerAndVirus(List<Pair<String, String>> list){
         for(int i=0 ;i<list.size(); i++){
             Log.d("PlayerCaughtVirus info","Player "+list.get(i).first + " Virus " + list.get(i).second);
 

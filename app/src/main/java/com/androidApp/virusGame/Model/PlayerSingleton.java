@@ -259,14 +259,23 @@ public class PlayerSingleton {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public List<Pair<Integer,Integer>> getPlayerAndVirus() {
-        List<Pair<Integer,Integer>> player_virus_List = new ArrayList<>();
+    public List<Pair<String, String>> getPlayerAndVirus() {
+        List<Pair<String, String>> player_virus_List = new ArrayList<>();
         try (CursorWrapper cursor = queryPlayerVirus()) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 int player_id = cursor.getInt(cursor.getColumnIndex(DbSchema.CaughtVirus.Cols.PLAYER_ID));
                 int virus_id = cursor.getInt(cursor.getColumnIndex(DbSchema.CaughtVirus.Cols.VIRUS_ID));
-                player_virus_List.add(new Pair<Integer, Integer>(player_id,virus_id));
+
+
+                String[]where=new String[]{String.valueOf(player_id)};
+                Cursor cursorForPlayer=mDatabase.rawQuery("SELECT name from players WHERE id=?",where);
+
+                where=new String[]{String.valueOf(virus_id)};
+                Cursor cursorForVirus=mDatabase.rawQuery("SELECT name from virus WHERE id=?",where);
+                cursorForPlayer.moveToFirst();
+                cursorForVirus.moveToFirst();
+                player_virus_List.add(new Pair<String, String>(cursorForPlayer.getString(0), cursorForVirus.getString(0)));
                 cursor.moveToNext();
             }
         }
