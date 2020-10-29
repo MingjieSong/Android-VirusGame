@@ -208,10 +208,33 @@ public class PlayerSingleton {
 
     //below are methods for relational db between player and virus
     public void addVirusToPlayer(String player, String virus) {
-        ContentValues values = new ContentValues();
+        String[]where=new String[]{player};
+        Cursor cursorForPlayer=mDatabase.rawQuery("SELECT * from players WHERE name=?",where);
+        where=new String[]{virus};
+        Cursor cursorForVirus=mDatabase.rawQuery("SELECT * from virus  WHERE name=?",where);
 
-        values.put(DbSchema.CaughtVirus.Cols.PLAYER_ID, "(SELECT " + "_id" + " FROM " + DbSchema.PlayerTable.NAME + " WHERE " + DbSchema.PlayerTable.Cols.NAME + "=" + player + ")");
-        values.put(DbSchema.CaughtVirus.Cols.VIRUS_ID, "(SELECT " + "_id" + " FROM " + DbSchema.VirusTable.NAME + " WHERE " + DbSchema.VirusTable.Cols.NAME + "=" + virus + ")");
+        int playerId=0 ;
+        int virusId=0 ;
+        if(cursorForPlayer== null ||cursorForPlayer.getCount()<=0){
+            Log.d("error", "player not found");
+
+        }else if(cursorForPlayer!=null) {
+            cursorForPlayer.moveToFirst();
+            playerId = cursorForPlayer.getInt(cursorForPlayer.getColumnIndex(DbSchema.PlayerTable.Cols.ID));
+        }
+
+
+        if(cursorForVirus== null ||cursorForVirus.getCount()<=0){
+            Log.d("error", "virus not found");
+        }else if(cursorForVirus!=null) {
+            cursorForVirus.moveToFirst();
+            virusId = cursorForVirus.getInt(cursorForVirus.getColumnIndex(DbSchema.VirusTable.Cols.ID));
+        }
+
+
+        ContentValues values = new ContentValues();
+        values.put(DbSchema.CaughtVirus.Cols.PLAYER_ID,  playerId) ;
+        values.put(DbSchema.CaughtVirus.Cols.VIRUS_ID,  virusId);
 
         mDatabase.beginTransaction();
         try {
@@ -241,7 +264,6 @@ public class PlayerSingleton {
         try (CursorWrapper cursor = queryPlayerVirus()) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-
                 int player_id = cursor.getInt(cursor.getColumnIndex(DbSchema.CaughtVirus.Cols.PLAYER_ID));
                 int virus_id = cursor.getInt(cursor.getColumnIndex(DbSchema.CaughtVirus.Cols.VIRUS_ID));
                 player_virus_List.add(new Pair<Integer, Integer>(player_id,virus_id));

@@ -31,12 +31,12 @@ public class DbHelper extends SQLiteOpenHelper {
         @Override
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
             sqLiteDatabase.execSQL("CREATE TABLE " + PLAYER_TABLE + "(" +
-                    "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    DbSchema.PlayerTable.Cols.ID+ " INTEGER PRIMARY KEY, "+
                     PLAYER_NAME + " TEXT, " +
                     PLAYER_PSD + " TEXT " +")");
 
             sqLiteDatabase.execSQL("CREATE TABLE " + VIRUS_TABLE+ "(" +
-                    "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    DbSchema.VirusTable.Cols.ID+ " INTEGER PRIMARY KEY, "+
                     VIRUS_NAME + " TEXT, " +
                     VIRUS_HP + " TEXT, " +
                     VIRUS_LOCATION + " TEXT " +
@@ -44,11 +44,11 @@ public class DbHelper extends SQLiteOpenHelper {
                     ")");
 
             sqLiteDatabase.execSQL("CREATE TABLE "+CAUGHTVIRUS_TABLE+" ("+
-                    "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    DbSchema.CaughtVirus.Cols.ID+ " INTEGER PRIMARY KEY, "+
                     PLAYER_ID + " INTEGER," +
                     VIRUS_ID + " INTEGER, " +
-                    "FOREIGN KEY (" + PLAYER_ID + ") REFERENCES " + PLAYER_TABLE + "(" + "_id" + ") ON DELETE CASCADE,"+
-                    "FOREIGN KEY (" + VIRUS_ID + ") REFERENCES " + VIRUS_TABLE + "(" + "_id" + ") ON DELETE CASCADE);");
+                    "FOREIGN KEY (" + PLAYER_ID + ") REFERENCES " + PLAYER_TABLE + "(" +  DbSchema.PlayerTable.Cols.ID + ") ON DELETE CASCADE,"+
+                    "FOREIGN KEY (" + VIRUS_ID + ") REFERENCES " + VIRUS_TABLE + "(" +  DbSchema.VirusTable.Cols.ID + ") ON DELETE CASCADE);");
 
         }
 

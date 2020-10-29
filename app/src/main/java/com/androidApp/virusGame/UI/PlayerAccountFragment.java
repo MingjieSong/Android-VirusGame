@@ -76,13 +76,23 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.exit_button:
 
-                Activity activity = getActivity();
+                /*Activity activity = getActivity();
                 if (activity != null) {
                     activity.finish() ;
-                }
+                } */
 
+                VirusSingleton v_singleton = VirusSingleton.get();
+                v_singleton.getSingleVirus("HIV");
+                v_singleton.updateSingleVirus("HIV","4","5,5");
+                showStoredVirus();
 
-
+                PlayerSingleton p_singleton = PlayerSingleton.get();
+                p_singleton.getSinglePlayer("mingjie") ;
+                p_singleton.addVirusToPlayer("mingjie","HIV");
+                p_singleton.addVirusToPlayer("mingjie","flu virus");
+                p_singleton.addVirusToPlayer("mingjie","COVID 19");
+                List<Pair<Integer,Integer>> PV = p_singleton.getPlayerAndVirus();
+                showPlayerAndVirus(PV);
                 /*
                 VirusSingleton singleton = VirusSingleton.get();
                 singleton.getSingleVirus("HIV");

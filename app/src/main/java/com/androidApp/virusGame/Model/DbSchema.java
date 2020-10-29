@@ -7,6 +7,7 @@ class DbSchema {
         static final String NAME = "players";
 
         static final class Cols {
+            static final String ID = "id";
             static final String NAME = "name";
             static final String PASSWORD = "password";
         }
@@ -16,6 +17,7 @@ class DbSchema {
         static final String NAME = "virus";
 
         static final class Cols {
+            static final String ID = "id";
             static final String NAME = "name";
             static final String HITPOINT = "hitpoint";
             static final String LOCATION = "location";
@@ -28,6 +30,7 @@ class DbSchema {
         static final String NAME = "caught_virus_table";
 
         static final class Cols{
+            static final String ID = "id";
             static final String PLAYER_ID = "player";
             static final String VIRUS_ID = "virus";
         }
