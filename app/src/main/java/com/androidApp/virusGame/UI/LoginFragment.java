@@ -67,10 +67,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+        FragmentActivity activity=getActivity();
+        PlayerSingleton singleton = PlayerSingleton.get();
         Intent intent;
+        String username=mEtUsername.getText().toString();
+        String password=mEtPassword.getText().toString();
         switch (view.getId()) {
             case R.id.done_button:
-                if(checkAccount(mEtUsername.getText().toString(),mEtPassword.getText().toString())==0){
+                if(checkAccount(username,password)==0){
                     intent =new Intent( getActivity(), MaskCheckActivity.class);
                     startActivity(intent);
                 }
@@ -81,7 +85,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 mEtPassword.setText("");
                 break;
             case R.id.exit_button:
-                Activity activity = getActivity();
                 if (activity != null) {
                     activity.finish() ;
                 }
@@ -92,11 +95,19 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.delete_account_button:
-                intent =new Intent( getActivity(), DeleteAccountActivity.class);
-                startActivity(intent);
+
+                if(checkAccount(username,password)==0){
+                    //success
+                    singleton.deleteSinglePlayerByName(username);
+                    Toast.makeText(activity.getApplicationContext(), "Account deleted", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
+
+
+
+
     public int checkAccount(String username, String password){
         //TODO: clear text edits and ask for new password, etc.
         FragmentActivity activity=getActivity();

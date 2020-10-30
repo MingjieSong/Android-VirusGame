@@ -15,7 +15,6 @@
         <activity android:name=".UI.LoginActivity" />
         <activity android:name=".UI.MaskCheckActivity" />
         <activity android:name=".UI.PlayerAccountActivity" />
-        <activity android:name=".UI.DeleteAccountActivity"/>
         <activity android:name=".UI.MapActivity" />
         <activity android:name=".UI.HomeScreenActivity">
 
