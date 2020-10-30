@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 public class VirusSingleton  {
@@ -77,18 +78,16 @@ public class VirusSingleton  {
         List<ContentValues>  contentValuesList = new ArrayList<>();
         List<Virus> virusList = new  ArrayList<>();
 
-
-
-        virusList.add(new Virus("flu virus", "1","2,3", getBytesByPath("fluvirus.png"))) ;
-        virusList.add(new Virus("COVID 19", "3","4,4",getBytesByPath("coronavirus.png"))) ;
-        virusList.add(new Virus("HIV", "10","5,2",getBytesByPath("hivvirus.png"))) ;
+        virusList.add(new Virus("fluvirus", "1","2,3", getPathByName("fluvirus")));
+        virusList.add(new Virus("coronavirus", "3","4,4",getPathByName("coronavirus.png")));
+        virusList.add(new Virus("hiv", "10","5,2",getPathByName("hivvirus.png")));
 
         for(int i =0 ;i<virusList.size() ; i++) {
             ContentValues contentValues = new ContentValues();
             contentValues.put(DbSchema.VirusTable.Cols.NAME, virusList.get(i).getName());
             contentValues.put(DbSchema.VirusTable.Cols.HITPOINT, virusList.get(i).getHitpt());
             contentValues.put(DbSchema.VirusTable.Cols.LOCATION, virusList.get(i).getLocation());
-            contentValues.put(DbSchema.VirusTable.Cols.IMAGE, virusList.get(i).getImage()); //change image byte to image path upper bounds for image size
+            contentValues.put(DbSchema.VirusTable.Cols.IMAGEPATH, virusList.get(i).getImagePath()); //change image byte to image path upper bounds for image size
 
             contentValuesList.add(contentValues)  ;
         }
@@ -96,6 +95,9 @@ public class VirusSingleton  {
         return contentValuesList ;
     }
 
+    private String getPathByName(String virus){
+        return virus+".png";
+    }
 
     //convert from path name to bitmap then to byte array
     public byte[] getBytesByPath(String path) throws IOException {
@@ -111,6 +113,8 @@ public class VirusSingleton  {
     public static Bitmap getImage(byte[] image) {
         return BitmapFactory.decodeByteArray(image, 0, image.length);
     }
+
+    
 
     private CursorWrapper queryVirus(){
 
@@ -137,8 +141,8 @@ public class VirusSingleton  {
                 String name = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.NAME));
                 String hitpt = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.HITPOINT));
                 String location = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.LOCATION));
-                byte[] image = cursor.getBlob(cursor.getColumnIndex(DbSchema.VirusTable.Cols.IMAGE));
-                Virus virus = new Virus(name, hitpt,location, image);
+                String imagepath = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.IMAGEPATH));
+                Virus virus = new Virus(name, hitpt,location, imagepath);
                 virusList.add(virus);
                 cursor.moveToNext();
             }
@@ -158,8 +162,8 @@ public class VirusSingleton  {
             cursor.moveToFirst() ;
             int htpt = cursor.getInt(cursor.getColumnIndex(DbSchema.VirusTable.Cols.HITPOINT));
             String loc = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.LOCATION));
-            byte[] img = cursor.getBlob(cursor.getColumnIndex(DbSchema.VirusTable.Cols.IMAGE));
-            Log.d("Found the virus's info", "The virus "+ name + "'s hitpoint is "+ htpt + " Location: ("+loc+")" +" Image byte array: "+ img);
+            String imgpath = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.IMAGEPATH));
+            Log.d("Found the virus's info", "The virus "+ name + "'s hitpoint is "+ htpt + " Location: ("+loc+")" +" Image path: "+ imgpath);
 
         }
 
@@ -169,14 +173,14 @@ public class VirusSingleton  {
         values.put(DbSchema.VirusTable.Cols.NAME, virus.getName());
         values.put(DbSchema.VirusTable.Cols.HITPOINT, virus.getHitpt());
         values.put(DbSchema.VirusTable.Cols.LOCATION, virus.getLocation());
-        values.put(DbSchema.VirusTable.Cols.IMAGE, virus.getImage());
+        values.put(DbSchema.VirusTable.Cols.IMAGEPATH, virus.getImagePath());
         return values;
     }
 
 
     //update single virus's info
-    public void updateSingleVirus(String name, String hitpoint, String location, byte[] image) {
-        Virus virus = new Virus(name,hitpoint,location,image);
+    public void updateSingleVirus(String name, String hitpoint, String location, String imagepath) {
+        Virus virus = new Virus(name,hitpoint,location,imagepath);
         ContentValues newContent = getContentValues(virus) ;
         String whereArgs[] = {name};
         mDatabase.update(DbSchema.VirusTable.NAME, newContent, "NAME=?", whereArgs);

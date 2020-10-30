@@ -81,7 +81,7 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 if (activity != null) {
                     activity.finish() ;
                 }
-
+                showStoredVirus();
 
                 /*
                 Intent intent =new Intent( getActivity(), MapActivity.class);
@@ -175,8 +175,8 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
             Log.d("Stored virus info", "virus#"+ i+" "+virus.get(i).getName()
                     +" Hitpoint: "+virus.get(i).getHitpt()
                     + " Location: ("+virus.get(i).getLocation() + ")"
-                    + " Image byte array: "+virus.get(i).getImage()
-                    + ")");
+                    + " Image path: "+virus.get(i).getImagePath()
+                    );
         }
 
     }
