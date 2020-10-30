@@ -18,7 +18,7 @@ public class DbHelper extends SQLiteOpenHelper {
         private static final String VIRUS_NAME = DbSchema.VirusTable.Cols.NAME ;
         private static final String VIRUS_HP = DbSchema.VirusTable.Cols.HITPOINT;
         private static final String VIRUS_LOCATION = DbSchema.VirusTable.Cols.LOCATION;
-        private static final String VIRUS_IMAGE_PATH = DbSchema.VirusTable.Cols.IMAGEPATH; //image path
+        private static final String VIRUS_IMAGE = DbSchema.VirusTable.Cols.IMAGE;
         //player caught virus
         private static final String CAUGHTVIRUS_TABLE = DbSchema.CaughtVirus.NAME;
         private static final String PLAYER_ID = DbSchema.CaughtVirus.Cols.PLAYER_ID;
@@ -42,7 +42,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     VIRUS_NAME + " TEXT, " +
                     VIRUS_HP + " TEXT, " +
                     VIRUS_LOCATION + " TEXT, " +
-                    VIRUS_IMAGE_PATH + " TEXT "+ ")");
+                    VIRUS_IMAGE + " BIOB "+ ")");
 
             sqLiteDatabase.execSQL("CREATE TABLE "+CAUGHTVIRUS_TABLE+" ("+
                     DbSchema.CaughtVirus.Cols.ID+ " INTEGER PRIMARY KEY, "+

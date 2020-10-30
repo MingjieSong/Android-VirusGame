@@ -1,21 +1,26 @@
 package com.androidApp.virusGame.UI;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.androidApp.virusGame.Model.VirusSingleton;
 import com.androidApp.virusGame.R;
+
+import java.io.IOException;
 
 
 public class HomeScreenFragment extends Fragment implements View.OnClickListener {
-
     private static final String TAG = "DebuggingMessage";
 
 
@@ -79,16 +84,13 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         Intent intent ;
         switch(view.getId()){
-
             case R.id.login_button:
                 intent =new Intent( getActivity(), LoginActivity.class);
                 startActivity(intent);
                 break;
             case R.id.create_account:
-
                 intent =new Intent( getActivity(), PlayerAccountActivity.class);
                 startActivity(intent);
-
                 break;
         }
         /* this needs to be called after a successful login

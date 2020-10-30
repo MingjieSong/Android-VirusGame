@@ -2,6 +2,8 @@ package com.androidApp.virusGame.UI;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.androidApp.virusGame.Model.Player;
@@ -34,12 +37,16 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     private EditText mEtPassword;
     private EditText mEtConfirm;
 
+    //private ImageView imageView = null;
+    //private Bitmap imageBitmap = null;
+
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_account, container, false);
+        //imageView = v.findViewById(R.id.imageView);
 
         Activity activity = getActivity();
 
@@ -81,7 +88,12 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 if (activity != null) {
                     activity.finish() ;
                 }
-                showStoredVirus();
+
+
+                /*
+                VirusSingleton singleton = VirusSingleton.get(this.getContext());
+                imageBitmap = singleton.getImage("fluvirus");
+                imageView.setImageBitmap(imageBitmap);*/
 
                 /*
                 Intent intent =new Intent( getActivity(), MapActivity.class);
@@ -106,9 +118,13 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 PlayerSingleton singleton = PlayerSingleton.get();
                 singleton.getSinglePlayer("mingjie") ;
                 singleton.updateSinglePlayerPassword("654321", "mingjie");
-                singleton.deleteSinglePlayerByName("mingjie");*/
+                singleton.deleteSinglePlayerByName("mingjie");
 
-
+                showStoredVirus();
+                VirusSingleton singleton = VirusSingleton.get(this.getContext());
+                byte[] bt = singleton.getSingleVirus("fluvirus");
+                imageBitmap = BitmapFactory.decodeByteArray(bt,0,bt.length);
+                imageView.setImageBitmap(imageBitmap);*/
 
 
         }
@@ -175,7 +191,7 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
             Log.d("Stored virus info", "virus#"+ i+" "+virus.get(i).getName()
                     +" Hitpoint: "+virus.get(i).getHitpt()
                     + " Location: ("+virus.get(i).getLocation() + ")"
-                    + " Image path: "+virus.get(i).getImagePath()
+                    + " Image path: "+virus.get(i).getImage()
                     );
         }
 
