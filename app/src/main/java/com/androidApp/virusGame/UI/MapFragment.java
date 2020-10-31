@@ -1,7 +1,9 @@
 package com.androidApp.virusGame.UI;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -11,13 +13,18 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
+//FIXME keep checking users' locations and user permission
 public class MapFragment extends SupportMapFragment implements OnMapReadyCallback {
     GoogleMap map ;
     private static final String[] LOCATION_PERMISSIONS = new String[]{
@@ -27,9 +34,11 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private static final int REQUEST_LOCATION_PERMISSIONS = 0;
     private static final String FINE_LOCATION  =  Manifest.permission.ACCESS_FINE_LOCATION ;
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private static final float DEFAULT_ZOOM = 15f ;
     private LatLng mDefaultLocation ;
     private boolean mLocationPermissionGranted = false;
-
+    private FusedLocationProviderClient mFusedLocationProviderClient ;
+    private String TAG = "mapDebugging" ;
 
 
     @Override
@@ -44,12 +53,38 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        map.addMarker(new MarkerOptions()
-                .position(sydney)
-                .title("Marker in Sydney"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        findDeviceLocation();
+
+    }
+
+    private void findDeviceLocation(){
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
+            if(mLocationPermissionGranted){
+                @SuppressLint("MissingPermission") Task location = mFusedLocationProviderClient.getLastLocation() ;
+                /*location.addOnCompleteListener(  new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(getActivity(), "Found Location!", Toast.LENGTH_SHORT).show();
+                            Location currentLocation = (Location) task.getResult() ;
+                            LatLng currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                            moveCamera( currentLatLng, DEFAULT_ZOOM) ;
+                            map.addMarker(new MarkerOptions()
+                                    .position(currentLatLng)
+                                    .title("Current Location"));
+                        }
+                    }
+                }) ; */
+            }
+
+
+
+    }
+
+
+    private void moveCamera(LatLng latLng, float zoom){
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
 
     private void getLocationPermission(){
