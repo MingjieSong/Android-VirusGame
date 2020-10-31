@@ -12,6 +12,11 @@
     <string name="create">create</string>
     <string name="enter">enter</string>
     <string name="exit">exit</string>
+    <string name="Post_to_Facebook">Share results with Facebook</string>
+    <string name="go_home">Return to Home</string>
+    <string name="get_started">Let\'s get started!</string>
+    <string name="settings">Settings</string>
+    <string name="profile">Profile</string>
     <string name="change_password">change password</string>
     <string name="confirm_new_password">confirm</string>
     <string name="old_password">old password</string>

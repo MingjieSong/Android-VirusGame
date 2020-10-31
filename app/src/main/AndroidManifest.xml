@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.androidApp.virusGame">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -10,14 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="@string/map_key"/>
-        <activity android:name=".UI.ChangePasswordActivity"></activity>
+        <activity android:name=".UI.ProfileActivity"></activity>
+        <activity android:name=".UI.HomeActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key" />
+
+        <activity android:name=".UI.ChangePasswordActivity" />
         <activity android:name=".UI.LoginActivity" />
         <activity android:name=".UI.MaskCheckActivity" />
         <activity android:name=".UI.PlayerAccountActivity" />
         <activity android:name=".UI.MapActivity" />
         <activity android:name=".UI.HomeScreenActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +34,4 @@
         </activity>
     </application>
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>

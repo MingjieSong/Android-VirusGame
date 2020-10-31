@@ -77,8 +77,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 if(checkAccount(username,password)==0){
                    /* intent =new Intent( getActivity(), MaskCheckActivity.class);
                     startActivity(intent); */
-                    //FIXME implement the mask check and then lead to the MapActivity class
-                    intent =new Intent( getActivity(), MapActivity.class);
+                    //TODO implement the mask check and then lead to the MapActivity class
+                    intent =new Intent( getActivity(), HomeActivity.class);
                     startActivity(intent);
                 }
 
