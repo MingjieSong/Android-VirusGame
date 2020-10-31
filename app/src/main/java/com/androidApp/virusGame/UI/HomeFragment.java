@@ -53,6 +53,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+        String username=getActivity().getIntent().getStringExtra("USER");
         FragmentActivity activity=getActivity();
         Intent intent;
         switch (view.getId()) {
@@ -64,7 +65,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 //TODO: go to settings activity
                 break;
             case R.id.profile_button:
+                //need information about which user is logged in
                 intent =new Intent( getActivity(), ProfileActivity.class);
+                intent.putExtra("USER",username);
                 startActivity(intent);
                 break;
         }

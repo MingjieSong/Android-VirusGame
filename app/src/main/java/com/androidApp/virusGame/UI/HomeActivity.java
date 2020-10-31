@@ -1,9 +1,9 @@
 package com.androidApp.virusGame.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+        import androidx.appcompat.app.AppCompatActivity;
+        import androidx.fragment.app.Fragment;
 
-import android.os.Bundle;
+        import android.os.Bundle;
 
 public class HomeActivity extends SingleFragmentActivity {
 

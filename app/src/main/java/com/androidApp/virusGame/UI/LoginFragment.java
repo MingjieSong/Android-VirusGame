@@ -79,6 +79,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                     startActivity(intent); */
                     //TODO implement the mask check and then lead to the MapActivity class
                     intent =new Intent( getActivity(), HomeActivity.class);
+                    //need to pass information about which user is logged in
+                    intent.putExtra("USER",username);
                     startActivity(intent);
                 }
 

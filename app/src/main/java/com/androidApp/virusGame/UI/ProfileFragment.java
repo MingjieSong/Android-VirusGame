@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidApp.virusGame.Model.Player;
@@ -36,6 +37,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
         Activity activity = getActivity();
+        String username=activity.getIntent().getStringExtra("USER");
 
         if (activity != null){
 
@@ -43,8 +45,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             btnFB.setOnClickListener(this);
             Button btnHome= v.findViewById(R.id.go_home_button);
             btnHome.setOnClickListener(this);
+            TextView welcomeTxt=(TextView)v.findViewById(R.id.welcome_user);
+            welcomeTxt.setText("Welcome "+username);
 
         }
+
 
         return v;
     }
