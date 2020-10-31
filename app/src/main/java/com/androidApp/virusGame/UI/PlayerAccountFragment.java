@@ -2,6 +2,8 @@ package com.androidApp.virusGame.UI;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.androidApp.virusGame.Model.Player;
@@ -35,12 +38,14 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     private EditText mEtConfirm;
 
 
+    private ImageView imageView = null;
+    private Bitmap imageBitmap = null;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_account, container, false);
-
+        imageView = v.findViewById(R.id.imageView);
         Activity activity = getActivity();
 
         if (activity != null){
@@ -76,27 +81,32 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 mEtConfirm.setText("");
                 break;
             case R.id.exit_button:
-
-                /*Activity activity = getActivity();
+                Activity activity = getActivity();
                 if (activity != null) {
                     activity.finish() ;
-                }*/
-               Intent intent =new Intent( getActivity(), MapActivity.class);
-                startActivity(intent);
+                }
 
                 /*
+                Intent intent =new Intent( getActivity(), MapActivity.class);
+                startActivity(intent);
+
                 VirusSingleton singleton = VirusSingleton.get();
-                singleton.getSingleVirus("HIV");
-                singleton.updateSingleVirus("HIV","4","5,5");
+                singleton.getSingleVirus("hiv");
+                singleton.updateSingleVirus("hiv","4","5,5");
                 showStoredVirus();
                 deleteAllVirus();
 
+                showStoredVirus();
+                VirusSingleton singleton = VirusSingleton.get(this.getContext());
+                byte[] bt = singleton.getSingleVirusByte(2);
+                imageBitmap = BitmapFactory.decodeByteArray(bt,0,bt.length);
+                imageView.setImageBitmap(imageBitmap);
 
                 PlayerSingleton singleton = PlayerSingleton.get();
                 p_singleton.getSinglePlayer("mingjie") ;
-                p_singleton.addVirusToPlayer("mingjie","HIV");
-                p_singleton.addVirusToPlayer("mingjie","flu virus");
-                p_singleton.addVirusToPlayer("mingjie","COVID 19");
+                p_singleton.addVirusToPlayer("mingjie","hiv");
+                p_singleton.addVirusToPlayer("mingjie","fluvirus");
+                p_singleton.addVirusToPlayer("mingjie","coronavirus");
                 List<Pair<String, String>> PV = singleton.getPlayerAndVirus();
                 showPlayerAndVirus(PV);
 
@@ -106,8 +116,6 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 singleton.getSinglePlayer("mingjie") ;
                 singleton.updateSinglePlayerPassword("654321", "mingjie");
                 singleton.deleteSinglePlayerByName("mingjie");*/
-
-
 
 
         }
@@ -161,19 +169,21 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     private void deleteAllVirus(){
         FragmentActivity activity = getActivity();
         if(activity != null){
-            VirusSingleton singleton = VirusSingleton.get();
+            VirusSingleton singleton = VirusSingleton.get(this.getContext());
             singleton.deleteAllVirus();
 
         }
     }
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void showStoredVirus(){
-        VirusSingleton singleton = VirusSingleton.get();
+        VirusSingleton singleton = VirusSingleton.get(this.getContext());
         List<Virus> virus = singleton.getVirus();
         for(int i=0 ;i<virus.size(); i++){
             Log.d("Stored virus info", "virus#"+ i+" "+virus.get(i).getName()
                     +" Hitpoint: "+virus.get(i).getHitpt()
-                    + " Location: ("+virus.get(i).getLocation()+")");
+                    + " Location: ("+virus.get(i).getLocation() + ")"
+                    + " Image byte: "+virus.get(i).getImage()
+            );
         }
 
     }

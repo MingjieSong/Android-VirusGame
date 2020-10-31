@@ -33,8 +33,8 @@ public class HomeScreenActivity extends SingleFragmentActivity {
     public void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
-        dbHelper = new DbHelper( getApplicationContext());
-        VirusSingleton singleton = VirusSingleton.get();
+        dbHelper = new DbHelper(getApplicationContext());
+        VirusSingleton singleton = VirusSingleton.get(getApplicationContext());
         //Add viruses into the db
         singleton.addVirus();
 

@@ -13,12 +13,13 @@ public class Virus {
     private String NAME;
     private String HITPOINT;
     private String LOCATION;
+    private byte[] IMAGE;
 
-
-    public Virus(String name, String hitpt, String location) {
+    public Virus(String name, String hitpt, String location, byte[] image) {
         NAME = name;
         HITPOINT = hitpt;
         LOCATION = location;
+        IMAGE = image;
     }
 
     public String getName() {
@@ -30,6 +31,8 @@ public class Virus {
     }
 
     public String getLocation() {return LOCATION; }
+
+    public byte[] getImage() {return IMAGE; }
 
     public void setNAME(String NAME) {
         this.NAME = NAME;
@@ -49,13 +52,14 @@ public class Virus {
         Virus virus = (Virus) o;
         return Objects.equals(NAME, virus.NAME) &&
                 Objects.equals(HITPOINT, virus.HITPOINT) &&
-                Objects.equals(LOCATION, virus.LOCATION);
+                Objects.equals(LOCATION, virus.LOCATION) &&
+                Objects.equals(IMAGE, virus.IMAGE);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public int hashCode() {
-        return Objects.hash(NAME, HITPOINT,LOCATION);
+        return Objects.hash(NAME, HITPOINT,LOCATION, IMAGE);
     }
 
     @Override
@@ -64,6 +68,7 @@ public class Virus {
                 "NAME='" + NAME + '\'' +
                 ", HITPOINT='" + HITPOINT + '\'' +
                 ", LOCATION='" + LOCATION + '\'' +
+                ", IMAGEPATH='" + IMAGE + '\'' +
                 '}';
     }
 }
