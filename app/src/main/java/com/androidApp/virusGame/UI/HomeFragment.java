@@ -1,12 +1,17 @@
 package com.androidApp.virusGame.UI;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -45,11 +50,48 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             btnSettings.setOnClickListener(this);
             Button btnProfile = v.findViewById(R.id.profile_button);
             btnProfile.setOnClickListener(this);
+            Button btnResources = v.findViewById(R.id.resources_button);
+            btnResources.setOnClickListener(this);
 
         }
 
         return v;
     }
+    private boolean hasNetworkConnection() {
+        Activity activity = getActivity();
+
+        if (activity != null) {
+            ConnectivityManager connectivityManager =
+                    (ConnectivityManager) activity.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (connectivityManager != null) {
+                NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+                return (activeNetwork != null && activeNetwork.isConnected());
+            }
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+
+
+    private void launchWebView() {
+        Activity activity = getActivity();
+
+        if (activity != null) {
+            Intent launchWebViewIntent = new Intent(getActivity().getApplicationContext(), WebActivity.class);
+            launchWebViewIntent.putExtra("url", "https://coronavirus.dc.gov/?gclid=CjwKCAiAv4n9BRA9EiwA30WND7LYSdXq2fxretSMGL9156XGVQzGyFR8ST5gpb-SRtmoVcdW1YDveRoC_xcQAvD_BwE");
+            startActivity(launchWebViewIntent);
+        }
+    }
+
+    // 0oi1OI!
+
+    private void noNetworkConnectionNotify() {
+        Toast.makeText(this.getContext(), "Error: No network connection", Toast.LENGTH_SHORT).show();
+    }
+
+
 
     @Override
     public void onClick(View view) {
@@ -70,6 +112,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 intent.putExtra("USER",username);
                 startActivity(intent);
                 break;
+            case R.id.resources_button:
+                if(hasNetworkConnection()){
+                    launchWebView();
+                }else{
+                    noNetworkConnectionNotify();
+
+                }
+
         }
     }
 

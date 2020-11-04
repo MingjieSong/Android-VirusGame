@@ -14,14 +14,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
              />
-        <Button
-            android:id="@+id/post_to_FB_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
-            android:text="@string/Post_to_Facebook"/>
 
         <Button
             android:id="@+id/go_home_button"

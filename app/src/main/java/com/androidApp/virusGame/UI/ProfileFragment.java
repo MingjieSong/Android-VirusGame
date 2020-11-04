@@ -41,8 +41,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
         if (activity != null){
 
-            Button btnFB = v.findViewById(R.id.post_to_FB_button);
-            btnFB.setOnClickListener(this);
             Button btnHome= v.findViewById(R.id.go_home_button);
             btnHome.setOnClickListener(this);
             TextView welcomeTxt=(TextView)v.findViewById(R.id.welcome_user);
@@ -59,9 +57,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         FragmentActivity activity=getActivity();
         Intent intent;
         switch (view.getId()) {
-            case R.id.post_to_FB_button:
-                //TODO: add facebook functionality
-                break;
             case R.id.go_home_button:
                 intent =new Intent( getActivity(), HomeActivity.class);
                 startActivity(intent);
