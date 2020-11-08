@@ -1,6 +1,8 @@
 package com.androidApp.virusGame.Model;
 
 
+import com.google.android.gms.maps.model.LatLng;
+
 class DbSchema {
     //player schema
     static final class PlayerTable {
@@ -20,7 +22,8 @@ class DbSchema {
             static final String ID = "id";
             static final String NAME = "name";
             static final String HITPOINT = "hitpoint";
-            static final String LOCATION = "location";
+            static final String LOCATION= "location";
+
             static final String IMAGE = "image";
         }
     }

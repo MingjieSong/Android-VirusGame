@@ -17,7 +17,9 @@ public class MapActivity extends SingleFragmentActivity  {
     private static final int REQUEST_ERROR =0;
     @Override
     protected Fragment createFragment() {
-        return new MapFragment();
+
+        return  new MapFragment();
+
     }
 
 

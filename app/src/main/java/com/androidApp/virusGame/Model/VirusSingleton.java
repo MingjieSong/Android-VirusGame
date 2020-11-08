@@ -126,41 +126,10 @@ public class VirusSingleton  {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public List<Virus> getVirus() {
-        List<Virus> virusList = new ArrayList<>();
-        try ( CursorWrapper cursor = queryVirus()) {
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-
-                String name = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.NAME));
-                String hitpt = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.HITPOINT));
-                String location = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.LOCATION));
-                byte[] image = cursor.getBlob(cursor.getColumnIndex(DbSchema.VirusTable.Cols.IMAGE));
-                Virus virus = new Virus(name, hitpt,location,image);
-                virusList.add(virus);
-                cursor.moveToNext();
-            }
-        }
-
-        return virusList;
-    }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public int getVirusCount() {
-        int count=0;
-        try ( CursorWrapper cursor = queryVirus()) {
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
 
-                count++;
-                cursor.moveToNext();
-            }
-        }
 
-        return count;
-    }
 
     //retrieve single virus's info by its name
     public void getSingleVirus(String name) {
@@ -190,7 +159,8 @@ public class VirusSingleton  {
         } else if (cursor != null) {
             cursor.moveToFirst();
             img = cursor.getBlob(cursor.getColumnIndex(DbSchema.VirusTable.Cols.IMAGE));
-        }return img;
+        }
+        return img;
     }
 
     private static ContentValues getContentValues(Virus virus) {
@@ -202,19 +172,8 @@ public class VirusSingleton  {
         return values;
     }
 
-    //update single virus's info
-    public void updateSingleVirus(String name, String hitpoint, String location, byte[] imagepath) {
-        Virus virus = new Virus(name,hitpoint,location,imagepath);
-        ContentValues newContent = getContentValues(virus) ;
-        String whereArgs[] = {name};
-        mDatabase.update(DbSchema.VirusTable.NAME, newContent, "NAME=?", whereArgs);
 
-    }
 
-    //FIXME
-    public void updateVirusLocation(ArrayList<LatLng> virusLocations) {
-
-    }
 
     public void deleteAllVirus() {
         mDatabase.beginTransaction();
@@ -249,6 +208,62 @@ public class VirusSingleton  {
         }
         return bt;
     }*/
+
+
+
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void updateVirusLocation(ArrayList<LatLng> virusLocations) {
+        //convert virusLocation to string and store them into the virus table
+        int i = 0 ;
+        try ( CursorWrapper cursor = queryVirus()) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                //update location value in that row
+                String virusLoc = String.valueOf( virusLocations.get(i).latitude).concat(",").concat(String.valueOf(virusLocations.get(i).longitude));
+                String htpt = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.HITPOINT));
+                byte[] img = cursor.getBlob(cursor.getColumnIndex(DbSchema.VirusTable.Cols.IMAGE));
+                String name =  cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.NAME)) ;
+                updateSingleVirus(name, htpt,  virusLoc, img ) ;
+                i++ ;
+
+                cursor.moveToNext();
+            }
+        }
+
+    }
+
+    //update single virus's info
+    public void updateSingleVirus(String name, String hitpoint, String location, byte[] imagepath) {
+        Virus virus = new Virus(name,hitpoint,location,imagepath);
+        ContentValues newContent = getContentValues(virus) ;
+        String whereArgs[] = {name};
+        mDatabase.update(DbSchema.VirusTable.NAME, newContent, "NAME=?", whereArgs);
+
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public ArrayList<Virus> getVirus() {
+        ArrayList<Virus> virusList = new ArrayList<>();
+        try ( CursorWrapper cursor = queryVirus()) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+
+                String name = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.NAME));
+                String hitpt = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.HITPOINT));
+                String location = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.LOCATION));
+                byte[] image = cursor.getBlob(cursor.getColumnIndex(DbSchema.VirusTable.Cols.IMAGE));
+                Virus virus = new Virus(name, hitpt,location,image);
+                virusList.add(virus);
+                cursor.moveToNext();
+            }
+        }
+
+        return virusList;
+    }
 
 }
 
