@@ -37,6 +37,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="search_virus">"Find Virus Nearby"</string>
+    <string name="gameTextView">"Your game starts here !"</string>
 
 
 

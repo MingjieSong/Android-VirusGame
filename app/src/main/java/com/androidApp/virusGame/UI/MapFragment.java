@@ -2,6 +2,7 @@ package com.androidApp.virusGame.UI;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -45,7 +46,6 @@ import com.google.android.gms.tasks.Task;
 import java.util.ArrayList;
 import java.util.Random;
 
-//FIXME keep checking users' locations and user permission
 public class MapFragment extends SupportMapFragment implements OnMapReadyCallback {
     GoogleMap map ;
     private static final String[] LOCATION_PERMISSIONS = new String[]{
@@ -56,6 +56,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private static final String FINE_LOCATION  =  Manifest.permission.ACCESS_FINE_LOCATION ;
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final float DEFAULT_ZOOM = 10f ;
+    private static final double VIRUS_RANGE = 0.05 ;
     private LatLng mDefaultLocation ;
     private LatLng mDeviceLocation ;
     private boolean mLocationPermissionGranted =false;
@@ -94,7 +95,6 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     /*@Override
     public void onResume() {
         super.onResume();
-
 
         } */
 
@@ -136,11 +136,14 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                         currentLocationMark.remove() ;
                         currentLocationMark = map.addMarker(new MarkerOptions()
                                 .position(mDeviceLocation)
-                                .title("Current Location"));
+                                .title("Current Location")
+                         );
                         if(resetVirus){
                             setUpVirus() ;
                             resetVirus = false ;
                         }
+                        //FIXME : detect if user is within the virus range
+                        detectUserVirusCollision();
 
 
                     }
@@ -262,7 +265,8 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                     Marker virusMarker = map.addMarker(new MarkerOptions()
                             .position(virusLoc)
                             .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons( icon, 150, 150)  ))
-                            .title(virusList.get(i).getName()));
+                            .title(virusList.get(i).getName())
+                             );
                     virusMarkers.add(virusMarker);
 
                 }else{
@@ -271,6 +275,44 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
             }
             singleton.updateVirusLocation(virusLocations);
         }
+
+        private void  detectUserVirusCollision(){
+         ArrayList<Double> distanceList = new ArrayList<>() ;
+         LatLng virusLoc ;
+         if(virusList!=null){
+             for(int i=0 ; i<virusList.size(); i++){
+                 virusLoc = stringToLatlng(virusList.get(i).getLocation()) ;
+                 distanceList.add(calculateDistance(mDeviceLocation, virusLoc ) );
+             }
+             double minDistance = Double.MAX_VALUE;
+             int closestVirusIndex = 0 ;
+             for(int i=0 ;i<virusList.size(); i++){
+                 if(distanceList.get(i)< minDistance){
+                     minDistance = distanceList.get(i) ;
+                     closestVirusIndex = i ;
+                 }
+             }
+
+             if(distanceList.get(closestVirusIndex ) <= Math.pow(VIRUS_RANGE,2) ){
+                 Virus cloestVirus = virusList.get(closestVirusIndex ) ;
+                 Toast.makeText( this.getActivity(),  cloestVirus.getName()+ " nearby by! Click the virus to start the game!", Toast.LENGTH_LONG ).show();
+
+                 /*
+                 FIXME: ADD  onMarkerClick method to start the game activity, see more in
+                 https://github.com/googlemaps/android-samples/blob/master/ApiDemos/java/app/src/gms/java/com/example/mapdemo/MarkerDemoActivity.java
+                 and https://developers.google.com/maps/documentation/android-sdk/marker
+                  */
+                 //pass the  "closestVirus" info into the game activity through intent so that we can load the proper virus image in the game
+                 /*Intent intent =new Intent( getActivity(), MapActivity.class);
+                 intent.putExtra("virusName", cloestVirus.getName()) ;
+                 startActivity(intent); */
+             }
+         }
+
+        }
+    private double calculateDistance(LatLng l1,LatLng l2 ){
+         return Math.pow((l1.latitude - l2.latitude),2) + Math.pow((l1.longitude - l2.longitude),2) ;
+    }
 
 
     //FIXME : save current state
