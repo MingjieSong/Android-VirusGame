@@ -16,6 +16,7 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 
 import com.androidApp.virusGame.UI.HomeScreenActivity;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -145,6 +146,22 @@ public class VirusSingleton  {
         return virusList;
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public int getVirusCount() {
+        int count=0;
+        try ( CursorWrapper cursor = queryVirus()) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+
+                count++;
+                cursor.moveToNext();
+            }
+        }
+
+        return count;
+    }
+
     //retrieve single virus's info by its name
     public void getSingleVirus(String name) {
         String[] where = new String[]{name};
@@ -191,6 +208,11 @@ public class VirusSingleton  {
         ContentValues newContent = getContentValues(virus) ;
         String whereArgs[] = {name};
         mDatabase.update(DbSchema.VirusTable.NAME, newContent, "NAME=?", whereArgs);
+
+    }
+
+    //FIXME
+    public void updateVirusLocation(ArrayList<LatLng> virusLocations) {
 
     }
 
