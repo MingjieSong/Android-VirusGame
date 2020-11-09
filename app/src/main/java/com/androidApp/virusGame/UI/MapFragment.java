@@ -127,8 +127,6 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     @SuppressLint("MissingPermission")
     private void findVirusNearby(){
 
-
-
         mLocationCallback = new LocationCallback() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
@@ -160,27 +158,29 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
             }
         };
 
-        if(!setLocationUpdate) {
-            // Create the LocationRequest object
-            LocationRequest mLocationRequest = LocationRequest.create()
-                    .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY) //PRIORITY_NO_POWER
-                    .setInterval(5* 1000)        // 5 seconds, in milliseconds
-                    .setFastestInterval(1 * 1000); // 1 second, in milliseconds
-            mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
-            mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
-            setLocationUpdate =true ;
-        }
+         if(!setLocationUpdate) {
+             // Create the LocationRequest object
+             LocationRequest mLocationRequest = LocationRequest.create()
+                     .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY) //PRIORITY_NO_POWER
+                     .setInterval(2 * 1000)        // 10 seconds, in milliseconds
+                     .setFastestInterval(1 * 1000); // 1 second, in milliseconds
+             mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+             mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+             setLocationUpdate = true;
+         }
+
 
     }
 
 
 
     private void getLocationPermission(){
-        if(ContextCompat.checkSelfPermission(getActivity(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(getActivity(), COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+         Activity activity = this.getActivity() ;
+        if(ContextCompat.checkSelfPermission(activity, FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(activity, COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
             mLocationPermissionGranted =true;
         }else{
-            ActivityCompat.requestPermissions(getActivity(), LOCATION_PERMISSIONS, REQUEST_LOCATION_PERMISSIONS);
+             ActivityCompat.requestPermissions(activity, LOCATION_PERMISSIONS, REQUEST_LOCATION_PERMISSIONS);
         }
     }
     @Override
@@ -215,7 +215,9 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
            if (mLocationPermissionGranted) {
                 firstTimeGetLocation =true;
                 resetVirus =true ;
+               Toast.makeText(this.getActivity(), "Loading......", Toast.LENGTH_LONG).show();
                 findVirusNearby();
+
            }
         }
         return true;
@@ -269,7 +271,9 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
          int closestVirusIndex = 0 ;
          if(virusList!=null){
              for(int i=0 ; i<virusList.size(); i++){
-                 virusLoc = stringToLatlng(virusList.get(i).getLocation()) ;
+                 //FIXME: how to make db get updated in time
+                 //virusLoc = stringToLatlng(virusList.get(i).getLocation()) ;
+                 virusLoc =virusLocations.get(i) ;
                  distanceList.add(calculateDistance(mDeviceLocation, virusLoc ) );
              }
              double minDistance = Double.MAX_VALUE;
@@ -284,7 +288,10 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                  Virus cloestVirus = virusList.get(closestVirusIndex ) ;
                  Activity activity = this.getActivity() ;
                  if( activity !=null &&   cloestVirus!=null) {
-                     Toast.makeText(this.getActivity(), "Hi " + playerName + "! " + cloestVirus.getName() + " nearby by! Click the virus to start the game!", Toast.LENGTH_LONG).show();
+                     Toast.makeText(this.getActivity(), "Hi " + playerName + "! " + cloestVirus.getName() + " nearby by! Click the virus to start the game!", Toast.LENGTH_SHORT).show();
+                     for(int i=0 ;i< distanceList.size() ; i++) {
+                         Log.d("distances", distanceList.get(i).toString());
+                     }
                  }
 
                  /*
