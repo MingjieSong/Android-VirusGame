@@ -9,16 +9,15 @@ import android.os.Bundle;
 
 import com.androidApp.virusGame.R;
 
-public class MaskCheckActivity extends FragmentActivity {
+public class MaskCheckActivity  extends SingleFragmentActivity {
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_mask_check);
-
+    protected Fragment createFragment() {
+        return  new  MaskCheckFragment();
     }
+
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
 

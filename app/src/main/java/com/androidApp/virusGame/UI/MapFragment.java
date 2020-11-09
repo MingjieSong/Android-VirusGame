@@ -2,18 +2,18 @@ package com.androidApp.virusGame.UI;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -62,6 +62,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private boolean mLocationPermissionGranted =false;
     private FusedLocationProviderClient mFusedLocationProviderClient ;
     private String TAG = "mapDebugging" ;
+    private String playerName  ;
     private LocationCallback mLocationCallback ;
     private boolean firstTimeGetLocation = false ;
     private boolean resetVirus = true ;
@@ -69,6 +70,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private ArrayList< LatLng> virusLocations = new ArrayList<>() ;
     private ArrayList< Marker> virusMarkers = new ArrayList<>() ;
     private ArrayList<Virus> virusList = new ArrayList<>() ;
+    private boolean setLocationUpdate= true ;
 
 
     @Override
@@ -76,10 +78,17 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         super.onCreate(savedInstanceState );
         getLocationPermission()  ;
         setHasOptionsMenu(true);
-        getMapAsync(this);
-
+        this.getMapAsync(this);
+        playerName= getActivity().getIntent().getStringExtra("USER");
 
     }
+
+  /* @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_map, container, false);
+        return v;
+    } */
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -109,6 +118,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("MissingPermission")
     private void findVirusNearby(){
 
@@ -136,45 +146,24 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                         currentLocationMark.remove() ;
                         currentLocationMark = map.addMarker(new MarkerOptions()
                                 .position(mDeviceLocation)
-                                .title("Current Location")
-                         );
-                        if(resetVirus){
-                            setUpVirus() ;
+                                .title(playerName+"'s Location"));
+                        if(resetVirus) {
+                            setUpVirus();
                             resetVirus = false ;
                         }
                         //FIXME : detect if user is within the virus range
                         detectUserVirusCollision();
-
-
                     }
 
                 }
             }
         };
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity()) ;
-        mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null) ;
 
-       /* mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
-
-            if(mLocationPermissionGranted){
-                Task<Location> location = mFusedLocationProviderClient.getLastLocation() ;
-                location.addOnSuccessListener(new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        if(location!=null){
-                            Toast.makeText(getActivity(),"Found Location!" + location.toString(), Toast.LENGTH_SHORT).show();
-
-                        }else{
-                            Toast.makeText(getActivity(), " Location is null !" , Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }) ;
-
-            }
-
-        */
-
-
+        if(setLocationUpdate) {
+            mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+            mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+            setLocationUpdate =false ;
+        }
 
     }
 
@@ -224,11 +213,6 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                 //->if the player is closer enough(how to update ui on the screen) -> notify & ask user if they want to start the game
                 //->start game activity(fragment)
 
-                /*-> refreshing the virus location if the player is too far away
-                if user location is too far away from the original generated virus, then delete the current
-                virus location/image on the screen and regenerate three new virus images that is nearby the player's new location */
-
-
             } else {
                 requestPermissions(LOCATION_PERMISSIONS, REQUEST_LOCATION_PERMISSIONS);
             }
@@ -264,7 +248,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                     Bitmap icon = singleton.getBitmap( virusList.get(i).getImage()) ;
                     Marker virusMarker = map.addMarker(new MarkerOptions()
                             .position(virusLoc)
-                            .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons( icon, 150, 150)  ))
+                            .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons( icon, 180, 180)  ))
                             .title(virusList.get(i).getName())
                              );
                     virusMarkers.add(virusMarker);
@@ -276,16 +260,16 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
             singleton.updateVirusLocation(virusLocations);
         }
 
-        private void  detectUserVirusCollision(){
+        private int detectUserVirusCollision(){
          ArrayList<Double> distanceList = new ArrayList<>() ;
          LatLng virusLoc ;
+         int closestVirusIndex = 0 ;
          if(virusList!=null){
              for(int i=0 ; i<virusList.size(); i++){
                  virusLoc = stringToLatlng(virusList.get(i).getLocation()) ;
                  distanceList.add(calculateDistance(mDeviceLocation, virusLoc ) );
              }
              double minDistance = Double.MAX_VALUE;
-             int closestVirusIndex = 0 ;
              for(int i=0 ;i<virusList.size(); i++){
                  if(distanceList.get(i)< minDistance){
                      minDistance = distanceList.get(i) ;
@@ -295,7 +279,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
              if(distanceList.get(closestVirusIndex ) <= Math.pow(VIRUS_RANGE,2) ){
                  Virus cloestVirus = virusList.get(closestVirusIndex ) ;
-                 Toast.makeText( this.getActivity(),  cloestVirus.getName()+ " nearby by! Click the virus to start the game!", Toast.LENGTH_LONG ).show();
+                 Toast.makeText( this.getActivity(),  "Hi "+ playerName+ "! " +cloestVirus.getName()+ " nearby by! Click the virus to start the game!", Toast.LENGTH_LONG ).show();
 
                  /*
                  FIXME: ADD  onMarkerClick method to start the game activity, see more in
@@ -306,9 +290,11 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                  /*Intent intent =new Intent( getActivity(), MapActivity.class);
                  intent.putExtra("virusName", cloestVirus.getName()) ;
                  startActivity(intent); */
+             }else{
+                 closestVirusIndex = -1 ;
              }
          }
-
+                return closestVirusIndex ;
         }
     private double calculateDistance(LatLng l1,LatLng l2 ){
          return Math.pow((l1.latitude - l2.latitude),2) + Math.pow((l1.longitude - l2.longitude),2) ;

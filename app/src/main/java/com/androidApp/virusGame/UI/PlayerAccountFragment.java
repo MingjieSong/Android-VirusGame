@@ -81,12 +81,11 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
                 mEtConfirm.setText("");
                 break;
             case R.id.exit_button:
-                /*Activity activity = getActivity();
+                Activity activity = getActivity();
                 if (activity != null) {
                     activity.finish() ;
-                }*/
-                Intent intent =new Intent( getActivity(), MapActivity.class);
-                startActivity(intent);
+                }
+
                 /*
                 Intent intent =new Intent( getActivity(), MapActivity.class);
                 startActivity(intent);

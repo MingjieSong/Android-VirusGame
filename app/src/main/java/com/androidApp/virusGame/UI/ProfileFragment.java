@@ -55,11 +55,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         FragmentActivity activity=getActivity();
-        Intent intent;
         switch (view.getId()) {
             case R.id.go_home_button:
-                intent =new Intent( getActivity(), HomeActivity.class);
-                startActivity(intent);
+                if (activity != null) {
+                    activity.finish() ;
+                }
                 break;
         }
     }

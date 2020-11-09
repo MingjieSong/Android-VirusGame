@@ -101,6 +101,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         switch (view.getId()) {
             case R.id.get_started_button:
                 intent =new Intent( getActivity(), MaskCheckActivity.class);
+                intent.putExtra("USER",username);
                 startActivity(intent);
                 break;
             case R.id.settings_button:
@@ -117,7 +118,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                     launchWebView();
                 }else{
                     noNetworkConnectionNotify();
-
                 }
 
         }
