@@ -240,6 +240,7 @@ public class VirusSingleton  {
         Virus virus = new Virus(name,hitpoint,location,imagepath);
         ContentValues newContent = getContentValues(virus) ;
         String whereArgs[] = {name};
+        //FIXME
         mDatabase.update(DbSchema.VirusTable.NAME, newContent, "NAME=?", whereArgs);
 
     }

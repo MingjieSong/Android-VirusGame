@@ -172,14 +172,12 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
     private void getLocationPermission(){
          Activity activity = this.getActivity() ;
-        if(ContextCompat.checkSelfPermission(activity, FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(activity, COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            mLocationPermissionGranted =true;
-        }else{
-             ActivityCompat.requestPermissions(activity, LOCATION_PERMISSIONS, REQUEST_LOCATION_PERMISSIONS);
+        if(!(ContextCompat.checkSelfPermission(activity, FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(activity, COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)){
+            ActivityCompat.requestPermissions(activity, LOCATION_PERMISSIONS, REQUEST_LOCATION_PERMISSIONS);
         }
     }
-    @Override
+    /*@Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -195,6 +193,13 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                 mLocationPermissionGranted = true;
             }
         }
+    }*/
+
+    private boolean hasLocationPermission() {
+        final Activity activity = requireActivity();
+        int result;
+        result = ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION);
+        return result == PackageManager.PERMISSION_GRANTED;
     }
 
         @Override
@@ -206,7 +211,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mLocationPermissionGranted) {
+        if (hasLocationPermission()) {
             if (item.getItemId() == R.id.search) {
                 firstTimeGetLocation = true;
                 resetVirus = true;
@@ -222,6 +227,8 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                     Toast.makeText(this.getActivity(), "You are not within the range of any virus", Toast.LENGTH_LONG).show();
                 }
             }
+        }else{
+            ActivityCompat.requestPermissions(getActivity() , LOCATION_PERMISSIONS, REQUEST_LOCATION_PERMISSIONS);
         }
 
         return true;
@@ -265,6 +272,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                 }
             }
             singleton.updateVirusLocation(virusLocations);
+            virusList = singleton.getVirus() ;
         }
 
 
@@ -275,9 +283,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
          int closestVirusIndex = 0 ;
          if(virusList!=null){
              for(int i=0 ; i<virusList.size(); i++){
-                 //FIXME: how to make db get updated in time
-                 //virusLoc = stringToLatlng(virusList.get(i).getLocation()) ;
-                 virusLoc =virusLocations.get(i) ;
+                 virusLoc = stringToLatlng(virusList.get(i).getLocation()) ;
                  distanceList.add(calculateDistance(mDeviceLocation, virusLoc ) );
              }
              double minDistance = Double.MAX_VALUE;
@@ -323,6 +329,8 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         return Bitmap.createScaledBitmap(imageBitmap, width, height, false);
 
     }
+
+
 
 
 
