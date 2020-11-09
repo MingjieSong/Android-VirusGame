@@ -5,5 +5,9 @@
             android:title="@string/search_virus"
             android:enabled="true"
             />
+        <item android:id="@+id/game"
+            android:title="@string/start_game"
+            android:enabled="true"
+            />
 
 </menu>

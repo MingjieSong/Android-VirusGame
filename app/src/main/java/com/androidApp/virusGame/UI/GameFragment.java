@@ -40,7 +40,7 @@ public class GameFragment extends Fragment   {
         Activity activity = getActivity();
         if(activity!=null) {
             String virusType = activity.getIntent().getStringExtra("virusName");
-            Toast.makeText( activity,  virusType+ "enemy is coming !", Toast.LENGTH_SHORT).show();
+            Toast.makeText( activity,  virusType+ " is coming !", Toast.LENGTH_SHORT).show();
         }
 
         return v;

@@ -27,6 +27,7 @@
         <activity android:name=".UI.MaskCheckActivity" />
         <activity android:name=".UI.PlayerAccountActivity" />
         <activity android:name=".UI.MapActivity" />
+        <activity android:name=".UI.GameActivity" />
         <activity android:name=".UI.HomeScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

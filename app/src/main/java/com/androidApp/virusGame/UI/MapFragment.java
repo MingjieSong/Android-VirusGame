@@ -3,6 +3,7 @@ package com.androidApp.virusGame.UI;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
@@ -47,7 +48,7 @@ import com.google.android.gms.tasks.Task;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MapFragment extends SupportMapFragment implements OnMapReadyCallback {
+public class MapFragment extends SupportMapFragment implements OnMapReadyCallback{
     GoogleMap map ;
     private static final String[] LOCATION_PERMISSIONS = new String[]{
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -57,7 +58,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private static final String FINE_LOCATION  =  Manifest.permission.ACCESS_FINE_LOCATION ;
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final float DEFAULT_ZOOM = 10f ;
-    private static final double VIRUS_RANGE = 0.05 ;
+    private static final double VIRUS_RANGE = 0.04 ;
     private LatLng mDefaultLocation ;
     private LatLng mDeviceLocation ;
     private boolean mLocationPermissionGranted =false;
@@ -72,6 +73,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private ArrayList< Marker> virusMarkers = new ArrayList<>() ;
     private ArrayList<Virus> virusList = new ArrayList<>() ;
     private boolean setLocationUpdate= false;
+    private int gameCode = -1 ;
 
 
     @Override
@@ -86,14 +88,12 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
             map = googleMap;
             mDefaultLocation = new LatLng(40.0, -83.0);
             currentLocationMark = map.addMarker(new MarkerOptions().position(mDefaultLocation)
-                    .title("Ohio State University"));
+                    .title("The Ohio State University"));
 
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
-
 
     }
 
@@ -109,7 +109,6 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         super.onResume();
 
         }
-
 */
      @Override
     public void onPause() {
@@ -150,8 +149,8 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                             setUpVirus();
                             resetVirus = false ;
                         }
-                        //FIXME : detect if user is within the virus range
-                        detectUserVirusCollision();
+                        gameCode =detectUserVirusCollision();
+
                     }
 
                 }
@@ -201,7 +200,6 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         }
     }
 
-
         @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -211,15 +209,24 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.search) {
-           if (mLocationPermissionGranted) {
-                firstTimeGetLocation =true;
-                resetVirus =true ;
-               Toast.makeText(this.getActivity(), "Loading......", Toast.LENGTH_LONG).show();
+        if (mLocationPermissionGranted) {
+            if (item.getItemId() == R.id.search) {
+                firstTimeGetLocation = true;
+                resetVirus = true;
+                Toast.makeText(this.getActivity(), "Loading......", Toast.LENGTH_LONG).show();
                 findVirusNearby();
 
-           }
+            } else if (item.getItemId() == R.id.game) {
+                if (gameCode >= 0) {
+                    Intent intent = new Intent(getActivity(), GameActivity.class);
+                    intent.putExtra("virusName", virusList.get(gameCode).getName());
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this.getActivity(), "You are not within the range of any virus", Toast.LENGTH_LONG).show();
+                }
+            }
         }
+
         return true;
     }
 
@@ -294,15 +301,6 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                      }
                  }
 
-                 /*
-                 FIXME: ADD  onMarkerClick method to start the game activity, see more in
-                 https://github.com/googlemaps/android-samples/blob/master/ApiDemos/java/app/src/gms/java/com/example/mapdemo/MarkerDemoActivity.java
-                 and https://developers.google.com/maps/documentation/android-sdk/marker
-                  */
-                 //pass the  "closestVirus" info into the game activity through intent so that we can load the proper virus image in the game
-                 /*Intent intent =new Intent( getActivity(), MapActivity.class);
-                 intent.putExtra("virusName", cloestVirus.getName()) ;
-                 startActivity(intent); */
              }else{
                  closestVirusIndex = -1 ;
              }
