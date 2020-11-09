@@ -2,6 +2,7 @@ package com.androidApp.virusGame.UI;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
@@ -70,49 +71,53 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private ArrayList< LatLng> virusLocations = new ArrayList<>() ;
     private ArrayList< Marker> virusMarkers = new ArrayList<>() ;
     private ArrayList<Virus> virusList = new ArrayList<>() ;
-    private boolean setLocationUpdate= true ;
+    private boolean setLocationUpdate= false;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState  ) {
         super.onCreate(savedInstanceState );
         getLocationPermission()  ;
+        getMapAsync(this);
         setHasOptionsMenu(true);
-        this.getMapAsync(this);
         playerName= getActivity().getIntent().getStringExtra("USER");
 
     }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+            map = googleMap;
+            mDefaultLocation = new LatLng(40.0, -83.0);
+            currentLocationMark = map.addMarker(new MarkerOptions().position(mDefaultLocation)
+                    .title("Ohio State University"));
+
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+
+
+    }
+
 
   /* @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_map, container, false);
         return v;
-    } */
-
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
-        mDefaultLocation = new LatLng(40.0, -83.0) ;
-        currentLocationMark= map.addMarker(new MarkerOptions().position(mDefaultLocation)
-                .title("Ohio State University"));
-
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
-
     }
 
-    /*@Override
+    @Override
     public void onResume() {
         super.onResume();
 
-        } */
+        }
 
-
+*/
      @Override
     public void onPause() {
         super.onPause();
+        if(setLocationUpdate){
         //stop the location updates
         mFusedLocationProviderClient.removeLocationUpdates(mLocationCallback);
+        }
 
     }
 
@@ -122,11 +127,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     @SuppressLint("MissingPermission")
     private void findVirusNearby(){
 
-        // Create the LocationRequest object
-        LocationRequest mLocationRequest = LocationRequest.create()
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY) //PRIORITY_NO_POWER
-                .setInterval(5* 1000)        // 5 seconds, in milliseconds
-                .setFastestInterval(1 * 1000); // 1 second, in milliseconds
+
 
         mLocationCallback = new LocationCallback() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -159,18 +160,24 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
             }
         };
 
-        if(setLocationUpdate) {
+        if(!setLocationUpdate) {
+            // Create the LocationRequest object
+            LocationRequest mLocationRequest = LocationRequest.create()
+                    .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY) //PRIORITY_NO_POWER
+                    .setInterval(5* 1000)        // 5 seconds, in milliseconds
+                    .setFastestInterval(1 * 1000); // 1 second, in milliseconds
             mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
             mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
-            setLocationUpdate =false ;
+            setLocationUpdate =true ;
         }
 
     }
 
 
+
     private void getLocationPermission(){
         if(ContextCompat.checkSelfPermission(getActivity(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-        && ContextCompat.checkSelfPermission(getActivity(), COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                && ContextCompat.checkSelfPermission(getActivity(), COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
             mLocationPermissionGranted =true;
         }else{
             ActivityCompat.requestPermissions(getActivity(), LOCATION_PERMISSIONS, REQUEST_LOCATION_PERMISSIONS);
@@ -181,16 +188,21 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                                            @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         mLocationPermissionGranted = false;
-        if (requestCode == REQUEST_LOCATION_PERMISSIONS) {// If request is cancelled, the result arrays are empty.
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == REQUEST_LOCATION_PERMISSIONS) {
+            if (grantResults.length > 0) {// If request is cancelled, the result arrays are empty.
+                for (int i = 0; i < grantResults.length; i++) {
+                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                        mLocationPermissionGranted = false;
+                        return;
+                    }
+                }
                 mLocationPermissionGranted = true;
             }
         }
     }
 
 
-    @Override
+        @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.map_menu, menu);
@@ -200,22 +212,11 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.search) {
-            //FIXME BUG IN PERMISSION REQUEST & if we don't get user permission, disable the menu item
-            if (mLocationPermissionGranted) {
+           if (mLocationPermissionGranted) {
                 firstTimeGetLocation =true;
                 resetVirus =true ;
                 findVirusNearby();
-
-                //FIXME
-                //myLocation -> locationRange(longitude/ latitude)
-                //-> use locationRange to generate random locations for three virus
-                //-> show them on map
-                //->if the player is closer enough(how to update ui on the screen) -> notify & ask user if they want to start the game
-                //->start game activity(fragment)
-
-            } else {
-                requestPermissions(LOCATION_PERMISSIONS, REQUEST_LOCATION_PERMISSIONS);
-            }
+           }
         }
         return true;
     }
@@ -232,7 +233,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         //get the random virus location within +- 0.05
             double deviceLongitude = mDeviceLocation .longitude;
             double deviceLatitude = mDeviceLocation.latitude;
-            VirusSingleton singleton = VirusSingleton.get(getActivity());
+            VirusSingleton singleton = VirusSingleton.get(requireContext());
             Random rnd = new Random();
             double latitudeRange;
             double  longitudeRange;
@@ -260,6 +261,8 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
             singleton.updateVirusLocation(virusLocations);
         }
 
+
+
         private int detectUserVirusCollision(){
          ArrayList<Double> distanceList = new ArrayList<>() ;
          LatLng virusLoc ;
@@ -279,7 +282,10 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
              if(distanceList.get(closestVirusIndex ) <= Math.pow(VIRUS_RANGE,2) ){
                  Virus cloestVirus = virusList.get(closestVirusIndex ) ;
-                 Toast.makeText( this.getActivity(),  "Hi "+ playerName+ "! " +cloestVirus.getName()+ " nearby by! Click the virus to start the game!", Toast.LENGTH_LONG ).show();
+                 Activity activity = this.getActivity() ;
+                 if( activity !=null &&   cloestVirus!=null) {
+                     Toast.makeText(this.getActivity(), "Hi " + playerName + "! " + cloestVirus.getName() + " nearby by! Click the virus to start the game!", Toast.LENGTH_LONG).show();
+                 }
 
                  /*
                  FIXME: ADD  onMarkerClick method to start the game activity, see more in
@@ -296,33 +302,12 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
          }
                 return closestVirusIndex ;
         }
+
+
     private double calculateDistance(LatLng l1,LatLng l2 ){
          return Math.pow((l1.latitude - l2.latitude),2) + Math.pow((l1.longitude - l2.longitude),2) ;
     }
 
-
-    //FIXME : save current state
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-
-        super.onSaveInstanceState(outState);
-        if (outState == null) {
-            return;
-        }
-        /* Update the value of requestingLocationUpdates from the Bundle.
-        if ( outState.keySet().contains(REQUESTING_LOCATION_UPDATES_KEY)) {
-            requestingLocationUpdates = savedInstanceState.getBoolean(
-                    REQUESTING_LOCATION_UPDATES_KEY);
-        } */
-
-        outState.putString("mDeviceLocation", LatlngToString(mDeviceLocation ));
-        for(int i=0; i<virusLocations.size(); i++){
-            outState.putString("virus"+ i, LatlngToString(virusLocations.get(i)) );
-        }
-        outState.putDouble("zoom", DEFAULT_ZOOM);
-
-
-    }
 
     private String LatlngToString(LatLng location){
         return String.valueOf( location.latitude).concat(",").concat(String.valueOf( location.longitude));
@@ -341,5 +326,29 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     }
 
 
+
+
+    /*FIXME : save current state
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+        super.onSaveInstanceState(outState);
+        if (outState == null) {
+            return;
+        }
+        //Update the value of requestingLocationUpdates from the Bundle.
+        //if ( outState.keySet().contains(REQUESTING_LOCATION_UPDATES_KEY)) {
+        //    requestingLocationUpdates = savedInstanceState.getBoolean(
+        //            REQUESTING_LOCATION_UPDATES_KEY);
+        //}
+
+        outState.putString("mDeviceLocation", LatlngToString(mDeviceLocation ));
+        for(int i=0; i<virusLocations.size(); i++){
+            outState.putString("virus"+ i, LatlngToString(virusLocations.get(i)) );
+        }
+        outState.putDouble("zoom", DEFAULT_ZOOM);
+
+
+    } */
 
 }
