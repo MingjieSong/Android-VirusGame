@@ -295,7 +295,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                  Virus cloestVirus = virusList.get(closestVirusIndex ) ;
                  Activity activity = this.getActivity() ;
                  if( activity !=null &&   cloestVirus!=null) {
-                     Toast.makeText(this.getActivity(), "Hi " + playerName + "! " + cloestVirus.getName() + " nearby by! Click the virus to start the game!", Toast.LENGTH_SHORT).show();
+                     Toast.makeText(this.getActivity(), "Hi " + playerName + "! " + cloestVirus.getName() + " nearby by! You can start the game!", Toast.LENGTH_SHORT).show();
                      for(int i=0 ;i< distanceList.size() ; i++) {
                          Log.d("distances", distanceList.get(i).toString());
                      }
