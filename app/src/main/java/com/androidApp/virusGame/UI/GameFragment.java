@@ -30,10 +30,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+/*this class uses code from https://stackoverflow.com/questions/32263233/how-to-make-a-button-randomly-move*/
 
 
 public class GameFragment extends Fragment implements View.OnClickListener  {
@@ -44,11 +47,83 @@ public class GameFragment extends Fragment implements View.OnClickListener  {
 
         View v = inflater.inflate(R.layout.fragment_game, container, false);
         Activity activity = getActivity();
+        String currentVirus=activity.getIntent().getStringExtra("virusName");
         //just for testing purposes
-        final ImageButton virusButton=v.findViewById(R.id.virus);
-        virusButton.setOnClickListener(this);
-        startRandomButton(virusButton);
+        //fill a list with buttons
+        final ImageButton one;
+        final ImageButton two;
+        final ImageButton three;
+        final ImageButton four;
+
+        switch(currentVirus){
+            case "fluvirus":
+                one=v.findViewById(R.id.fluvirus1);
+                two=v.findViewById(R.id.fluvirus2);
+                three=v.findViewById(R.id.fluvirus3);
+                four=v.findViewById(R.id.fluvirus4);
+                break;
+           case "coronavirus":
+                one=v.findViewById(R.id.coronavirus1);
+                two=v.findViewById(R.id.coronavirus2);
+                three=v.findViewById(R.id.coronavirus3);
+                four=v.findViewById(R.id.coronavirus4);
+                break;
+            default:
+                one=v.findViewById(R.id.hiv1);
+                two=v.findViewById(R.id.hiv2);
+                three=v.findViewById(R.id.hiv3);
+                four=v.findViewById(R.id.hiv4);
+                break;
+
+        }
+        setOthersNonVisible(currentVirus, v);
+        one.setOnClickListener(this);
+        startRandomButton(one);
+
+        two.setOnClickListener(this);
+        startRandomButton(two);
+
+        three.setOnClickListener(this);
+        startRandomButton(three);
+
+        four.setOnClickListener(this);
+        startRandomButton(four);
         return v;
+    }
+
+    public static void setOthersNonVisible(String virusName, View v){
+        switch(virusName) {
+            case "fluvirus":
+                v.findViewById(R.id.coronavirus1).setVisibility(View.GONE);
+                v.findViewById(R.id.coronavirus2).setVisibility(View.GONE);
+                v.findViewById(R.id.coronavirus3).setVisibility(View.GONE);
+                v.findViewById(R.id.coronavirus4).setVisibility(View.GONE);
+                v.findViewById(R.id.hiv1).setVisibility(View.GONE);
+                v.findViewById(R.id.hiv2).setVisibility(View.GONE);
+                v.findViewById(R.id.hiv3).setVisibility(View.GONE);
+                v.findViewById(R.id.hiv4).setVisibility(View.GONE);
+                break;
+            case "coronavirus":
+                v.findViewById(R.id.fluvirus1).setVisibility(View.GONE);
+                v.findViewById(R.id.fluvirus2).setVisibility(View.GONE);
+                v.findViewById(R.id.fluvirus3).setVisibility(View.GONE);
+                v.findViewById(R.id.fluvirus4).setVisibility(View.GONE);
+                v.findViewById(R.id.hiv1).setVisibility(View.GONE);
+                v.findViewById(R.id.hiv2).setVisibility(View.GONE);
+                v.findViewById(R.id.hiv3).setVisibility(View.GONE);
+                v.findViewById(R.id.hiv4).setVisibility(View.GONE);
+                break;
+            default:
+                v.findViewById(R.id.fluvirus1).setVisibility(View.GONE);
+                v.findViewById(R.id.fluvirus2).setVisibility(View.GONE);
+                v.findViewById(R.id.fluvirus3).setVisibility(View.GONE);
+                v.findViewById(R.id.fluvirus4).setVisibility(View.GONE);
+                v.findViewById(R.id.coronavirus1).setVisibility(View.GONE);
+                v.findViewById(R.id.coronavirus2).setVisibility(View.GONE);
+                v.findViewById(R.id.coronavirus3).setVisibility(View.GONE);
+                v.findViewById(R.id.coronavirus4).setVisibility(View.GONE);
+                break;
+        }
     }
     public static Point getDisplaySize(@NonNull Context context) {
         Point point = new Point();
@@ -76,18 +151,7 @@ public class GameFragment extends Fragment implements View.OnClickListener  {
     @Override
     public void onClick(View view) {
         Intent intent ;
-        switch(view.getId()){
-            //the virus gets destroyed when it's clicked
-            case R.id.virus:
-                view.setVisibility(View.GONE);
-                break;
-
-        }
-        /* this needs to be called after a successful login
-        intent=new Intent( getActivity(), MaskCheckActivity.class);
-        startActivity(intent); */
-        //just called here so we can trigger onDestroy
-        //getActivity().finish();
+        view.setVisibility(View.GONE);
 
     }
 

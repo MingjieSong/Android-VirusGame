@@ -1,5 +1,4 @@
 package com.androidApp.virusGame.UI;
-
 import android.app.Dialog;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
