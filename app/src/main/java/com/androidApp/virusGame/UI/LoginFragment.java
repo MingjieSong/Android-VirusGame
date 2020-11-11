@@ -75,9 +75,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         switch (view.getId()) {
             case R.id.done_button:
                 if(checkAccount(username,password)==0){
-                   /* intent =new Intent( getActivity(), MaskCheckActivity.class);
-                    startActivity(intent); */
-                    //TODO implement the mask check and then lead to the MapActivity class
                     intent =new Intent( getActivity(), HomeActivity.class);
                     //need to pass information about which user is logged in
                     intent.putExtra("USER",username);

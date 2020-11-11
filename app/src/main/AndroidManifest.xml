@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.WebActivity"></activity>
+        <activity android:name=".UI.LoseActivity"></activity>
+        <activity android:name=".UI.WinActivity" />
+        <activity android:name=".UI.WebActivity" />
         <activity android:name=".UI.ProfileActivity" />
         <activity android:name=".UI.HomeActivity" />
 

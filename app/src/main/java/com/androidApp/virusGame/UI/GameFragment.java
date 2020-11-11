@@ -8,6 +8,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -18,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidApp.virusGame.Model.Player;
@@ -39,17 +43,18 @@ import java.util.TimerTask;
 /*this class uses code from https://stackoverflow.com/questions/32263233/how-to-make-a-button-randomly-move*/
 
 
-public class GameFragment extends Fragment implements View.OnClickListener  {
+public class GameFragment extends Fragment{
 
-
+    int score=0;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_game, container, false);
         Activity activity = getActivity();
-        String currentVirus=activity.getIntent().getStringExtra("virusName");
-        //just for testing purposes
-        //fill a list with buttons
+        final String currentVirus=activity.getIntent().getStringExtra("virusName");
+        final TextView scoreTxt=(TextView)v.findViewById(R.id.score);
+        scoreTxt.setText("Score: "+Integer.toString(score));
+        final TextView timerTxt=v.findViewById(R.id.timer);
         final ImageButton one;
         final ImageButton two;
         final ImageButton three;
@@ -77,17 +82,89 @@ public class GameFragment extends Fragment implements View.OnClickListener  {
 
         }
         setOthersNonVisible(currentVirus, v);
-        one.setOnClickListener(this);
+        one.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent;
+                v.setVisibility(View.GONE);
+                score++;
+                if(score==4){
+                    intent =new Intent( getActivity(), WinActivity.class);
+                    //need to pass information about which user is logged in
+                    intent.putExtra("virusName",currentVirus);
+                    startActivity(intent);
+                }
+                scoreTxt.setText("Score: "+Integer.toString(score));
+            }
+        });
         startRandomButton(one);
-
-        two.setOnClickListener(this);
+        two.setOnClickListener(new View.OnClickListener(){
+            Intent intent;
+            public void onClick(View v){
+                v.setVisibility(View.GONE);
+                score++;
+                if(score==4){
+                    intent =new Intent( getActivity(), WinActivity.class);
+                    //need to pass information about which user is logged in
+                    intent.putExtra("virusName",currentVirus);
+                    startActivity(intent);
+                }
+                scoreTxt.setText("Score: "+Integer.toString(score));
+            }
+        });
         startRandomButton(two);
-
-        three.setOnClickListener(this);
+        three.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent;
+                v.setVisibility(View.GONE);
+                score++;
+                if(score==4){
+                    intent =new Intent( getActivity(), WinActivity.class);
+                    //need to pass information about which user is logged in
+                    intent.putExtra("virusName",currentVirus);
+                    startActivity(intent);
+                }
+                scoreTxt.setText("Score: "+Integer.toString(score));
+            }
+        });
         startRandomButton(three);
-
-        four.setOnClickListener(this);
+        four.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent;
+                v.setVisibility(View.GONE);
+                score++;
+                if(score==4){
+                    intent =new Intent( getActivity(), WinActivity.class);
+                    //need to pass information about which user is logged in
+                    intent.putExtra("virusName",currentVirus);
+                    startActivity(intent);
+                }
+                scoreTxt.setText("Score: "+Integer.toString(score));
+            }
+        });
         startRandomButton(four);
+
+        new CountDownTimer(10000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timerTxt.setText("seconds remaining: " + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                Intent intent;
+                timerTxt.setText("done!");
+                if(score==4){
+                    intent =new Intent( getActivity(), WinActivity.class);
+                    //need to pass information about which user is logged in
+                    intent.putExtra("virusName",currentVirus);
+                    startActivity(intent);
+                }else{
+                    intent =new Intent( getActivity(), LoseActivity.class);
+                    //need to pass information about which user is logged in
+                    intent.putExtra("virusName",currentVirus);
+                    startActivity(intent);
+                }
+            }
+        }.start();
         return v;
     }
 
@@ -147,14 +224,6 @@ public class GameFragment extends Fragment implements View.OnClickListener  {
             }
         }, 0, 1000);//Update button every second
     }
-
-    @Override
-    public void onClick(View view) {
-        Intent intent ;
-        view.setVisibility(View.GONE);
-
-    }
-
 
 
 }
