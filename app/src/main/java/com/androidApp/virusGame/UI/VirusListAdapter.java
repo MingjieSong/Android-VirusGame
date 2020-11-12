@@ -3,6 +3,7 @@ package com.androidApp.virusGame.UI;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,40 +22,47 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class VirusListAdapter extends ArrayAdapter<Virus> {
+public class VirusListAdapter extends ArrayAdapter<String> {
 
     private static final String TAG = "VirusListAdapter";
+    Context mContext;
+    String[] names;
+    int [] virus;
 
 
-    private Context mContext;
-    int mResource;
-
-    public VirusListAdapter(Context context, int resource, ArrayList<Virus> objects){
-        super(context,resource,objects);
-        mContext = context;
-        mResource = resource;
+    public VirusListAdapter(Context context, String[] virusNames, int [] virusImage){
+        super(context,R.layout.adapter_view_layout);
+        this.mContext = context;
+        this.names = virusNames;
+        this.virus = virusImage;
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        ViewHolder mViewHolder = new ViewHolder();
+        if(convertView == null) {
+            LayoutInflater mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = mInflater.inflate(R.layout.adapter_view_layout, parent, false);
+             mViewHolder.mImage = (ImageView) convertView.findViewById(R.id.image);
+            mViewHolder.mName = (TextView) convertView.findViewById(R.id.textView1);
+            convertView.setTag(mViewHolder);
+        }else {
+            mViewHolder = (ViewHolder) convertView.getTag();
+        }
+        mViewHolder.mImage.setImageResource(virus[position]);
+        mViewHolder.mName.setText(names[position]);
 
-        String name = getItem(position).getName();
-
-
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        convertView = inflater.inflate(mResource,parent,false);
-
-        TextView tvName = (TextView) convertView.findViewById(R.id.textView1);
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView);
-
-        int defaultImage = mContext.getResources().getIdentifier("@drawable/image_failed",null,mContext.getPackageName());
-        
-
-        tvName.setText(name);
         return convertView;
     }
 
+    public int getCount(){
+        return names.length;
+    }
 
+    static class ViewHolder {
+        ImageView mImage;
+        TextView mName;
+    }
 
 }

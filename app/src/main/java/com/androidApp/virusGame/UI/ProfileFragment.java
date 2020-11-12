@@ -37,10 +37,12 @@ import java.util.Map;
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends Fragment implements View.OnClickListener{
+    ListView mListView;
     //store virus name and count of virus
     public Map<String, Integer> virusMap = new HashMap<String,Integer>();
     private ArrayList<Virus> virusList = new ArrayList<>();
-
+    String [] virusNames = {"hivvirus","coronavirus"};
+    int [] virusImage = {R.drawable.hivvirus,R.drawable.coronavirus};
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -59,14 +61,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             Button btnHome= v.findViewById(R.id.go_home_button);
             btnHome.setOnClickListener(this);
             TextView welcomeTxt=(TextView)v.findViewById(R.id.welcome_user);
-            ListView list = (ListView)v.findViewById(R.id.listView);
+            mListView = (ListView)v.findViewById(R.id.listView);
             welcomeTxt.setText("Welcome "+username);
 
             VirusSingleton singleton = VirusSingleton.get(this.getContext());
             virusList = singleton.getVirus();
-
-            VirusListAdapter adapter = new VirusListAdapter(this.getContext(), R.layout.adapter_view_layout, virusList);
-            list.setAdapter(adapter);
+            VirusListAdapter virusAdapter = new VirusListAdapter(this.getContext(),virusNames,virusImage);
+            mListView.setAdapter(virusAdapter);
 
         }
 
