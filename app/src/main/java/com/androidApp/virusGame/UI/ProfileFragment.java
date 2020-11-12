@@ -41,8 +41,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     //store virus name and count of virus
     public Map<String, Integer> virusMap = new HashMap<String,Integer>();
     private ArrayList<Virus> virusList = new ArrayList<>();
-    String [] virusNames = {"hivvirus","coronavirus"};
-    int [] virusImage = {R.drawable.hivvirus,R.drawable.coronavirus};
+    String [] virusNames = {"hivvirus","fluvirus","coronavirus"};
+    int [] virusImage = {R.drawable.hivvirus,R.drawable.fluvirus, R.drawable.coronavirus};
+    int hivCount = 0;
+    int fluCount = 0;
+    int coronaCount = 0;
+    String [] virusCount = {Integer.toString(hivCount),Integer.toString(fluCount),Integer.toString(coronaCount)};
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -64,9 +68,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             mListView = (ListView)v.findViewById(R.id.listView);
             welcomeTxt.setText("Welcome "+username);
 
-            VirusSingleton singleton = VirusSingleton.get(this.getContext());
-            virusList = singleton.getVirus();
-            VirusListAdapter virusAdapter = new VirusListAdapter(this.getContext(),virusNames,virusImage);
+
+            VirusListAdapter virusAdapter = new VirusListAdapter(this.getContext(),virusNames,virusImage,virusCount);
             mListView.setAdapter(virusAdapter);
 
         }

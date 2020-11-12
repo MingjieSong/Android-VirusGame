@@ -28,13 +28,15 @@ public class VirusListAdapter extends ArrayAdapter<String> {
     Context mContext;
     String[] names;
     int [] virus;
+    String [] counts;
 
 
-    public VirusListAdapter(Context context, String[] virusNames, int [] virusImage){
+    public VirusListAdapter(Context context, String[] virusNames, int [] virusImage, String[] virusCounts){
         super(context,R.layout.adapter_view_layout);
         this.mContext = context;
         this.names = virusNames;
         this.virus = virusImage;
+        this.counts = virusCounts;
     }
 
     @NonNull
@@ -44,14 +46,16 @@ public class VirusListAdapter extends ArrayAdapter<String> {
         if(convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_view_layout, parent, false);
-             mViewHolder.mImage = (ImageView) convertView.findViewById(R.id.image);
+            mViewHolder.mImage = (ImageView) convertView.findViewById(R.id.image);
             mViewHolder.mName = (TextView) convertView.findViewById(R.id.textView1);
+            mViewHolder.mCount = (TextView) convertView.findViewById(R.id.textView2);
             convertView.setTag(mViewHolder);
         }else {
             mViewHolder = (ViewHolder) convertView.getTag();
         }
         mViewHolder.mImage.setImageResource(virus[position]);
         mViewHolder.mName.setText(names[position]);
+        mViewHolder.mCount.setText(counts[position]);
 
         return convertView;
     }
@@ -63,6 +67,7 @@ public class VirusListAdapter extends ArrayAdapter<String> {
     static class ViewHolder {
         ImageView mImage;
         TextView mName;
+        TextView mCount;
     }
 
 }

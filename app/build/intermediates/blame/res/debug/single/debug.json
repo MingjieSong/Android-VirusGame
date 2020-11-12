@@ -52,12 +52,12 @@
         "source": "/Users/yuxiliang/Desktop/Android-VirusGame/app/build/generated/res/pngs/debug/drawable-xhdpi/ic_launcher_background.png"
     },
     {
-        "merged": "/Users/yuxiliang/Desktop/Android-VirusGame/app/build/intermediates/res/merged/debug/mipmap-xhdpi_virusimage_foreground.png.flat",
-        "source": "/Users/yuxiliang/Desktop/Android-VirusGame/app/src/main/res/mipmap-xhdpi/virusimage_foreground.png"
-    },
-    {
         "merged": "/Users/yuxiliang/Desktop/Android-VirusGame/app/build/intermediates/res/merged/debug/layout_fragment_homescreen.xml.flat",
         "source": "/Users/yuxiliang/Desktop/Android-VirusGame/app/src/main/res/layout/fragment_homescreen.xml"
+    },
+    {
+        "merged": "/Users/yuxiliang/Desktop/Android-VirusGame/app/build/intermediates/res/merged/debug/mipmap-xhdpi_virusimage_foreground.png.flat",
+        "source": "/Users/yuxiliang/Desktop/Android-VirusGame/app/src/main/res/mipmap-xhdpi/virusimage_foreground.png"
     },
     {
         "merged": "/Users/yuxiliang/Desktop/Android-VirusGame/app/build/intermediates/res/merged/debug/layout_fragment_web.xml.flat",
@@ -146,6 +146,10 @@
     {
         "merged": "/Users/yuxiliang/Desktop/Android-VirusGame/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher.png.flat",
         "source": "/Users/yuxiliang/Desktop/Android-VirusGame/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/yuxiliang/Desktop/Android-VirusGame/app/build/intermediates/res/merged/debug/drawable_fluvirus.png.flat",
+        "source": "/Users/yuxiliang/Desktop/Android-VirusGame/app/src/main/res/drawable/fluvirus.png"
     },
     {
         "merged": "/Users/yuxiliang/Desktop/Android-VirusGame/app/build/intermediates/res/merged/debug/mipmap-mdpi_fluvirus.png.flat",
