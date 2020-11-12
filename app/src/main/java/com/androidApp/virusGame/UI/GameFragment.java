@@ -37,6 +37,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -87,6 +88,7 @@ public class GameFragment extends Fragment{
                 Intent intent;
                 v.setVisibility(View.GONE);
                 score++;
+                ProfileFragment.setMap(currentVirus);
                 if(score==4){
                     intent =new Intent( getActivity(), WinActivity.class);
                     //need to pass information about which user is logged in
@@ -102,6 +104,7 @@ public class GameFragment extends Fragment{
             public void onClick(View v){
                 v.setVisibility(View.GONE);
                 score++;
+                ProfileFragment.setMap(currentVirus);
                 if(score==4){
                     intent =new Intent( getActivity(), WinActivity.class);
                     //need to pass information about which user is logged in
@@ -117,6 +120,7 @@ public class GameFragment extends Fragment{
                 Intent intent;
                 v.setVisibility(View.GONE);
                 score++;
+                ProfileFragment.setMap(currentVirus);
                 if(score==4){
                     intent =new Intent( getActivity(), WinActivity.class);
                     //need to pass information about which user is logged in
@@ -132,6 +136,7 @@ public class GameFragment extends Fragment{
                 Intent intent;
                 v.setVisibility(View.GONE);
                 score++;
+                ProfileFragment.setMap(currentVirus);
                 if(score==4){
                     intent =new Intent( getActivity(), WinActivity.class);
                     //need to pass information about which user is logged in

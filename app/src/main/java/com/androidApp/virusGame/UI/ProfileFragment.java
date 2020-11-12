@@ -30,23 +30,21 @@ import com.androidApp.virusGame.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends Fragment implements View.OnClickListener{
-    ListView mListView;
     //store virus name and count of virus
-    public Map<String, Integer> virusMap = new HashMap<String,Integer>();
-    private ArrayList<Virus> virusList = new ArrayList<>();
-    String [] virusNames = {"hivvirus","fluvirus","coronavirus"};
-    int [] virusImage = {R.drawable.hivvirus,R.drawable.fluvirus, R.drawable.coronavirus};
-    int hivCount = 0;
-    int fluCount = 0;
-    int coronaCount = 0;
-    String [] virusCount = {Integer.toString(hivCount),Integer.toString(fluCount),Integer.toString(coronaCount)};
+    private static Map<String, Integer> virusMap= new HashMap<String,Integer>();;
+    ListView mListView;
+    ArrayList<String>virusNames = new ArrayList<>();
+    ArrayList<Integer>virusImage = new ArrayList<>();
+    ArrayList<String>virusCount = new ArrayList<>();
+    //{R.drawable.hivvirus,R.drawable.fluvirus, R.drawable.coronavirus};
+    //{Integer.toString(hivCount),Integer.toString(fluCount),Integer.toString(coronaCount)};
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -59,6 +57,26 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
         Activity activity = getActivity();
         String username=activity.getIntent().getStringExtra("USER");
+
+
+
+        for (String key: virusMap.keySet()){
+            virusNames.add(key);
+            if (key == "hivvirus"){
+                virusImage.add(R.drawable.hivvirus);
+            }
+            if (key == "fluvirus"){
+                virusImage.add(R.drawable.fluvirus);
+            }
+            if (key == "coronavirus"){
+                virusImage.add(R.drawable.coronavirus);
+            }
+        }
+
+        for (Integer value: virusMap.values()){
+            virusCount.add(Integer.toString(value));
+        }
+
 
         if (activity != null){
 
@@ -87,6 +105,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 }
                 break;
         }
+    }
+
+    public static void setMap(String name){
+        if (!virusMap.containsKey(name)){
+            virusMap.put(name,1);
+        }else{
+            virusMap.put(name, virusMap.get(name)+1);
+        }
+
     }
 
 

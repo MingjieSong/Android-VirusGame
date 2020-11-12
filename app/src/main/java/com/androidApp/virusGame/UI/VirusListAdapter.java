@@ -26,12 +26,12 @@ public class VirusListAdapter extends ArrayAdapter<String> {
 
     private static final String TAG = "VirusListAdapter";
     Context mContext;
-    String[] names;
-    int [] virus;
-    String [] counts;
+    ArrayList<String> names;
+    ArrayList<Integer> virus;
+    ArrayList<String> counts;
 
 
-    public VirusListAdapter(Context context, String[] virusNames, int [] virusImage, String[] virusCounts){
+    public VirusListAdapter(Context context, ArrayList<String> virusNames, ArrayList<Integer>virusImage, ArrayList<String> virusCounts){
         super(context,R.layout.adapter_view_layout);
         this.mContext = context;
         this.names = virusNames;
@@ -53,15 +53,15 @@ public class VirusListAdapter extends ArrayAdapter<String> {
         }else {
             mViewHolder = (ViewHolder) convertView.getTag();
         }
-        mViewHolder.mImage.setImageResource(virus[position]);
-        mViewHolder.mName.setText(names[position]);
-        mViewHolder.mCount.setText(counts[position]);
+        mViewHolder.mImage.setImageResource(virus.get(position));
+        mViewHolder.mName.setText(names.get(position));
+        mViewHolder.mCount.setText(counts.get(position));
 
         return convertView;
     }
 
     public int getCount(){
-        return names.length;
+        return names.size();
     }
 
     static class ViewHolder {
