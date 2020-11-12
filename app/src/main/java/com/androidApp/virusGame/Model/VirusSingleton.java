@@ -131,9 +131,10 @@ public class VirusSingleton  {
 
 
 
-    //retrieve single virus's info by its name
-    public void getSingleVirus(String name) {
+    //retrieve single virus by its name
+    public Virus getSingleVirus(String name) {
         String[] where = new String[]{name};
+        Virus v = new Virus(name,null,null,null);
         Cursor cursor = mDatabase.rawQuery("SELECT * from virus WHERE name=?", where);
         if (cursor == null || cursor.getCount() <= 0) {
             Log.d("error", "virus not found");
@@ -144,7 +145,11 @@ public class VirusSingleton  {
             String loc = cursor.getString(cursor.getColumnIndex(DbSchema.VirusTable.Cols.LOCATION));
             byte[] img = cursor.getBlob(cursor.getColumnIndex(DbSchema.VirusTable.Cols.IMAGE));
             Log.d("Found the virus's info", "The virus " + name + "'s hitpoint is " + htpt + " Location: (" + loc + ")" + " Image path: " + img);
+            v.setHITPOINT(Integer.toString(htpt));
+            v.setLOCATION(loc);
+            v.setIMAGE(img);
         }
+        return v;
     }
 
 

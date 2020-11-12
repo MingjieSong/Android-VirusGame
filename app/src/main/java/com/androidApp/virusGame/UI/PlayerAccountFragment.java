@@ -182,7 +182,7 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
             Log.d("Stored virus info", "virus#"+ i+" "+virus.get(i).getName()
                     +" Hitpoint: "+virus.get(i).getHitpt()
                     + " Location: ("+virus.get(i).getLocation() + ")"
-                    + " Image byte: "+virus.get(i).getImage()
+                    + " Image url: "+virus.get(i).getImage()
             );
         }
 

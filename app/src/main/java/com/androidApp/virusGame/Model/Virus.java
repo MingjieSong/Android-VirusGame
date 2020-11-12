@@ -22,6 +22,7 @@ public class Virus {
         IMAGE = image;
     }
 
+
     public String getName() {
         return NAME;
     }
@@ -43,6 +44,8 @@ public class Virus {
     }
 
     public void setLOCATION(String LOCATION) {this.LOCATION = LOCATION; }
+
+    public void setIMAGE(byte[] IMAGE){this.IMAGE = IMAGE;}
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
