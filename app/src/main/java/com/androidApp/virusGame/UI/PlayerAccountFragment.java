@@ -38,14 +38,11 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     private EditText mEtConfirm;
 
 
-    private ImageView imageView = null;
-    private Bitmap imageBitmap = null;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_account, container, false);
-        imageView = v.findViewById(R.id.imageView);
         Activity activity = getActivity();
 
         if (activity != null){

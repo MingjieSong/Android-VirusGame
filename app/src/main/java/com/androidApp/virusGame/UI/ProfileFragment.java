@@ -43,8 +43,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     ArrayList<String>virusNames = new ArrayList<>();
     ArrayList<Integer>virusImage = new ArrayList<>();
     ArrayList<String>virusCount = new ArrayList<>();
-    //{R.drawable.hivvirus,R.drawable.fluvirus, R.drawable.coronavirus};
-    //{Integer.toString(hivCount),Integer.toString(fluCount),Integer.toString(coronaCount)};
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -58,8 +56,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         Activity activity = getActivity();
         String username=activity.getIntent().getStringExtra("USER");
 
-
-
+        virusNames.add("hivvirus");
+        virusNames.add("fluvirus");
+        virusNames.add("coronavirus");
+        virusImage.add(R.drawable.hivvirus);
+        virusImage.add(R.drawable.fluvirus);
+        virusImage.add(R.drawable.coronavirus);
+        virusCount.add(Integer.toString(0));
+        virusCount.add(Integer.toString(0));
+        virusCount.add(Integer.toString(0));
+        /*
         for (String key: virusMap.keySet()){
             virusNames.add(key);
             if (key == "hivvirus"){
@@ -71,7 +77,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             if (key == "coronavirus"){
                 virusImage.add(R.drawable.coronavirus);
             }
-        }
+        }*/
 
         for (Integer value: virusMap.values()){
             virusCount.add(Integer.toString(value));
