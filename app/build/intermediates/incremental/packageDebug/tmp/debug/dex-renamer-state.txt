@@ -1,4 +1,4 @@
-#Thu Nov 12 01:51:37 CST 2020
-base.0=/Users/yuxiliang/Desktop/Android-VirusGame/app/build/intermediates/dex/debug/mergeDexDebug/classes.dex
+#Fri Nov 13 11:26:52 EST 2020
+base.0=C\:\\Users\\19736\\Android-VirusGame\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

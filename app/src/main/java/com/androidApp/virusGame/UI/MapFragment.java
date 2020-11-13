@@ -223,6 +223,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                 if (gameCode >= 0) {
                     Intent intent = new Intent(getActivity(), GameActivity.class);
                     intent.putExtra("virusName", virusList.get(gameCode).getName());
+                    intent.putExtra("USER",playerName);
                     startActivity(intent);
                 } else {
                     Toast.makeText(this.getActivity(), "You are not within the range of any virus", Toast.LENGTH_LONG).show();

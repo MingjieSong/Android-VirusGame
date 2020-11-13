@@ -1,6 +1,7 @@
 package com.androidApp.virusGame.UI;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -45,13 +46,16 @@ import java.util.TimerTask;
 
 
 public class GameFragment extends Fragment{
-
+    Timer timer;
+    TimerTask task;
+    CountDownTimer ct;
     int score=0;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_game, container, false);
         Activity activity = getActivity();
+        final String username=activity.getIntent().getStringExtra("USER");
         final String currentVirus=activity.getIntent().getStringExtra("virusName");
         final TextView scoreTxt=(TextView)v.findViewById(R.id.score);
         scoreTxt.setText("Score: "+Integer.toString(score));
@@ -90,7 +94,10 @@ public class GameFragment extends Fragment{
                 score++;
                 ProfileFragment.setMap(currentVirus);
                 if(score==4){
+                    stopTimer();
+                    ct.cancel();
                     intent =new Intent( getActivity(), WinActivity.class);
+                    intent.putExtra("USER",username);
                     //need to pass information about which user is logged in
                     intent.putExtra("virusName",currentVirus);
                     startActivity(intent);
@@ -98,7 +105,6 @@ public class GameFragment extends Fragment{
                 scoreTxt.setText("Score: "+Integer.toString(score));
             }
         });
-        startRandomButton(one);
         two.setOnClickListener(new View.OnClickListener(){
             Intent intent;
             public void onClick(View v){
@@ -106,15 +112,17 @@ public class GameFragment extends Fragment{
                 score++;
                 ProfileFragment.setMap(currentVirus);
                 if(score==4){
+                    stopTimer();
+                    ct.cancel();
                     intent =new Intent( getActivity(), WinActivity.class);
                     //need to pass information about which user is logged in
                     intent.putExtra("virusName",currentVirus);
+                    intent.putExtra("USER",username);
                     startActivity(intent);
                 }
                 scoreTxt.setText("Score: "+Integer.toString(score));
             }
         });
-        startRandomButton(two);
         three.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent;
@@ -122,7 +130,10 @@ public class GameFragment extends Fragment{
                 score++;
                 ProfileFragment.setMap(currentVirus);
                 if(score==4){
+                    stopTimer();
+                    ct.cancel();
                     intent =new Intent( getActivity(), WinActivity.class);
+                    intent.putExtra("USER",username);
                     //need to pass information about which user is logged in
                     intent.putExtra("virusName",currentVirus);
                     startActivity(intent);
@@ -130,7 +141,6 @@ public class GameFragment extends Fragment{
                 scoreTxt.setText("Score: "+Integer.toString(score));
             }
         });
-        startRandomButton(three);
         four.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent;
@@ -138,7 +148,10 @@ public class GameFragment extends Fragment{
                 score++;
                 ProfileFragment.setMap(currentVirus);
                 if(score==4){
+                    stopTimer();
+                    ct.cancel();
                     intent =new Intent( getActivity(), WinActivity.class);
+                    intent.putExtra("USER",username);
                     //need to pass information about which user is logged in
                     intent.putExtra("virusName",currentVirus);
                     startActivity(intent);
@@ -146,9 +159,7 @@ public class GameFragment extends Fragment{
                 scoreTxt.setText("Score: "+Integer.toString(score));
             }
         });
-        startRandomButton(four);
-
-        new CountDownTimer(10000, 1000) {
+        ct=new CountDownTimer(10000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 timerTxt.setText("seconds remaining: " + millisUntilFinished / 1000);
@@ -159,17 +170,22 @@ public class GameFragment extends Fragment{
                 timerTxt.setText("done!");
                 if(score==4){
                     intent =new Intent( getActivity(), WinActivity.class);
+                    intent.putExtra("USER",username);
                     //need to pass information about which user is logged in
                     intent.putExtra("virusName",currentVirus);
                     startActivity(intent);
                 }else{
                     intent =new Intent( getActivity(), LoseActivity.class);
+                    intent.putExtra("USER",username);
                     //need to pass information about which user is logged in
                     intent.putExtra("virusName",currentVirus);
                     startActivity(intent);
                 }
+                stopTimer();
+                cancel();
             }
         }.start();
+        startRandomButton(one,two,three,four);
         return v;
     }
 
@@ -220,14 +236,26 @@ public class GameFragment extends Fragment{
         button.setX(randomX);
         button.setY(randomY);
     }
-    private void startRandomButton(final ImageButton button) {
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
+    private void startRandomButton(final ImageButton button1, final ImageButton button2, final ImageButton button3, final ImageButton button4) {
+        timer = new Timer();
+        task=new TimerTask() {
             @Override
             public void run() {
-                setButtonRandomPosition(button);
+                setButtonRandomPosition(button1);
+                setButtonRandomPosition(button2);
+                setButtonRandomPosition(button3);
+                setButtonRandomPosition(button4);
             }
-        }, 0, 1000);//Update button every second
+        };
+        timer.schedule(task,0,1000);//Update button every second
+    }
+
+    public void stopTimer(){
+        if(timer!=null){
+            timer.cancel();
+            timer.purge();
+            timer=null;
+        }
     }
 
 
