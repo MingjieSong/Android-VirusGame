@@ -19,15 +19,6 @@
             android:text="@string/get_started"/>
 
         <Button
-            android:id="@+id/settings_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
-            android:text="@string/settings" />
-
-        <Button
             android:id="@+id/profile_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1557,7 +1557,6 @@ id search_src_text
 id search_voice_btn
 id select_dialog_listview
 id selected
-id settings_button
 id shortcut
 id showCustom
 id showHome

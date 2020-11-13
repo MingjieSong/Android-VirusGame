@@ -50,12 +50,15 @@ public class GameFragment extends Fragment{
     TimerTask task;
     CountDownTimer ct;
     int score=0;
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_game, container, false);
         Activity activity = getActivity();
         final String username=activity.getIntent().getStringExtra("USER");
+        final PlayerSingleton player = PlayerSingleton.get();
+        player.getSinglePlayer(username) ;
         final String currentVirus=activity.getIntent().getStringExtra("virusName");
         final TextView scoreTxt=(TextView)v.findViewById(R.id.score);
         scoreTxt.setText("Score: "+Integer.toString(score));
@@ -92,7 +95,8 @@ public class GameFragment extends Fragment{
                 Intent intent;
                 v.setVisibility(View.GONE);
                 score++;
-                ProfileFragment.setMap(currentVirus);
+                //add killed virus to current player into relational db
+                player.addVirusToPlayer(username,currentVirus);
                 if(score==4){
                     stopTimer();
                     ct.cancel();
@@ -110,7 +114,7 @@ public class GameFragment extends Fragment{
             public void onClick(View v){
                 v.setVisibility(View.GONE);
                 score++;
-                ProfileFragment.setMap(currentVirus);
+                player.addVirusToPlayer(username,currentVirus);
                 if(score==4){
                     stopTimer();
                     ct.cancel();
@@ -128,7 +132,7 @@ public class GameFragment extends Fragment{
                 Intent intent;
                 v.setVisibility(View.GONE);
                 score++;
-                ProfileFragment.setMap(currentVirus);
+                player.addVirusToPlayer(username,currentVirus);
                 if(score==4){
                     stopTimer();
                     ct.cancel();
@@ -146,7 +150,7 @@ public class GameFragment extends Fragment{
                 Intent intent;
                 v.setVisibility(View.GONE);
                 score++;
-                ProfileFragment.setMap(currentVirus);
+                player.addVirusToPlayer(username,currentVirus);
                 if(score==4){
                     stopTimer();
                     ct.cancel();
@@ -186,6 +190,9 @@ public class GameFragment extends Fragment{
             }
         }.start();
         startRandomButton(one,two,three,four);
+
+        List<Pair<String, String>> PV = player.getPlayerAndVirus();
+        showPlayerAndVirus(PV);
         return v;
     }
 
@@ -258,5 +265,12 @@ public class GameFragment extends Fragment{
         }
     }
 
+    private void showPlayerAndVirus(List<Pair<String, String>> list){
+        for(int i=0 ;i<list.size(); i++){
+            Log.d("PlayerCaughtVirus info","Player "+list.get(i).first + " Virus " + list.get(i).second);
+
+        }
+
+    }
 
 }

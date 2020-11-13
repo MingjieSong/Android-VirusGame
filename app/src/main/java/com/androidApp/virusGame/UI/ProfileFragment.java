@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-
+import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
@@ -31,6 +31,7 @@ import com.androidApp.virusGame.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,6 +57,17 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         Activity activity = getActivity();
         String username=activity.getIntent().getStringExtra("USER");
 
+        /*
+
+        PlayerSingleton player = PlayerSingleton.get();
+        player.getSinglePlayer(username);
+        List<Pair<String, String>> pv = player.getPlayerAndVirus();
+
+        for(int i=0 ;i<pv.size(); i++){
+            Log.d("PlayerCaughtVirus info","Player "+pv.get(i).first + " Virus " + pv.get(i).second);
+            setMap(pv.get(i).second);
+        }*/
+
         virusNames.add("hivvirus");
         virusNames.add("fluvirus");
         virusNames.add("coronavirus");
@@ -65,7 +77,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         virusCount.add(Integer.toString(0));
         virusCount.add(Integer.toString(0));
         virusCount.add(Integer.toString(0));
-        /*
+
         for (String key: virusMap.keySet()){
             virusNames.add(key);
             if (key == "hivvirus"){
@@ -77,7 +89,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             if (key == "coronavirus"){
                 virusImage.add(R.drawable.coronavirus);
             }
-        }*/
+        }
 
         for (Integer value: virusMap.values()){
             virusCount.add(Integer.toString(value));

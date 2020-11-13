@@ -46,8 +46,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
             Button btnStart = v.findViewById(R.id.get_started_button);
             btnStart.setOnClickListener(this);
+            /*
             Button btnSettings = v.findViewById(R.id.settings_button);
-            btnSettings.setOnClickListener(this);
+            btnSettings.setOnClickListener(this);*/
             Button btnProfile = v.findViewById(R.id.profile_button);
             btnProfile.setOnClickListener(this);
             Button btnResources = v.findViewById(R.id.resources_button);
@@ -104,9 +105,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 intent.putExtra("USER",username);
                 startActivity(intent);
                 break;
+                /*
             case R.id.settings_button:
                 //TODO: go to settings activity
-                break;
+                break;*/
             case R.id.profile_button:
                 //need information about which user is logged in
                 intent =new Intent( getActivity(), ProfileActivity.class);
