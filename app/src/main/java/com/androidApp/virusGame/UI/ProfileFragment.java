@@ -78,6 +78,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         virusCount.add(Integer.toString(0));
         virusCount.add(Integer.toString(0));
 
+        /*
         for (String key: virusMap.keySet()){
             virusNames.add(key);
             if (key == "hivvirus"){
@@ -93,7 +94,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
         for (Integer value: virusMap.values()){
             virusCount.add(Integer.toString(value));
-        }
+        }*/
 
 
         if (activity != null){
