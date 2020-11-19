@@ -43,6 +43,7 @@
     <string name="start_game">Start Game</string>
     <string name="virus">virus</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="sound_effects_on">Turn sound effects on</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

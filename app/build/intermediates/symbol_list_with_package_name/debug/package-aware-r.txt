@@ -1845,6 +1845,7 @@ mipmap ic_launcher_round
 mipmap virusimage
 mipmap virusimage_foreground
 mipmap virusimage_round
+raw readme
 raw virus
 string CreateAccount
 string Login
@@ -1953,6 +1954,7 @@ string search_menu_title
 string search_virus
 string settings
 string signature_title
+string sound_effects_on
 string start_game
 string status_bar_notification_info_overflow
 string summary_collapsed_preference_list

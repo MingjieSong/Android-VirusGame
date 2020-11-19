@@ -20,8 +20,9 @@
     <PreferenceCategory app:title="@string/sync_header">
 
         <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="@string/sync_title" />
+            app:key="sound_effects_on"
+            app:title="@string/sound_effects_on"
+            />
 
         <SwitchPreferenceCompat
             app:dependency="sync"

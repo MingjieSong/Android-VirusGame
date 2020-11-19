@@ -71,6 +71,8 @@ public class GameFragment extends Fragment{
         final ImageButton three;
         final ImageButton four;
         final MediaPlayer mp= MediaPlayer.create(getContext(),R.raw.virus);
+        final boolean sound_on=PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("sound_effects_on",false);
+
 
         switch(currentVirus){
             case "fluvirus":
@@ -96,7 +98,9 @@ public class GameFragment extends Fragment{
         setOthersNonVisible(currentVirus, v);
         one.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                mp.start();
+                if(sound_on) {
+                    mp.start();
+                }
                 Intent intent;
                 v.setVisibility(View.GONE);
                 score++;
@@ -117,7 +121,9 @@ public class GameFragment extends Fragment{
         two.setOnClickListener(new View.OnClickListener(){
             Intent intent;
             public void onClick(View v){
-                mp.start();
+                if(sound_on) {
+                    mp.start();
+                }
                 v.setVisibility(View.GONE);
                 score++;
                 player.addVirusToPlayer(username,currentVirus);
@@ -135,7 +141,9 @@ public class GameFragment extends Fragment{
         });
         three.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                mp.start();
+                if(sound_on) {
+                    mp.start();
+                }
                 Intent intent;
                 v.setVisibility(View.GONE);
                 score++;
@@ -154,7 +162,9 @@ public class GameFragment extends Fragment{
         });
         four.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                mp.start();
+                if(sound_on) {
+                    mp.start();
+                }
                 Intent intent;
                 v.setVisibility(View.GONE);
                 score++;

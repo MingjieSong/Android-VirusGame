@@ -12,24 +12,24 @@
         "source": "C:\\Users\\19736\\Android-VirusGame\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_launcher_background.png"
     },
     {
-        "merged": "C:\\Users\\19736\\Android-VirusGame\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_virusimage_round.png.flat",
-        "source": "C:\\Users\\19736\\Android-VirusGame\\app\\src\\main\\res\\mipmap-xhdpi\\virusimage_round.png"
-    },
-    {
         "merged": "C:\\Users\\19736\\Android-VirusGame\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_image_failed.png.flat",
         "source": "C:\\Users\\19736\\Android-VirusGame\\app\\src\\main\\res\\drawable-hdpi\\image_failed.png"
+    },
+    {
+        "merged": "C:\\Users\\19736\\Android-VirusGame\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_virusimage_round.png.flat",
+        "source": "C:\\Users\\19736\\Android-VirusGame\\app\\src\\main\\res\\mipmap-xhdpi\\virusimage_round.png"
     },
     {
         "merged": "C:\\Users\\19736\\Android-VirusGame\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\19736\\Android-VirusGame\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\19736\\Android-VirusGame\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\19736\\Android-VirusGame\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
-    },
-    {
         "merged": "C:\\Users\\19736\\Android-VirusGame\\app\\build\\intermediates\\res\\merged\\debug\\raw_virus.mp3.flat",
         "source": "C:\\Users\\19736\\Android-VirusGame\\app\\src\\main\\res\\raw\\virus.mp3"
+    },
+    {
+        "merged": "C:\\Users\\19736\\Android-VirusGame\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\19736\\Android-VirusGame\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },
     {
         "merged": "C:\\Users\\19736\\Android-VirusGame\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_launcher_background.png.flat",
@@ -134,6 +134,10 @@
     {
         "merged": "C:\\Users\\19736\\Android-VirusGame\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_image_failed.png.flat",
         "source": "C:\\Users\\19736\\Android-VirusGame\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\image_failed.png"
+    },
+    {
+        "merged": "C:\\Users\\19736\\Android-VirusGame\\app\\build\\intermediates\\res\\merged\\debug\\raw_readme.flat",
+        "source": "C:\\Users\\19736\\Android-VirusGame\\app\\src\\main\\res\\raw\\readme"
     },
     {
         "merged": "C:\\Users\\19736\\Android-VirusGame\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
