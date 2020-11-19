@@ -44,6 +44,10 @@
     <string name="virus">virus</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="sound_effects_on">Turn sound effects on</string>
+    <string name="location_permission">Location Access</string>
+    <string name="location_preferences_header">Location Preferences</string>
+    <string name="sound_preferences_header">Sound Preferences</string>
+
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
@@ -56,9 +60,9 @@
     <!-- Sync Preferences -->
     <string name="sync_title">Sync email periodically</string>
     <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    <string name="location_summary_on">Allow the game to access your location to find nearby virus characters.
     </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="location_summary_off">Do not allow the game to access your location to find nearby virus characters</string>
 
 
 </resources>

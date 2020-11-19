@@ -6,9 +6,8 @@ com/androidApp/virusGame/UI/HomeScreenFragment.java
  com.androidApp.virusGame.UI.HomeScreenFragment
 com/androidApp/virusGame/UI/PlayerAccountFragment.java
  com.androidApp.virusGame.UI.PlayerAccountFragment
-com/androidApp/virusGame/UI/MapFragment.java
- com.androidApp.virusGame.UI.MapFragment
- com.androidApp.virusGame.UI.MapFragment$1
+com/androidApp/virusGame/UI/WinFragment.java
+ com.androidApp.virusGame.UI.WinFragment
 com/androidApp/virusGame/UI/LoginFragment.java
  com.androidApp.virusGame.UI.LoginFragment
 com/androidApp/virusGame/UI/HomeScreenActivity.java
@@ -78,11 +77,12 @@ com/androidApp/virusGame/UI/GameFragment.java
  com.androidApp.virusGame.UI.GameFragment$6
 com/androidApp/virusGame/UI/MaskCheckFragment.java
  com.androidApp.virusGame.UI.MaskCheckFragment
-com/androidApp/virusGame/UI/MapActivity.java
- com.androidApp.virusGame.UI.MapActivity
-com/androidApp/virusGame/UI/GameActivity.java
- com.androidApp.virusGame.UI.GameActivity
-com/androidApp/virusGame/UI/WinFragment.java
- com.androidApp.virusGame.UI.WinFragment
 com/androidApp/virusGame/UI/ChangePasswordActivity.java
  com.androidApp.virusGame.UI.ChangePasswordActivity
+com/androidApp/virusGame/UI/GameActivity.java
+ com.androidApp.virusGame.UI.GameActivity
+com/androidApp/virusGame/UI/MapActivity.java
+ com.androidApp.virusGame.UI.MapActivity
+com/androidApp/virusGame/UI/MapFragment.java
+ com.androidApp.virusGame.UI.MapFragment
+ com.androidApp.virusGame.UI.MapFragment$1

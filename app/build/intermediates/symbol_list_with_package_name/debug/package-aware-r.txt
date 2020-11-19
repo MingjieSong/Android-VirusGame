@@ -1883,8 +1883,6 @@ string action_sign_in
 string action_sign_in_short
 string app_name
 string appbar_scrolling_view_behavior
-string attachment_summary_off
-string attachment_summary_on
 string attachment_title
 string bottom_sheet_behavior
 string change_password
@@ -1930,6 +1928,10 @@ string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string invalid_password
 string invalid_username
+string location_permission
+string location_preferences_header
+string location_summary_off
+string location_summary_on
 string login_failed
 string map_key
 string messages_header
@@ -1955,6 +1957,7 @@ string search_virus
 string settings
 string signature_title
 string sound_effects_on
+string sound_preferences_header
 string start_game
 string status_bar_notification_info_overflow
 string summary_collapsed_preference_list

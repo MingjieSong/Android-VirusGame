@@ -175,7 +175,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
 
     private void getLocationPermission(){
-         Activity activity = this.getActivity() ;
+        Activity activity = this.getActivity() ;
         if(!(ContextCompat.checkSelfPermission(activity, FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(activity, COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)){
             ActivityCompat.requestPermissions(activity, LOCATION_PERMISSIONS, REQUEST_LOCATION_PERMISSIONS);
@@ -215,7 +215,8 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (hasLocationPermission()) {
+        final boolean location_permission=PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("location_permission",false);
+        if (hasLocationPermission()&&location_permission) {
             if (item.getItemId() == R.id.search) {
                 firstTimeGetLocation = true;
                 resetVirus = true;
@@ -232,7 +233,10 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                     Toast.makeText(this.getActivity(), "You are not within the range of any virus", Toast.LENGTH_LONG).show();
                 }
             }
+        }else if(!location_permission){
+            Toast.makeText(this.getActivity(), "Enable location permission in settings to play.", Toast.LENGTH_LONG).show();
         }else{
+
             ActivityCompat.requestPermissions(getActivity() , LOCATION_PERMISSIONS, REQUEST_LOCATION_PERMISSIONS);
         }
 
