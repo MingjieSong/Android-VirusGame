@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -69,6 +70,7 @@ public class GameFragment extends Fragment{
         final ImageButton two;
         final ImageButton three;
         final ImageButton four;
+        final MediaPlayer mp= MediaPlayer.create(getContext(),R.raw.virus);
 
         switch(currentVirus){
             case "fluvirus":
@@ -94,6 +96,7 @@ public class GameFragment extends Fragment{
         setOthersNonVisible(currentVirus, v);
         one.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                mp.start();
                 Intent intent;
                 v.setVisibility(View.GONE);
                 score++;
@@ -114,6 +117,7 @@ public class GameFragment extends Fragment{
         two.setOnClickListener(new View.OnClickListener(){
             Intent intent;
             public void onClick(View v){
+                mp.start();
                 v.setVisibility(View.GONE);
                 score++;
                 player.addVirusToPlayer(username,currentVirus);
@@ -131,6 +135,7 @@ public class GameFragment extends Fragment{
         });
         three.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                mp.start();
                 Intent intent;
                 v.setVisibility(View.GONE);
                 score++;
@@ -149,6 +154,7 @@ public class GameFragment extends Fragment{
         });
         four.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                mp.start();
                 Intent intent;
                 v.setVisibility(View.GONE);
                 score++;

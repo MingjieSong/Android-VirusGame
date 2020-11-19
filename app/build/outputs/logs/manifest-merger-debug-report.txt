@@ -1,12 +1,13 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-42:12
-INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-42:12
-INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-42:12
-INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-42:12
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-43:12
+INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-43:12
+INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-43:12
+INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-43:12
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\88142f2244cfab058dc6f41a4bbd61ee\jetified-play-services-location-15.0.1\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\452c75ee67a5c0929bb1299fcfc1a8d0\constraintlayout-2.0.1\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\66aba086a3ba41cc418e2122d602114c\material-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.preference:preference:1.1.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\9610e0ab3a30d056897691763ec89077\preference-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\a621425fdde0cc39c6e6986394ecd820\appcompat-1.2.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\02fc910b688e417c120ac8502bbbe7df\legacy-support-v4-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.recyclerview:recyclerview:1.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\52601ed9d4e11040fd9a7f59d526de1b\recyclerview-1.0.0\AndroidManifest.xml:17:1-22:12
@@ -49,20 +50,20 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\19736\.gradle\ca
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\4e74c8d2c846421439b6b276f7c28a17\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\43a45535a51738f421fbc4c1a2411916\print-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\2ae42694ed8b1eb5e6487cc4ca63f786\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-42:12
-INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-42:12
-INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-43:12
+INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-43:12
+INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-43:12
 	package
 		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:3:5-39
 		INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-42:12
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-43:12
 		INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-42:12
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:1-43:12
 		INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:2:11-69
@@ -87,7 +88,7 @@ MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\19736\.g
 	android:name
 		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:8:22-64
 application
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:10:5-40:19
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:10:5-41:19
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\88142f2244cfab058dc6f41a4bbd61ee\jetified-play-services-location-15.0.1\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\88142f2244cfab058dc6f41a4bbd61ee\jetified-play-services-location-15.0.1\AndroidManifest.xml:7:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\452c75ee67a5c0929bb1299fcfc1a8d0\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
@@ -126,70 +127,74 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\19
 		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:11:9-35
 	android:theme
 		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:16:9-40
+activity#com.androidApp.virusGame.UI.SettingsActivity
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:17:9-66
+	android:name
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:17:19-54
 activity#com.androidApp.virusGame.UI.LoseActivity
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:17:9-62
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:18:9-53
 	android:name
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:17:19-50
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:18:19-50
 activity#com.androidApp.virusGame.UI.WinActivity
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:18:9-52
-	android:name
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:18:19-49
-activity#com.androidApp.virusGame.UI.WebActivity
 ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:19:9-52
 	android:name
 		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:19:19-49
+activity#com.androidApp.virusGame.UI.WebActivity
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:20:9-52
+	android:name
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:20:19-49
 activity#com.androidApp.virusGame.UI.ProfileActivity
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:20:9-56
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:21:9-56
 	android:name
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:20:19-53
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:21:19-53
 activity#com.androidApp.virusGame.UI.HomeActivity
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:21:9-53
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:22:9-53
 	android:name
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:21:19-50
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:22:19-50
 meta-data#com.google.android.geo.API_KEY
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:23:9-25:47
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:24:9-26:47
 	android:value
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:25:13-44
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:26:13-44
 	android:name
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:24:13-58
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:25:13-58
 activity#com.androidApp.virusGame.UI.ChangePasswordActivity
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:27:9-63
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:28:9-63
 	android:name
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:27:19-60
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:28:19-60
 activity#com.androidApp.virusGame.UI.LoginActivity
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:28:9-54
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:29:9-54
 	android:name
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:28:19-51
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:29:19-51
 activity#com.androidApp.virusGame.UI.MaskCheckActivity
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:29:9-58
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:30:9-58
 	android:name
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:29:19-55
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:30:19-55
 activity#com.androidApp.virusGame.UI.PlayerAccountActivity
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:30:9-62
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:31:9-62
 	android:name
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:30:19-59
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:31:19-59
 activity#com.androidApp.virusGame.UI.MapActivity
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:31:9-52
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:32:9-52
 	android:name
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:31:19-49
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:32:19-49
 activity#com.androidApp.virusGame.UI.GameActivity
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:32:9-53
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:33:9-53
 	android:name
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:32:19-50
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:33:19-50
 activity#com.androidApp.virusGame.UI.HomeScreenActivity
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:33:9-39:20
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:34:9-40:20
 	android:name
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:33:19-56
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:34:19-56
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:34:13-38:29
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:35:13-39:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:35:17-69
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:36:17-69
 	android:name
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:35:25-66
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:36:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:37:17-77
+ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:38:17-77
 	android:name
-		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:37:27-74
+		ADDED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:38:27-74
 uses-sdk
 INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml
@@ -200,6 +205,8 @@ MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\19736\.g
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\452c75ee67a5c0929bb1299fcfc1a8d0\constraintlayout-2.0.1\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\66aba086a3ba41cc418e2122d602114c\material-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\66aba086a3ba41cc418e2122d602114c\material-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.preference:preference:1.1.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\9610e0ab3a30d056897691763ec89077\preference-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.preference:preference:1.1.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\9610e0ab3a30d056897691763ec89077\preference-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\a621425fdde0cc39c6e6986394ecd820\appcompat-1.2.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\a621425fdde0cc39c6e6986394ecd820\appcompat-1.2.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\02fc910b688e417c120ac8502bbbe7df\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
