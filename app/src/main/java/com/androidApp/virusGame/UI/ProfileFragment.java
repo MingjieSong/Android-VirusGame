@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -55,7 +56,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
         Activity activity = getActivity();
-        String username=activity.getIntent().getStringExtra("USER");
+        //String username=activity.getIntent().getStringExtra("USER");
+        String username= PreferenceManager.getDefaultSharedPreferences(getContext()).getString("USER","default");
 
         /*
 

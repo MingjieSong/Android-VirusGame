@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -83,7 +84,9 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         getLocationPermission()  ;
         getMapAsync(this);
         setHasOptionsMenu(true);
-        playerName= getActivity().getIntent().getStringExtra("USER");
+        //playerName= getActivity().getIntent().getStringExtra("USER");
+        playerName=PreferenceManager.getDefaultSharedPreferences(getContext()).getString("USER","default");
+
         //updateValuesFromBundle(savedInstanceState);
 
     }

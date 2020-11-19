@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -56,7 +57,8 @@ public class GameFragment extends Fragment{
 
         View v = inflater.inflate(R.layout.fragment_game, container, false);
         Activity activity = getActivity();
-        final String username=activity.getIntent().getStringExtra("USER");
+       // final String username=activity.getIntent().getStringExtra("USER");
+        final String username= PreferenceManager.getDefaultSharedPreferences(getContext()).getString("USER","default");
         final PlayerSingleton player = PlayerSingleton.get();
         player.getSinglePlayer(username) ;
         final String currentVirus=activity.getIntent().getStringExtra("virusName");

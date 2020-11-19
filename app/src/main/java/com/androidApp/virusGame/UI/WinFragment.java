@@ -39,7 +39,7 @@ public class WinFragment extends Fragment implements View.OnClickListener{
 
         Activity activity = getActivity();
         String virus=activity.getIntent().getStringExtra("virusName");
-        username=activity.getIntent().getStringExtra("USER");
+        //username=activity.getIntent().getStringExtra("USER");
 
         if (activity != null){
 
@@ -61,7 +61,7 @@ public class WinFragment extends Fragment implements View.OnClickListener{
             case R.id.winhome:
                 intent =new Intent( getActivity(), HomeActivity.class);
                 startActivity(intent);
-                intent.putExtra("USER",username);
+                //intent.putExtra("USER",username);
                 break;
         }
     }

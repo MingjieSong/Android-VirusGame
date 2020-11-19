@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.androidApp.virusGame.Model.Player;
 import com.androidApp.virusGame.Model.PlayerSingleton;
 import com.androidApp.virusGame.R;
 
+import android.content.SharedPreferences;
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -77,7 +79,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 if(checkAccount(username,password)==0){
                     intent =new Intent( getActivity(), HomeActivity.class);
                     //need to pass information about which user is logged in
-                    intent.putExtra("USER",username);
+                   // intent.putExtra("USER",username);
+                    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("USER", username);
+                    editor.apply();
                     startActivity(intent);
                 }
 
