@@ -39,8 +39,6 @@ import java.util.Map;
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends Fragment implements View.OnClickListener{
-    //store virus name and count of virus
-    private static Map<String, Integer> virusMap= new HashMap<String,Integer>();;
     ListView mListView;
     ArrayList<String>virusNames = new ArrayList<>();
     ArrayList<Integer>virusImage = new ArrayList<>();
@@ -52,14 +50,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        int hivCount = 0;
+        int fluCount = 0;
+        int coronaCount = 0;
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
         Activity activity = getActivity();
         //String username=activity.getIntent().getStringExtra("USER");
         String username= PreferenceManager.getDefaultSharedPreferences(getContext()).getString("USER","default");
-
-        /*
 
         PlayerSingleton player = PlayerSingleton.get();
         player.getSinglePlayer(username);
@@ -67,36 +65,27 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
         for(int i=0 ;i<pv.size(); i++){
             Log.d("PlayerCaughtVirus info","Player "+pv.get(i).first + " Virus " + pv.get(i).second);
-            setMap(pv.get(i).second);
-        }*/
+            if (pv.get(i).second.equals("hiv")){
+                hivCount++;
+            }
+            if (pv.get(i).second.equals( "fluvirus")){
+                fluCount++;
+            }
+            if (pv.get(i).second.equals( "coronavirus")){
+                coronaCount++;
+            }
+        }
 
+        //set up profile virus record
         virusNames.add("hivvirus");
         virusNames.add("fluvirus");
         virusNames.add("coronavirus");
         virusImage.add(R.drawable.hivvirus);
         virusImage.add(R.drawable.fluvirus);
         virusImage.add(R.drawable.coronavirus);
-        virusCount.add(Integer.toString(0));
-        virusCount.add(Integer.toString(0));
-        virusCount.add(Integer.toString(0));
-
-        /*
-        for (String key: virusMap.keySet()){
-            virusNames.add(key);
-            if (key == "hivvirus"){
-                virusImage.add(R.drawable.hivvirus);
-            }
-            if (key == "fluvirus"){
-                virusImage.add(R.drawable.fluvirus);
-            }
-            if (key == "coronavirus"){
-                virusImage.add(R.drawable.coronavirus);
-            }
-        }
-
-        for (Integer value: virusMap.values()){
-            virusCount.add(Integer.toString(value));
-        }*/
+        virusCount.add(Integer.toString(hivCount));
+        virusCount.add(Integer.toString(fluCount));
+        virusCount.add(Integer.toString(coronaCount));
 
 
         if (activity != null){
@@ -107,12 +96,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             mListView = (ListView)v.findViewById(R.id.listView);
             welcomeTxt.setText("Welcome "+username);
 
-
             VirusListAdapter virusAdapter = new VirusListAdapter(this.getContext(),virusNames,virusImage,virusCount);
             mListView.setAdapter(virusAdapter);
-
         }
-
         return v;
     }
 
@@ -127,15 +113,4 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 break;
         }
     }
-
-    public static void setMap(String name){
-        if (!virusMap.containsKey(name)){
-            virusMap.put(name,1);
-        }else{
-            virusMap.put(name, virusMap.get(name)+1);
-        }
-
-    }
-
-
 }

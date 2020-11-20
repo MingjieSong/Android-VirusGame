@@ -208,9 +208,6 @@ public class GameFragment extends Fragment{
             }
         }.start();
         startRandomButton(one,two,three,four);
-
-        List<Pair<String, String>> PV = player.getPlayerAndVirus();
-        showPlayerAndVirus(PV);
         return v;
     }
 
@@ -283,12 +280,6 @@ public class GameFragment extends Fragment{
         }
     }
 
-    private void showPlayerAndVirus(List<Pair<String, String>> list){
-        for(int i=0 ;i<list.size(); i++){
-            Log.d("PlayerCaughtVirus info","Player "+list.get(i).first + " Virus " + list.get(i).second);
 
-        }
-
-    }
 
 }
