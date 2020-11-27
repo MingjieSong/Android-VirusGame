@@ -63,7 +63,6 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private static final double VIRUS_RANGE = 0.04 ;
     private LatLng mDefaultLocation ;
     private LatLng mDeviceLocation ;
-    private boolean mLocationPermissionGranted =false;
     private FusedLocationProviderClient mFusedLocationProviderClient ;
     private String TAG = "mapDebugging" ;
     private String playerName  ;
@@ -76,40 +75,62 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private ArrayList<Virus> virusList = new ArrayList<>() ;
     private boolean setLocationUpdate= false;
     private int gameCode = -1 ;
+    private boolean defaultMode  =true;
+    private boolean useStoredValue =false ;
+    private Bundle savedInstanceState ;
 
 
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState  ) {
         super.onCreate(savedInstanceState );
         getLocationPermission()  ;
-        getMapAsync(this);
-        setHasOptionsMenu(true);
-        //playerName= getActivity().getIntent().getStringExtra("USER");
+        if (savedInstanceState != null){
+            this.savedInstanceState = savedInstanceState ;
+            this.defaultMode = savedInstanceState.getBoolean("mapMode") ;
+        }
         playerName=PreferenceManager.getDefaultSharedPreferences(getContext()).getString("USER","default");
-
-        //updateValuesFromBundle(savedInstanceState);
-
-    }
-
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-            map = googleMap;
-            mDefaultLocation = new LatLng(40.0, -83.0);
-            currentLocationMark = map.addMarker(new MarkerOptions().position(mDefaultLocation)
-                    .title("The Ohio State University"));
-
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
-
+        setHasOptionsMenu(true);
+        getMapAsync(this);
     }
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    public void onResume() {
-        super.onResume();
-        setLocationUpdate= false;
-        }
+    public void onMapReady(GoogleMap googleMap) {
+            map = googleMap;
+            if(defaultMode) {
+                //show default location
+                mDefaultLocation = new LatLng(40.0, -83.0);
+                currentLocationMark = map.addMarker(new MarkerOptions().position(mDefaultLocation)
+                        .title("The Ohio State University"));
+
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+            }else if( this.savedInstanceState != null ){
+                //initialize virusMarker
+                virusMarkers = new ArrayList<>() ;
+                //get stored device location and add marker
+                mDeviceLocation =stringToLatlng( savedInstanceState.getString("deviceLocation"));
+                currentLocationMark = map.addMarker(new MarkerOptions()
+                        .position(mDeviceLocation)
+                        .title(playerName+"'s Location"));
+                //set storedVirusLocation here
+                useStoredValue = true ;
+                virusLocations = new ArrayList<>() ;
+                int virusCount = savedInstanceState.getInt("virusCount") ;
+                for(int i = 0 ; i<virusCount; i++) {
+                    virusLocations.add(stringToLatlng(savedInstanceState.getString("virus"+i))  );
+                }
+                setUpVirus();
+                //set locationUpdates
+                firstTimeGetLocation = false ;
+                resetVirus = false;
+                findVirusNearby();
+
+            }
+    }
+
 
      @Override
     public void onPause() {
@@ -117,6 +138,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         if(setLocationUpdate){
         //stop the location updates
         mFusedLocationProviderClient.removeLocationUpdates(mLocationCallback);
+        setLocationUpdate= false;
         }
 
     }
@@ -142,14 +164,16 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                             map.moveCamera(CameraUpdateFactory.newLatLngZoom(mDeviceLocation, DEFAULT_ZOOM));
                             firstTimeGetLocation =false;
                         }
-                        currentLocationMark.remove() ;
+                        if(currentLocationMark!=null) {
+                            currentLocationMark.remove();
+                        }
                         currentLocationMark = map.addMarker(new MarkerOptions()
                                 .position(mDeviceLocation)
                                 .title(playerName+"'s Location"));
-                        if(resetVirus) {
+                         if(resetVirus) {
                             setUpVirus();
                             resetVirus = false ;
-                        }
+                          }
                         gameCode =detectUserVirusCollision();
 
                     }
@@ -181,27 +205,12 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
             ActivityCompat.requestPermissions(activity, LOCATION_PERMISSIONS, REQUEST_LOCATION_PERMISSIONS);
         }
     }
-    /*@Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        mLocationPermissionGranted = false;
-        if (requestCode == REQUEST_LOCATION_PERMISSIONS) {
-            if (grantResults.length > 0) {// If request is cancelled, the result arrays are empty.
-                for (int i = 0; i < grantResults.length; i++) {
-                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                        mLocationPermissionGranted = false;
-                        return;
-                    }
-                }
-                mLocationPermissionGranted = true;
-            }
-        }
-    }*/
+
 
     private boolean hasLocationPermission() {
         final Activity activity = requireActivity();
         int result;
+        //check again in order to get the most updated result
         result = ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION);
         return result == PackageManager.PERMISSION_GRANTED;
     }
@@ -218,6 +227,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         final boolean location_permission=PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("location_permission",false);
         if (hasLocationPermission()&&location_permission) {
             if (item.getItemId() == R.id.search) {
+                defaultMode =false;
                 firstTimeGetLocation = true;
                 resetVirus = true;
                 Toast.makeText(this.getActivity(), "Loading......", Toast.LENGTH_LONG).show();
@@ -246,42 +256,47 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void setUpVirus(){
+    private void setUpVirus() {
         //clean the original generated virusMarkers and virusLocation
-        for(int i=0 ; i<virusMarkers.size() ; i++){
+        for (int i = 0; i < virusMarkers.size(); i++) {
             virusMarkers.get(i).remove();
         }
-        virusLocations = new ArrayList<LatLng>() ;
-        //get the random virus location within +- 0.05
-            double deviceLongitude = mDeviceLocation .longitude;
+        VirusSingleton singleton = VirusSingleton.get(requireContext());
+        virusList = singleton.getVirus();
+        if (!useStoredValue) {//then generating new virus location
+             virusLocations = new ArrayList<LatLng>();
+            //get the random virus location within +- 0.05
+            double deviceLongitude = mDeviceLocation.longitude;
             double deviceLatitude = mDeviceLocation.latitude;
-            VirusSingleton singleton = VirusSingleton.get(requireContext());
             Random rnd = new Random();
             double latitudeRange;
-            double  longitudeRange;
+            double longitudeRange;
             LatLng virusLoc;
-            virusList = singleton.getVirus() ;
             for (int i = 0; i < virusList.size(); i++) {
                 latitudeRange = (rnd.nextInt(10) - 5) / 100.0;
                 longitudeRange = (rnd.nextInt(10) - 5) / 100.0;
-                virusLoc = new LatLng(deviceLatitude +  latitudeRange , deviceLongitude +  longitudeRange);
-                if(!virusLocations.contains(virusLoc)) {
+                virusLoc = new LatLng(deviceLatitude + latitudeRange, deviceLongitude + longitudeRange);
+                if (!virusLocations.contains(virusLoc)) {
                     virusLocations.add(virusLoc);
-                //FIXME : try load it with picasso library later
-                    Bitmap icon = singleton.getBitmap( virusList.get(i).getImage()) ;
-                    Marker virusMarker = map.addMarker(new MarkerOptions()
-                            .position(virusLoc)
-                            .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons( icon, 180, 180)  ))
-                            .title(virusList.get(i).getName())
-                             );
-                    virusMarkers.add(virusMarker);
-
-                }else{
-                    i-- ;
+                } else {
+                    i--;
                 }
             }
+        }
+
+         for(int i = 0 ; i<virusLocations.size() ; i++){
+             Bitmap icon = singleton.getBitmap( virusList.get(i).getImage()) ;
+             Marker virusMarker = map.addMarker(new MarkerOptions()
+                     .position(virusLocations.get(i))
+                     .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons( icon, 180, 180)  ))
+                     .title(virusList.get(i).getName())
+             );
+             virusMarkers.add(virusMarker);
+         }
+
             singleton.updateVirusLocation(virusLocations);
             virusList = singleton.getVirus() ;
+            useStoredValue = false ;
         }
 
 
@@ -343,30 +358,23 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
 
 
-
-    /*FIXME : save current state
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) { //only being called when outState is not null
         super.onSaveInstanceState(outState);
-        if(virusLocations != null &&  mDeviceLocation!=null) {
-            outState.putString("mDeviceLocation", LatlngToString(mDeviceLocation));
+        outState.putBoolean("mapMode" , defaultMode);
+        if(virusLocations != null ) {
+            outState.putInt("virusCount", virusLocations.size()) ;
             for(int i=0; i<virusLocations.size(); i++){
                outState.putString("virus"+ i, LatlngToString(virusLocations.get(i)) );
              }
-             outState.putDouble("zoom", DEFAULT_ZOOM);
+        }
+        if(mDeviceLocation!=null){
+            outState.putString("deviceLocation", LatlngToString(mDeviceLocation));
         }
     }
 
 
-    private void updateValuesFromBundle(Bundle savedInstanceState) {
-        if (savedInstanceState == null) {
-            return;
-        }
 
-
-    }
-
-     */
 
 
 

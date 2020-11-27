@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/yuxiliang/Desktop/Android-VirusGame/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-xlarge-v4/values-xlarge-v4.xml",
+            "outputFile": "/Users/songmingjie/Desktop/Android-VirusGame/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-xlarge-v4/values-xlarge-v4.xml",
             "map": [
                 {
-                    "source": "/Users/yuxiliang/.gradle/caches/transforms-2/files-2.1/a621425fdde0cc39c6e6986394ecd820/appcompat-1.2.0/res/values-xlarge-v4/values-xlarge-v4.xml",
+                    "source": "/Users/songmingjie/.gradle/caches/transforms-2/files-2.1/a621425fdde0cc39c6e6986394ecd820/appcompat-1.2.0/res/values-xlarge-v4/values-xlarge-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
                         "startColumns": "4,4,4,4,4,4",

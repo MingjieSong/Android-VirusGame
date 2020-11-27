@@ -42,6 +42,7 @@ public class VirusListAdapter extends ArrayAdapter<String> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        //better performance using viewHolder
         ViewHolder mViewHolder = new ViewHolder();
         if(convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -53,6 +54,7 @@ public class VirusListAdapter extends ArrayAdapter<String> {
         }else {
             mViewHolder = (ViewHolder) convertView.getTag();
         }
+        //bind data
         mViewHolder.mImage.setImageResource(virus.get(position));
         mViewHolder.mName.setText(names.get(position));
         mViewHolder.mCount.setText(counts.get(position));
