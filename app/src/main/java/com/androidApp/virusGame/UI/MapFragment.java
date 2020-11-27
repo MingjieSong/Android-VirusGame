@@ -3,10 +3,13 @@ package com.androidApp.virusGame.UI;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
+import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -67,8 +70,8 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private String TAG = "mapDebugging" ;
     private String playerName  ;
     private LocationCallback mLocationCallback ;
-    private boolean firstTimeGetLocation = true ;
-    private boolean resetVirus = true ;
+    private boolean firstTimeGetLocation =false ;
+    private boolean resetVirus =false ;
     private Marker currentLocationMark ;
     private ArrayList< LatLng> virusLocations = new ArrayList<>() ;
     private ArrayList< Marker> virusMarkers = new ArrayList<>() ;
@@ -78,6 +81,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private boolean defaultMode  =true;
     private boolean useStoredValue =false ;
     private Bundle savedInstanceState ;
+    private int batteryLevel ;
 
 
 
@@ -95,6 +99,25 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         getMapAsync(this);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(!defaultMode){
+            findVirusNearby();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(setLocationUpdate){
+            //stop the location updates
+            mFusedLocationProviderClient.removeLocationUpdates(mLocationCallback);
+            setLocationUpdate= false;
+        }
+
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -132,16 +155,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     }
 
 
-     @Override
-    public void onPause() {
-        super.onPause();
-        if(setLocationUpdate){
-        //stop the location updates
-        mFusedLocationProviderClient.removeLocationUpdates(mLocationCallback);
-        setLocationUpdate= false;
-        }
 
-    }
 
 
 
@@ -157,6 +171,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                      Log.d(TAG, "CANNOT GET DEVICE LOCATION") ;
                      return ;
                 }
+
                 for (Location location : locationResult.getLocations()) {
                     if(location !=null){
                         mDeviceLocation = new LatLng(location.getLatitude(),  location.getLongitude());
@@ -185,8 +200,8 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
             // Create the LocationRequest object
              LocationRequest mLocationRequest = LocationRequest.create()
-                     .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY) //PRIORITY_NO_POWER
-                     .setInterval(2 * 1000)        // 2 seconds, in milliseconds
+                     .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY) //PRIORITY_LOW_POWER
+                     .setInterval(10 * 1000)        // 10 seconds, in milliseconds
                      .setFastestInterval(1 * 1000); // 1 second, in milliseconds
              mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
              mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
