@@ -6,140 +6,143 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="16"
-8-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml
+8-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="30" />
-9-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml
+9-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-11-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:5:5-79
-11-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:5:22-76
+11-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:5:5-79
+11-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:5:22-76
 12    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-12-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:6:5-81
-12-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:6:22-78
+12-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:6:5-81
+12-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:6:22-78
 13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-13-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:7:5-79
-13-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:7:22-76
+13-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:7:5-79
+13-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:7:22-76
 14    <uses-permission android:name="android.permission.INTERNET" />
-14-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:8:5-67
-14-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:8:22-64
+14-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:8:5-67
+14-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:8:22-64
 15
 16    <uses-feature
-16-->[com.google.android.gms:play-services-maps:17.0.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/ac7407cd14ac423d4ceaf8288533a2df/jetified-play-services-maps-17.0.0/AndroidManifest.xml:26:5-28:35
+16-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\ac7407cd14ac423d4ceaf8288533a2df\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
 17        android:glEsVersion="0x00020000"
-17-->[com.google.android.gms:play-services-maps:17.0.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/ac7407cd14ac423d4ceaf8288533a2df/jetified-play-services-maps-17.0.0/AndroidManifest.xml:27:9-41
+17-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\ac7407cd14ac423d4ceaf8288533a2df\jetified-play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
 18        android:required="true" />
-18-->[com.google.android.gms:play-services-maps:17.0.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/ac7407cd14ac423d4ceaf8288533a2df/jetified-play-services-maps-17.0.0/AndroidManifest.xml:28:9-32
+18-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\ac7407cd14ac423d4ceaf8288533a2df\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
 19
 20    <application
-20-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:10:5-41:19
+20-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:10:5-43:19
 21        android:allowBackup="true"
-21-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:11:9-35
+21-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:11:9-35
 22        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-22-->[androidx.core:core:1.3.1] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/3fb110591b633ccbfa136562b7a4046a/core-1.3.1/AndroidManifest.xml:24:18-86
+22-->[androidx.core:core:1.3.1] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\3fb110591b633ccbfa136562b7a4046a\core-1.3.1\AndroidManifest.xml:24:18-86
 23        android:debuggable="true"
 24        android:icon="@mipmap/ic_launcher"
-24-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:12:9-43
+24-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:12:9-43
 25        android:label="@string/app_name"
-25-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:13:9-41
+25-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:13:9-41
 26        android:roundIcon="@mipmap/ic_launcher_round"
-26-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:14:9-54
+26-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:14:9-54
 27        android:supportsRtl="true"
-27-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:15:9-35
+27-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:15:9-35
 28        android:testOnly="true"
 29        android:theme="@style/AppTheme" >
-29-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:16:9-40
+29-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:16:9-40
 30        <activity android:name="com.androidApp.virusGame.UI.SettingsActivity" />
-30-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:17:9-66
-30-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:17:19-54
+30-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:17:9-66
+30-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:17:19-54
 31        <activity android:name="com.androidApp.virusGame.UI.LoseActivity" />
-31-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:18:9-53
-31-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:18:19-50
+31-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:18:9-53
+31-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:18:19-50
 32        <activity android:name="com.androidApp.virusGame.UI.WinActivity" />
-32-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:19:9-52
-32-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:19:19-49
+32-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:19:9-52
+32-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:19:19-49
 33        <activity android:name="com.androidApp.virusGame.UI.WebActivity" />
-33-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:20:9-52
-33-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:20:19-49
+33-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:20:9-52
+33-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:20:19-49
 34        <activity android:name="com.androidApp.virusGame.UI.ProfileActivity" />
-34-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:21:9-56
-34-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:21:19-53
+34-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:21:9-56
+34-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:21:19-53
 35        <activity android:name="com.androidApp.virusGame.UI.HomeActivity" />
-35-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:22:9-53
-35-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:22:19-50
+35-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:22:9-53
+35-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:22:19-50
 36
 37        <meta-data
-37-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:24:9-26:47
+37-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:24:9-26:47
 38            android:name="com.google.android.geo.API_KEY"
-38-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:25:13-58
+38-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:25:13-58
 39            android:value="@string/map_key" />
-39-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:26:13-44
+39-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:26:13-44
 40
 41        <activity android:name="com.androidApp.virusGame.UI.ChangePasswordActivity" />
-41-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:28:9-63
-41-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:28:19-60
+41-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:28:9-63
+41-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:28:19-60
 42        <activity android:name="com.androidApp.virusGame.UI.LoginActivity" />
-42-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:29:9-54
-42-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:29:19-51
+42-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:29:9-54
+42-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:29:19-51
 43        <activity android:name="com.androidApp.virusGame.UI.MaskCheckActivity" />
-43-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:30:9-58
-43-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:30:19-55
+43-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:30:9-58
+43-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:30:19-55
 44        <activity android:name="com.androidApp.virusGame.UI.PlayerAccountActivity" />
-44-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:31:9-62
-44-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:31:19-59
+44-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:31:9-62
+44-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:31:19-59
 45        <activity android:name="com.androidApp.virusGame.UI.MapActivity" />
-45-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:32:9-52
-45-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:32:19-49
-46        <activity android:name="com.androidApp.virusGame.UI.GameActivity" />
-46-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:33:9-53
-46-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:33:19-50
-47        <activity android:name="com.androidApp.virusGame.UI.HomeScreenActivity" >
-47-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:34:9-40:20
-47-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:34:19-56
-48            <intent-filter>
-48-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:35:13-39:29
-49                <action android:name="android.intent.action.MAIN" />
-49-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:36:17-69
-49-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:36:25-66
-50
-51                <category android:name="android.intent.category.LAUNCHER" />
-51-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:38:17-77
-51-->/Users/songmingjie/Desktop/Android-VirusGame/app/src/main/AndroidManifest.xml:38:27-74
-52            </intent-filter>
-53        </activity>
-54        <!-- Needs to be explicitly declared on P+ -->
-55        <uses-library
-55-->[com.google.android.gms:play-services-maps:17.0.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/ac7407cd14ac423d4ceaf8288533a2df/jetified-play-services-maps-17.0.0/AndroidManifest.xml:33:9-35:40
-56            android:name="org.apache.http.legacy"
-56-->[com.google.android.gms:play-services-maps:17.0.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/ac7407cd14ac423d4ceaf8288533a2df/jetified-play-services-maps-17.0.0/AndroidManifest.xml:34:13-50
-57            android:required="false" />
-57-->[com.google.android.gms:play-services-maps:17.0.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/ac7407cd14ac423d4ceaf8288533a2df/jetified-play-services-maps-17.0.0/AndroidManifest.xml:35:13-37
-58
-59        <activity
-59-->[com.google.android.gms:play-services-base:17.0.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/e9af12053fbbbcd4c322fb00f6706570/jetified-play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
-60            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-60-->[com.google.android.gms:play-services-base:17.0.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/e9af12053fbbbcd4c322fb00f6706570/jetified-play-services-base-17.0.0/AndroidManifest.xml:24:13-79
-61            android:exported="false"
-61-->[com.google.android.gms:play-services-base:17.0.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/e9af12053fbbbcd4c322fb00f6706570/jetified-play-services-base-17.0.0/AndroidManifest.xml:25:13-37
-62            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-62-->[com.google.android.gms:play-services-base:17.0.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/e9af12053fbbbcd4c322fb00f6706570/jetified-play-services-base-17.0.0/AndroidManifest.xml:26:13-72
-63
-64        <meta-data
-64-->[com.google.android.gms:play-services-basement:17.0.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/5b384d348ade37cfc4cf6b9238973884/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
-65            android:name="com.google.android.gms.version"
-65-->[com.google.android.gms:play-services-basement:17.0.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/5b384d348ade37cfc4cf6b9238973884/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
-66            android:value="@integer/google_play_services_version" />
-66-->[com.google.android.gms:play-services-basement:17.0.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/5b384d348ade37cfc4cf6b9238973884/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
-67
-68        <provider
-68-->[androidx.lifecycle:lifecycle-process:2.1.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/4d37963c666d0a0e40b35637215b1c39/jetified-lifecycle-process-2.1.0/AndroidManifest.xml:23:9-27:43
-69            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-69-->[androidx.lifecycle:lifecycle-process:2.1.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/4d37963c666d0a0e40b35637215b1c39/jetified-lifecycle-process-2.1.0/AndroidManifest.xml:24:13-79
-70            android:authorities="com.androidApp.virusGame.lifecycle-process"
-70-->[androidx.lifecycle:lifecycle-process:2.1.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/4d37963c666d0a0e40b35637215b1c39/jetified-lifecycle-process-2.1.0/AndroidManifest.xml:25:13-69
-71            android:exported="false"
-71-->[androidx.lifecycle:lifecycle-process:2.1.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/4d37963c666d0a0e40b35637215b1c39/jetified-lifecycle-process-2.1.0/AndroidManifest.xml:26:13-37
-72            android:multiprocess="true" />
-72-->[androidx.lifecycle:lifecycle-process:2.1.0] /Users/songmingjie/.gradle/caches/transforms-2/files-2.1/4d37963c666d0a0e40b35637215b1c39/jetified-lifecycle-process-2.1.0/AndroidManifest.xml:27:13-40
-73    </application>
-74
-75</manifest>
+45-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:32:9-52
+45-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:32:19-49
+46        <activity
+46-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:33:9-35:15
+47            android:name="com.androidApp.virusGame.UI.GameActivity"
+47-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:33:19-50
+48            android:configChanges="orientation|screenSize" />
+48-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:34:13-59
+49        <activity android:name="com.androidApp.virusGame.UI.HomeScreenActivity" >
+49-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:36:9-42:20
+49-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:36:19-56
+50            <intent-filter>
+50-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:37:13-41:29
+51                <action android:name="android.intent.action.MAIN" />
+51-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:38:17-69
+51-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:38:25-66
+52
+53                <category android:name="android.intent.category.LAUNCHER" />
+53-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:40:17-77
+53-->C:\Users\19736\Android-VirusGame\app\src\main\AndroidManifest.xml:40:27-74
+54            </intent-filter>
+55        </activity>
+56        <!-- Needs to be explicitly declared on P+ -->
+57        <uses-library
+57-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\ac7407cd14ac423d4ceaf8288533a2df\jetified-play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
+58            android:name="org.apache.http.legacy"
+58-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\ac7407cd14ac423d4ceaf8288533a2df\jetified-play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
+59            android:required="false" />
+59-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\ac7407cd14ac423d4ceaf8288533a2df\jetified-play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
+60
+61        <activity
+61-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\e9af12053fbbbcd4c322fb00f6706570\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+62            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+62-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\e9af12053fbbbcd4c322fb00f6706570\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+63            android:exported="false"
+63-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\e9af12053fbbbcd4c322fb00f6706570\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+64            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+64-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\e9af12053fbbbcd4c322fb00f6706570\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+65
+66        <meta-data
+66-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\5b384d348ade37cfc4cf6b9238973884\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+67            android:name="com.google.android.gms.version"
+67-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\5b384d348ade37cfc4cf6b9238973884\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+68            android:value="@integer/google_play_services_version" />
+68-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\5b384d348ade37cfc4cf6b9238973884\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+69
+70        <provider
+70-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\4d37963c666d0a0e40b35637215b1c39\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:23:9-27:43
+71            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+71-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\4d37963c666d0a0e40b35637215b1c39\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:24:13-79
+72            android:authorities="com.androidApp.virusGame.lifecycle-process"
+72-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\4d37963c666d0a0e40b35637215b1c39\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:25:13-69
+73            android:exported="false"
+73-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\4d37963c666d0a0e40b35637215b1c39\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:26:13-37
+74            android:multiprocess="true" />
+74-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\19736\.gradle\caches\transforms-2\files-2.1\4d37963c666d0a0e40b35637215b1c39\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:27:13-40
+75    </application>
+76
+77</manifest>

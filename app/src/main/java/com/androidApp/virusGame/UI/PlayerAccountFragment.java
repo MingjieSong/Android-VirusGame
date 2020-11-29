@@ -26,8 +26,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 
 public class PlayerAccountFragment extends Fragment implements View.OnClickListener  {
@@ -70,7 +77,21 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.done_button:
-                createAccount();
+                try {
+                    createAccount();
+                } catch (NoSuchPaddingException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IllegalBlockSizeException e) {
+                    e.printStackTrace();
+                } catch (BadPaddingException e) {
+                    e.printStackTrace();
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                } catch (InvalidKeyException e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.cancel_button:
                 mEtUsername.setText("");
@@ -119,7 +140,7 @@ public class PlayerAccountFragment extends Fragment implements View.OnClickListe
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void createAccount() {
+    private void createAccount() throws NoSuchPaddingException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeyException {
         FragmentActivity activity = getActivity();
         String username = mEtUsername.getText().toString();
         String password = mEtPassword.getText().toString();

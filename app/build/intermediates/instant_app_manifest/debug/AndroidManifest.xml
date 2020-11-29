@@ -44,7 +44,9 @@
         <activity android:name="com.androidApp.virusGame.UI.MaskCheckActivity" />
         <activity android:name="com.androidApp.virusGame.UI.PlayerAccountActivity" />
         <activity android:name="com.androidApp.virusGame.UI.MapActivity" />
-        <activity android:name="com.androidApp.virusGame.UI.GameActivity" />
+        <activity
+            android:name="com.androidApp.virusGame.UI.GameActivity"
+            android:configChanges="orientation|screenSize" />
         <activity android:name="com.androidApp.virusGame.UI.HomeScreenActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

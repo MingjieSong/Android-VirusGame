@@ -1,3 +1,5 @@
+//password encryption done with the help of https://www.youtube.com/watch?v=kN8hlHO8US0&ab_channel=SylvainSaurel
+
 package com.androidApp.virusGame.Model;
 
 import android.content.ContentValues;
@@ -6,6 +8,8 @@ import android.database.CursorWrapper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Build;
+import android.os.Message;
+import android.util.Base64;
 import android.util.Log;
 import android.util.Pair;
 
@@ -13,11 +17,21 @@ import androidx.annotation.RequiresApi;
 
 import com.androidApp.virusGame.UI.HomeScreenActivity;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerSingleton {
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 
+public class PlayerSingleton {
+    private static final String encryptionKey="ldsfbkbfaskbfojsbdfka310875408w70513uqbsdkdjbjfkdsbfb0138750328y52";
     private static PlayerSingleton sPlayer;
 
     private SQLiteDatabase mDatabase;
@@ -41,10 +55,9 @@ public class PlayerSingleton {
 
     //Add new player info into the db
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public boolean addPlayer(Player player) {
+    public boolean addPlayer(Player player) throws NoSuchPaddingException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeyException {
         if(!checkUsernameDuplicate(player.getName())) {
             ContentValues contentValues = getContentValues(player);
-
             mDatabase.beginTransaction();
             try {
                 SQLiteStatement statement = mDatabase.compileStatement(INSERT_STMT);
@@ -139,11 +152,12 @@ public class PlayerSingleton {
     }
 
 
-    private static ContentValues getContentValues(Player player) {
+    private static ContentValues getContentValues(Player player) throws NoSuchPaddingException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeyException {
         ContentValues values = new ContentValues();
         values.put(DbSchema.PlayerTable.Cols.NAME, player.getName());
-        values.put(DbSchema.PlayerTable.Cols.PASSWORD, player.getPassword());
-
+        String encrypted=encrypt(player.getPassword());
+        values.put(DbSchema.PlayerTable.Cols.PASSWORD, encrypted);
+        Log.d("debug", "encrypted password");
         return values;
     }
 
@@ -188,8 +202,11 @@ public class PlayerSingleton {
                 return 1;
             }else if(cursor!=null){
                 cursor.moveToFirst();
+                //decrypt the password stored in the database
+                String decrypted=decrypt(cursor.getString(2));
+                Log.d("debug", "decrypted password: "+decrypted);
                 //check password
-                if(cursor.getString(2).equals(password)){
+                if(decrypted.equals(password)){
                     //login successful
                     return 0;
                 }else{
@@ -198,6 +215,18 @@ public class PlayerSingleton {
                 }
             }
             mDatabase.setTransactionSuccessful();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
         } finally {
             mDatabase.endTransaction();
         }
@@ -280,6 +309,36 @@ public class PlayerSingleton {
             }
         }
         return player_virus_List;
+    }
+
+    private static String encrypt(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+        SecretKeySpec key=generateKey();
+        Cipher c= Cipher.getInstance("AES");
+        c.init(Cipher.ENCRYPT_MODE,key);
+        byte[]encVal=c.doFinal(password.getBytes());
+        String encryptedValue= Base64.encodeToString(encVal,Base64.DEFAULT);
+        return encryptedValue;
+    }
+
+    private static SecretKeySpec generateKey() throws NoSuchAlgorithmException, UnsupportedEncodingException {
+       final MessageDigest digest= MessageDigest.getInstance("SHA-256");
+       byte[]bytes = encryptionKey.getBytes("UTF-8");
+       digest.update(bytes,0,bytes.length);
+       byte[]key=digest.digest();
+       SecretKeySpec skspc=new SecretKeySpec(key,"AES");
+       return skspc;
+
+    }
+
+    private static String decrypt(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+        SecretKeySpec skspc=generateKey();
+        Cipher c=Cipher.getInstance("AES");
+        c.init(Cipher.DECRYPT_MODE,skspc);
+        byte[]decodedValue=Base64.decode(password,Base64.DEFAULT);
+        byte[]decValue=c.doFinal(decodedValue);
+        String decryptedValue=new String(decValue);
+        return decryptedValue;
+
     }
 
 
