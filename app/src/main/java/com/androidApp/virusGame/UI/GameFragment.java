@@ -1,9 +1,12 @@
+
+
 package com.androidApp.virusGame.UI;
 
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -34,6 +37,7 @@ import com.androidApp.virusGame.Model.VirusSingleton;
 import com.androidApp.virusGame.R;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -280,6 +284,9 @@ public class GameFragment extends Fragment{
         }
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
 
-
+    }
 }
