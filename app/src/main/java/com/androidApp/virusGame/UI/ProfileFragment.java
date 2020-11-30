@@ -59,36 +59,37 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         //String username=activity.getIntent().getStringExtra("USER");
         String username= PreferenceManager.getDefaultSharedPreferences(getContext()).getString("USER","default");
 
-        PlayerSingleton player = PlayerSingleton.get();
-        player.getSinglePlayer(username);
-        List<Pair<String, String>> pv = player.getPlayerAndVirus();
-
-        for(int i=0 ;i<pv.size(); i++){
-            Log.d("PlayerCaughtVirus info","Player "+pv.get(i).first + " Virus " + pv.get(i).second);
-            if (pv.get(i).second.equals("hiv")){
-                hivCount++;
-            }
-            if (pv.get(i).second.equals( "fluvirus")){
-                fluCount++;
-            }
-            if (pv.get(i).second.equals( "coronavirus")){
-                coronaCount++;
-            }
-        }
-
-        //set up profile virus record
-        virusNames.add("hivvirus");
-        virusNames.add("fluvirus");
-        virusNames.add("coronavirus");
-        virusImage.add(R.drawable.hivvirus);
-        virusImage.add(R.drawable.fluvirus);
-        virusImage.add(R.drawable.coronavirus);
-        virusCount.add(Integer.toString(hivCount));
-        virusCount.add(Integer.toString(fluCount));
-        virusCount.add(Integer.toString(coronaCount));
-
-
         if (activity != null){
+            PlayerSingleton player = PlayerSingleton.get();
+            player.getSinglePlayer(username);
+            List<Pair<String, String>> pv = player.getPlayerAndVirus();
+
+            for(int i=0 ;i<pv.size(); i++) {
+                Log.d("PlayerCaughtVirus info", "Player " + pv.get(i).first + " Virus " + pv.get(i).second);
+
+                if (pv.get(i).first.equals(username)) {
+                    if (pv.get(i).second.equals("hiv")) {
+                        hivCount++;
+                    }
+                    if (pv.get(i).second.equals("fluvirus")) {
+                        fluCount++;
+                    }
+                    if (pv.get(i).second.equals("coronavirus")) {
+                        coronaCount++;
+                    }
+                }
+            }
+
+            //set up profile virus record
+            virusNames.add("hivvirus");
+            virusNames.add("fluvirus");
+            virusNames.add("coronavirus");
+            virusImage.add(R.drawable.hivvirus);
+            virusImage.add(R.drawable.fluvirus);
+            virusImage.add(R.drawable.coronavirus);
+            virusCount.add(Integer.toString(hivCount));
+            virusCount.add(Integer.toString(fluCount));
+            virusCount.add(Integer.toString(coronaCount));
 
             Button btnHome= v.findViewById(R.id.go_home_button);
             btnHome.setOnClickListener(this);

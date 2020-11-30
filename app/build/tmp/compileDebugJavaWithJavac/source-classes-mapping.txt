@@ -15,8 +15,8 @@ com/androidApp/virusGame/UI/HomeScreenActivity.java
  com.androidApp.virusGame.UI.HomeScreenActivity
 com/androidApp/virusGame/UI/SingleFragmentActivity.java
  com.androidApp.virusGame.UI.SingleFragmentActivity
-com/androidApp/virusGame/UI/ProfileFragment.java
- com.androidApp.virusGame.UI.ProfileFragment
+com/androidApp/virusGame/UI/ChangePasswordActivity.java
+ com.androidApp.virusGame.UI.ChangePasswordActivity
 com/androidApp/virusGame/Model/Player.java
  com.androidApp.virusGame.Model.Player
 com/androidApp/virusGame/UI/HomeActivity.java
@@ -25,8 +25,8 @@ com/androidApp/virusGame/UI/PlayerAccountActivity.java
  com.androidApp.virusGame.UI.PlayerAccountActivity
 com/androidApp/virusGame/UI/LoginActivity.java
  com.androidApp.virusGame.UI.LoginActivity
-com/androidApp/virusGame/UI/ProfileActivity.java
- com.androidApp.virusGame.UI.ProfileActivity
+com/androidApp/virusGame/UI/GameActivity.java
+ com.androidApp.virusGame.UI.GameActivity
 com/androidApp/virusGame/UI/SettingsActivity.java
  com.androidApp.virusGame.UI.SettingsActivity
 com/androidApp/virusGame/Model/PlayerSingleton.java
@@ -82,7 +82,7 @@ com/androidApp/virusGame/UI/MapActivity.java
  com.androidApp.virusGame.UI.MapActivity
 com/androidApp/virusGame/UI/WinFragment.java
  com.androidApp.virusGame.UI.WinFragment
-com/androidApp/virusGame/UI/GameActivity.java
- com.androidApp.virusGame.UI.GameActivity
-com/androidApp/virusGame/UI/ChangePasswordActivity.java
- com.androidApp.virusGame.UI.ChangePasswordActivity
+com/androidApp/virusGame/UI/ProfileFragment.java
+ com.androidApp.virusGame.UI.ProfileFragment
+com/androidApp/virusGame/UI/ProfileActivity.java
+ com.androidApp.virusGame.UI.ProfileActivity

@@ -42,6 +42,4 @@ public class UnitTest {
         assertEquals(nPw,p.getPassword());
     }
 
-
-
 }
