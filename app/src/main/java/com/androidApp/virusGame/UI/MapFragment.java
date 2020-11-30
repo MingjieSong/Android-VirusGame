@@ -200,9 +200,9 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
             // Create the LocationRequest object
              LocationRequest mLocationRequest = LocationRequest.create()
-                     .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY) //PRIORITY_LOW_POWER
+                     .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY) //PRIORITY_LOW_POWER
                      .setInterval(10 * 1000)        // 10 seconds, in milliseconds
-                     .setFastestInterval(1 * 1000); // 1 second, in milliseconds
+                     .setFastestInterval(3 * 1000); // 5 second, in milliseconds
              mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
              mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
              setLocationUpdate = true;
@@ -240,7 +240,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final boolean location_permission=PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("location_permission",false);
-        if (hasLocationPermission()&&location_permission) {
+        if ( location_permission) { //FIXME :hasLocationPermission()&&
             if (item.getItemId() == R.id.search) {
                 defaultMode =false;
                 firstTimeGetLocation = true;
@@ -299,11 +299,24 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
             }
         }
 
+        //FIXME: performance 
+        ArrayList<BitmapDescriptor> virusImages = new ArrayList<>() ;
+        virusImages.add(BitmapDescriptorFactory.fromResource(R.drawable.fluvirus60)) ;
+        virusImages.add(BitmapDescriptorFactory.fromResource(R.drawable.coronavirus60)) ;
+        virusImages.add(BitmapDescriptorFactory.fromResource(R.drawable.hivvirus60)) ;
+
+
          for(int i = 0 ; i<virusLocations.size() ; i++){
-             Bitmap icon = singleton.getBitmap( virusList.get(i).getImage()) ;
+           /*  Bitmap icon = singleton.getBitmap( virusList.get(i).getImage()) ;
              Marker virusMarker = map.addMarker(new MarkerOptions()
                      .position(virusLocations.get(i))
                      .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons( icon, 180, 180)  ))
+                     .title(virusList.get(i).getName())
+             ); */
+
+             Marker virusMarker = map.addMarker(new MarkerOptions()
+                     .position(virusLocations.get(i))
+                     .icon( virusImages.get(i))
                      .title(virusList.get(i).getName())
              );
              virusMarkers.add(virusMarker);
