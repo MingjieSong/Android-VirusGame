@@ -19,9 +19,9 @@ import com.androidApp.virusGame.R;
 
 
 /**
- * Fragment that shows WebView for Tic-Tac-Toe on Wikipedia.
+ * Fragment that shows WebView for CDC Website
  *
- * Created by adamcchampion on 2017/08/14.
+ *  Written with the assitance of adamcchampion's tictactoe app modified on 2017/08/14.
  */
 
 public class WebFragment extends Fragment  {
